@@ -1,0 +1,12 @@
+{
+  "owner": "NextMicon",
+  "repo": "Interface",
+  "branch": "main",
+  "packages": [
+    { "name": "Input", "versions": ["0.0.0"] },
+    { "name": "Output", "versions": ["0.0.0"] },
+    { "name": "Tristate", "versions": ["0.0.0"] },
+    { "name": "Registor", "versions": ["0.0.0"] },
+    { "name": "Interrupt", "versions": ["0.0.0"] }
+  ]
+}

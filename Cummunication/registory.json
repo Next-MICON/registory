@@ -1,0 +1,10 @@
+{
+  "owner": "NextMicon",
+  "repo": "Communication",
+  "branch": "main",
+  "packages": [
+    { "name": "UART", "versions": ["0.0.0"] },
+    { "name": "SPI", "versions": ["0.0.0"] },
+    { "name": "I2C", "versions": ["0.0.0"] }
+  ]
+}

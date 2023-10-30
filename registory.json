@@ -1,9 +1,0 @@
-{
-  "owner": "NextMicon",
-  "repo": "registory",
-  "branch": "main",
-  "packages": [
-    { "name": "GPIO", "versions": ["0.0.0"], "category": "SignalIO" },
-    { "name": "PWM", "versions": ["0.0.0"], "category": "SignalIO" }
-  ]
-}

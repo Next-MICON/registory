@@ -1,0 +1,10 @@
+{
+  "owner": "NextMicon",
+  "repo": "System",
+  "branch": "main",
+  "packages": [
+    { "name": "Timer", "versions": ["0.0.0"] },
+    { "name": "Clock", "versions": ["0.0.0"] },
+    { "name": "Prescaler", "versions": ["0.0.0"] }
+  ]
+}
