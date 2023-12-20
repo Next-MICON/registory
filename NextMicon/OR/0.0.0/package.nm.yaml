@@ -1,0 +1,16 @@
+ports:
+  - name: in1
+    direct: input
+    width: 1
+    pos: [-120, -20]
+  - name: in2
+    direct: input
+    width: 1
+    pos: [-120, 20]
+  - name: out
+    direct: output
+    width: 1
+    pos: [120, 0]
+params: []
+size: [240, 160]
+textX: 0

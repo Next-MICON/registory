@@ -1,0 +1,30 @@
+ports:
+  - name: rx
+    direct: input
+    width: 1
+    pos: [120, -20]
+  - name: tx
+    direct: output
+    width: 1
+    pos: [120, 20]
+params: []
+size: [240, 100]
+textX: -50
+software:
+  className: Serial
+  memSize: 0x10
+  member:
+    - doc: "Serial& Serial::operator<<(char)"
+      copy: "${INSTANCE} << ' '"
+    - doc: "Serial& Serial::operator<<(const char*)"
+      copy: "${INSTANCE} << \"\""
+    - doc: "Serial& Serial::operator<<(uint32_t)"
+      copy: "${INSTANCE} <<"
+    - doc: "void Serial::print(char)"
+      copy: "${INSTANCE}.print()"
+    - doc: "void Serial::print(const char*)"
+      copy: "${INSTANCE}.print()"
+    - doc: "void Serial::print(uint32_t)"
+      copy: "${INSTANCE}.print()"
+    - doc: "char Serial::read()"
+      copy: "${INSTANCE}.read()"

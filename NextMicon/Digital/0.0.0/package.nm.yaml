@@ -1,0 +1,28 @@
+ports:
+  - name: iosel
+    direct: output
+    width: 1
+    pos: [120, -40]
+  - name: out
+    direct: output
+    width: 1
+    pos: [120, 0]
+  - name: in
+    direct: input
+    width: 1
+    pos: [120, 40]
+params: []
+size: [240, 140]
+textX: -50
+software:
+  className: Digital
+  memSize: 0x10
+  member:
+    - doc: "void out_mode()"
+      copy: "${INSTANCE}.out_mode()"
+    - doc: "void write(int)"
+      copy: "${INSTANCE}.write()"
+    - doc: "void in_mode()"
+      copy: "${INSTANCE}.in_mode()"
+    - doc: "int read()"
+      copy: "${INSTANCE}.read()"
