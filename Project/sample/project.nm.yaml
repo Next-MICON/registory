@@ -1,4 +1,5 @@
 board:
+  owner: NextMicon
   name: TinyFPGA_BX
   version: 0.0.0
 instances:
@@ -29,21 +30,6 @@ ioports:
     pos:
       - 180
       - 340
-    pack:
-      type: irq
-      ports:
-        - name: irq
-          icon: '!'
-          direct: input
-          width: 1
-          pos:
-            - 60
-            - 0
-      params: []
-      size:
-        - 96
-        - 36
-      textX: -14
     flip: false
   - name: pin2
     type: in
@@ -52,20 +38,6 @@ ioports:
       - 360
       - 40
     flip: true
-    pack: &ref_1
-      type: in
-      ports:
-        - name: in
-          direct: output
-          width: 1
-          pos:
-            - 60
-            - 0
-      params: []
-      size:
-        - 96
-        - 36
-      textX: -14
   - name: pin1
     type: out
     params: []
@@ -73,20 +45,6 @@ ioports:
       - 360
       - 80
     flip: true
-    pack: &ref_0
-      type: out
-      ports:
-        - name: out
-          direct: input
-          width: 1
-          pos:
-            - 60
-            - 0
-      params: []
-      size:
-        - 96
-        - 36
-      textX: -14
   - name: pin3
     type: inout
     params: []
@@ -94,33 +52,6 @@ ioports:
       - 360
       - 200
     flip: true
-    pack:
-      type: inout
-      ports:
-        - name: iosel
-          icon: '?'
-          direct: input
-          width: 1
-          pos:
-            - 60
-            - -20
-        - name: out
-          direct: input
-          width: 1
-          pos:
-            - 60
-            - 0
-        - name: in
-          direct: output
-          width: 1
-          pos:
-            - 60
-            - 20
-      params: []
-      size:
-        - 96
-        - 76
-      textX: -14
   - name: led
     type: out
     params: []
@@ -128,7 +59,6 @@ ioports:
       - 360
       - 280
     flip: true
-    pack: *ref_0
   - name: pin11
     type: in
     params: []
@@ -136,60 +66,53 @@ ioports:
       - 360
       - 340
     flip: true
-    pack: *ref_1
 wires:
-  - width: 1
-    first:
+  - first:
       - digital
       - out
     last:
       - led
       - out
     waypoints: []
-  - width: 1
-    first:
+    width: 1
+  - first:
       - pin11
       - in
     last:
       - irq3
       - irq
     waypoints: []
-  - width: 1
-    first:
+    width: 1
+  - first:
       - digital
       - iosel
     last:
       - pin3
       - iosel
     waypoints: []
-  - width: 1
-    first:
+    width: 1
+  - first:
       - digital
       - out
     last:
       - pin3
       - out
     waypoints: []
-  - width: 1
-    first:
+    width: 1
+  - first:
       - pin3
       - in
     last:
       - digital
       - in
     waypoints: []
+    width: 1
   - first:
       - pin2
       - in
     last:
       - serial
       - rx
-    firstPos:
-      - 300
-      - 40
-    lastPos:
-      - 240
-      - 40
     waypoints: []
     width: 1
   - first:
@@ -198,11 +121,5 @@ wires:
     last:
       - pin1
       - out
-    firstPos:
-      - 240
-      - 80
-    lastPos:
-      - 300
-      - 80
     waypoints: []
     width: 1
