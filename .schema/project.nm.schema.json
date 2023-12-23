@@ -1,0 +1,208 @@
+{
+  "$ref": "#/definitions/Project",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Project": {
+      "additionalProperties": false,
+      "properties": {
+        "board": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "owner": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "owner",
+            "name",
+            "version"
+          ],
+          "type": "object"
+        },
+        "instances": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "addr": {
+                "type": "number"
+              },
+              "flip": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              },
+              "pack": {
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "owner": {
+                    "type": "string"
+                  },
+                  "version": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "owner",
+                  "name",
+                  "version"
+                ],
+                "type": "object"
+              },
+              "params": {
+                "items": {
+                  "items": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": [
+                        "string",
+                        "number"
+                      ]
+                    }
+                  ],
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              "pos": {
+                "items": {
+                  "type": "number"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+              }
+            },
+            "required": [
+              "name",
+              "pack",
+              "params",
+              "pos"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "ioports": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "assign": {
+                "type": "string"
+              },
+              "flip": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              },
+              "params": {
+                "items": {
+                  "items": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": [
+                        "string",
+                        "number"
+                      ]
+                    }
+                  ],
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              "pos": {
+                "items": {
+                  "type": "number"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "type",
+              "params",
+              "pos"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "wires": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "first": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+              },
+              "last": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+              },
+              "waypoints": {
+                "items": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              "width": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "first",
+              "last",
+              "width",
+              "waypoints"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "board",
+        "instances",
+        "ioports",
+        "wires"
+      ],
+      "type": "object"
+    }
+  }
+}

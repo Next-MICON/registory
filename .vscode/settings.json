@@ -1,19 +1,9 @@
 {
   "yaml.schemas": {
-    "/home/ohta/NextMicon/NextMiconIDE/src/files/board/board.nm.schema.json": [
-      "board.nm.yaml"
-    ],
-    "/home/ohta/NextMicon/NextMiconIDE/src/files/config/config.nm.schema.json": [
-      "config.nm.yaml"
-    ],
-    "/home/ohta/NextMicon/NextMiconIDE/src/files/package/package.nm.schema.json": [
-      "package.nm.yaml"
-    ],
-    "/home/ohta/NextMicon/NextMiconIDE/src/files/project/project.nm.schema.json": [
-      "project.nm.yaml"
-    ],
-    "/home/ohta/NextMicon/NextMiconIDE/src/files/registory/registory.nm.schema.json": [
-      "registory.nm.yaml"
-    ]
+    "~/NextMiconIDE/.schema/board.nm.schema.json": ["board.nm.yaml"],
+    "~/NextMiconIDE/.schema/config.nm.schema.json": ["config.nm.yaml"],
+    "~/NextMiconIDE/.schema//package.nm.schema.json": ["package.nm.yaml"],
+    "~/NextMiconIDE/.schema/project.nm.schema.json": ["project.nm.yaml"],
+    "~/NextMiconIDE/.schema/registory.nm.schema.json": ["registory.nm.yaml"]
   }
 }

@@ -23,7 +23,7 @@
 
 // 送信は wstrb または sample によって開始されます。
 // wstrb にトリガされた場合は、メモリから送られてきた 2バイト をそのまま送信します。
-// sample にトリガされた場合は、analog 入力 12 ビットと、内部レジスタの上位4ビットを送信します。
+// sample にトリガされた場合は、in 入力 12 ビットと、内部レジスタの上位4ビットを送信します。
 // 内部レジスタ dsend には、前回送信した内容が含まれています。
 
 module SPIDAC (
@@ -38,7 +38,7 @@ module SPIDAC (
     output reg [31:0] rdata,
 
     input wire sample,
-    input wire [11:0] analog,
+    input wire [11:0] in,
 
     output reg cs,
     output reg scl,
@@ -59,9 +59,9 @@ module SPIDAC (
       state <= waiting;
       dsend <= {
         1'b0,
-        1'b1, // BUF
-        1'b1, // GA
-        1'b1, // SHDN
+        1'b1,  // BUF
+        1'b1,  // GA
+        1'b1,  // SHDN
         12'b0
       };
       cs <= 1;
@@ -70,12 +70,12 @@ module SPIDAC (
       ldac <= 1;
     end else begin
       ready <= valid;
-      rdata <= { 16'b0, dsend };
+      rdata <= {16'b0, dsend};
       case (state)
         waiting: begin
           if (|wstrb || sample) begin  // [S] Start sending
             // Latch send data
-            dsend <= |wstrb ? wdata[15:0] : {dsend[15:12], analog};
+            dsend <= |wstrb ? wdata[15:0] : {dsend[15:12], in};
             // Start sending
             state <= sending;
             cnt <= 0;

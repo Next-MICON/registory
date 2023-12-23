@@ -1,0 +1,198 @@
+{
+  "$ref": "#/definitions/Board",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Board": {
+      "additionalProperties": false,
+      "properties": {
+        "addr": {
+          "additionalProperties": false,
+          "properties": {
+            "maxAddr": {
+              "type": "number"
+            },
+            "pageSize": {
+              "type": "number"
+            },
+            "reserved": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "reserved",
+            "pageSize",
+            "maxAddr"
+          ],
+          "type": "object"
+        },
+        "ioifs": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "params": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "valid": {
+                      "items": {
+                        "anyOf": [
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "num": {
+                                "type": "number"
+                              },
+                              "type": {
+                                "const": "num",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "num"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "from": {
+                                "type": "number"
+                              },
+                              "to": {
+                                "type": "number"
+                              },
+                              "type": {
+                                "const": "range",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "from",
+                              "to"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "num": {
+                                "type": "number"
+                              },
+                              "str": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "const": "enum",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "num",
+                              "str"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "valid"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "ports": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "direct": {
+                      "enum": [
+                        "input",
+                        "output",
+                        "inout"
+                      ],
+                      "type": "string"
+                    },
+                    "icon": {
+                      "enum": [
+                        "?",
+                        "!"
+                      ],
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "pos": {
+                      "items": {
+                        "type": "number"
+                      },
+                      "maxItems": 2,
+                      "minItems": 2,
+                      "type": "array"
+                    },
+                    "width": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "direct",
+                    "width",
+                    "pos"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "size": {
+                "items": {
+                  "type": "number"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "ports",
+              "params",
+              "size"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "ioports": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "addr",
+        "ioports",
+        "ioifs"
+      ],
+      "type": "object"
+    }
+  }
+}

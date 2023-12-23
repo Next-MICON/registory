@@ -1,25 +1,25 @@
 # Directory
-IDE_ROOT  = /home/ohta/NextMiconIDE
+IDE_HOME  = /home/ohta/NextMiconIDE
 PROJ      = /home/ohta/NextMiconIDE/Projects/sample
-TEMPLATE  = TinyFPGA_BX/0.0.0
+BOARD     = NextMicon/TinyFPGA_BX/0.0.0
 
 # Input Files
-HARDWARE  = $(IDE_ROOT)/Template/$(TEMPLATE)/hardware/*.v \
-			$(IDE_ROOT)/Library/*/*/*/*/*.v \
+HARDWARE  = $(IDE_HOME)/Board/$(BOARD)/hardware/*.v \
+			$(IDE_HOME)/Package/*/*/*/*.v \
 			micon/*.v
 
-PCF       = $(IDE_ROOT)/Template/$(TEMPLATE)/hardware/*.pcf
+PCF       = $(IDE_HOME)/Board/$(BOARD)/hardware/*.pcf
 
-START     = $(IDE_ROOT)/Template/$(TEMPLATE)/software/start.S
-LINKER    = $(IDE_ROOT)/Template/$(TEMPLATE)/software/sections.lds
+START     = $(IDE_HOME)/Board/$(BOARD)/software/start.S
+LINKER    = $(IDE_HOME)/Board/$(BOARD)/software/sections.lds
 
-SOFTWARE  = $(IDE_ROOT)/Template/$(TEMPLATE)/software/*.cpp \
-			$(IDE_ROOT)/Library/*/*/*/*/*.cpp \
+SOFTWARE  = $(IDE_HOME)/Board/$(BOARD)/software/*.cpp \
+			$(IDE_HOME)/Package/*/*/*/*.cpp \
 			micon/*.cpp \
 			software/*.cpp
 
-INCLUDE_TEMPLATE = $(IDE_ROOT)/Template/$(TEMPLATE)/software
-INCLUDE_LIBRARY  = $(IDE_ROOT)/Library
+INCLUDE_BOARD    = $(IDE_HOME)/Board/$(BOARD)/software
+INCLUDE_LIBRARY  = $(IDE_HOME)/Package
 INCLUDE_FIRMWARE = micon
 
 # Tools
@@ -28,9 +28,11 @@ CROSS     = riscv64-unknown-elf-
 SIMU_HARD = simulation/*.v
 SIMU_SOFT = .template/cpu/*.cpp .packages/*/*.cpp micon/*.cpp simulation/*.cpp
 
-TOOLS = $(IDE_ROOT)/Template/$(TEMPLATE)/tools
+TOOLS = $(IDE_HOME)/Board/$(BOARD)/tools
 
 ###############################################################################
+
+all: upload
 
 install:
 	sudo apt update
@@ -59,7 +61,7 @@ software: .build/software.objdump .build/software.nm .build/software.bin
 	$(CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
 	        -Wl,-Bstatic,-T,$(LINKER),--strip-debug,-Map=.build/software.map,--cref \
 			-O3 -ffreestanding -nostdlib \
-			-I $(INCLUDE_TEMPLATE) \
+			-I $(INCLUDE_BOARD) \
 			-I $(INCLUDE_LIBRARY) \
 			-I $(INCLUDE_FIRMWARE) \
 			-o $@ \
@@ -83,7 +85,7 @@ upload: hardware software
 	$(CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
 	        -Wl,-Bstatic,-T,$(LINKER),--strip-debug,-Map=.build/software.map,--cref \
 			-O3 -ffreestanding -nostdlib \
-			-I $(INCLUDE_TEMPLATE) \
+			-I $(INCLUDE_BOARD) \
 			-I $(INCLUDE_LIBRARY) \
 			-I $(INCLUDE_FIRMWARE) \
 			-o $@ \

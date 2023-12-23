@@ -1,0 +1,184 @@
+{
+  "$ref": "#/definitions/Package",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Package": {
+      "additionalProperties": false,
+      "properties": {
+        "params": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "valid": {
+                "items": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "num": {
+                          "type": "number"
+                        },
+                        "type": {
+                          "const": "num",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "num"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "from": {
+                          "type": "number"
+                        },
+                        "to": {
+                          "type": "number"
+                        },
+                        "type": {
+                          "const": "range",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "from",
+                        "to"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "num": {
+                          "type": "number"
+                        },
+                        "str": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "const": "enum",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "num",
+                        "str"
+                      ],
+                      "type": "object"
+                    }
+                  ]
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "name",
+              "valid"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "ports": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "direct": {
+                "enum": [
+                  "input",
+                  "output",
+                  "inout"
+                ],
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "pos": {
+                "items": {
+                  "type": "number"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+              },
+              "width": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "name",
+              "direct",
+              "width",
+              "pos"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "size": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "software": {
+          "additionalProperties": false,
+          "properties": {
+            "className": {
+              "type": "string"
+            },
+            "memSize": {
+              "type": "number"
+            },
+            "member": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "copy": {
+                    "type": "string"
+                  },
+                  "doc": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "doc",
+                  "copy"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "className",
+            "memSize",
+            "member"
+          ],
+          "type": "object"
+        },
+        "textX": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "ports",
+        "params",
+        "size",
+        "textX"
+      ],
+      "type": "object"
+    }
+  }
+}

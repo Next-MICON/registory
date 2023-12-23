@@ -1,0 +1,43 @@
+{
+  "$ref": "#/definitions/Registory",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Registory": {
+      "items": {
+        "$ref": "#/definitions/RegistoryItem"
+      },
+      "type": "array"
+    },
+    "RegistoryItem": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "keywords": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "pack": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "owner",
+        "pack",
+        "version",
+        "description",
+        "keywords"
+      ],
+      "type": "object"
+    }
+  }
+}
