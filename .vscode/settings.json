@@ -1,9 +1,9 @@
 {
   "yaml.schemas": {
-    "~/NextMiconIDE/.schema/board.nm.schema.json": ["board.nm.yaml"],
-    "~/NextMiconIDE/.schema/config.nm.schema.json": ["config.nm.yaml"],
-    "~/NextMiconIDE/.schema//package.nm.schema.json": ["package.nm.yaml"],
-    "~/NextMiconIDE/.schema/project.nm.schema.json": ["project.nm.yaml"],
-    "~/NextMiconIDE/.schema/registory.nm.schema.json": ["registory.nm.yaml"]
+    ".schema/board.nm.schema.json": ["board.nm.yaml"],
+    ".schema/config.nm.schema.json": ["config.nm.yaml"],
+    ".schema//package.nm.schema.json": ["package.nm.yaml"],
+    ".schema/project.nm.schema.json": ["project.nm.yaml"],
+    ".schema/registory.nm.schema.json": ["registory.nm.yaml"]
   }
 }
