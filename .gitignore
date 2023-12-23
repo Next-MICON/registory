@@ -1,2 +1,3 @@
 Project/*
+!Project/sample
 !Project/projects.nm.yaml
