@@ -1,0 +1,32 @@
+- owner: NextMicon
+  pack: Digital
+  version: 0.0.0
+  description: "GPIO: General Purpose I/O"
+  keywords: 
+    - "GPIO"
+    - "Signal"
+- owner: NextMicon
+  pack: Analog
+  version: 0.0.0
+  description: "PWM: Pulse Width Modulation"
+  keywords: 
+    - "PWM"
+    - "Signal"
+- owner: NextMicon
+  pack: AND
+  version: 0.0.0
+  description: "AND Gate"
+  keywords: 
+    - "Logic"
+- owner: NextMicon
+  pack: OR
+  version: 0.0.0
+  description: "OR Gate"
+  keywords: 
+    - "Logic"
+- owner: NextMicon
+  pack: Serial
+  version: 0.0.0
+  description: "UART: "
+  keywords: 
+    - "Commutication"

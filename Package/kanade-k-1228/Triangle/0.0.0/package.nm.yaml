@@ -1,0 +1,14 @@
+ports:
+  - name: out
+    direct: output
+    width: 1
+    pos: [120, 0]
+params: []
+size: [214, 64]
+textX: -50
+software:
+  className: Analog
+  memSize: 0x10
+  member:
+    - doc: "void Analog:duty(int)"
+      copy: "${INSTANCE}.duty()"

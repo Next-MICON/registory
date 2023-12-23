@@ -1,0 +1,30 @@
+ports:
+  - name: ch0
+    direct: input
+    width: 1
+    pos: [-120, 60]
+  - name: ch1
+    direct: input
+    width: 1
+    pos: [-120, 20]
+  - name: ch2
+    direct: input
+    width: 1
+    pos: [-120, -20]
+  - name: ch3
+    direct: input
+    width: 1
+    pos: [-120, -60]
+  - name: out
+    direct: output
+    width: 1
+    pos: [120, 0]
+params: []
+size: [214, 160]
+textX: 0
+software:
+  className: Mixier
+  memSize: 0x10
+  member:
+    - doc: "void set_vol(uint32_t ch, uint32_t vol)"
+      copy: "${INSTANCE}.set_vol(ch,vol);"

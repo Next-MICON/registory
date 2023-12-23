@@ -1,0 +1,19 @@
+{
+  "yaml.schemas": {
+    "/home/ohta/NextMicon/NextMiconIDE/src/files/board/board.nm.schema.json": [
+      "board.nm.yaml"
+    ],
+    "/home/ohta/NextMicon/NextMiconIDE/src/files/config/config.nm.schema.json": [
+      "config.nm.yaml"
+    ],
+    "/home/ohta/NextMicon/NextMiconIDE/src/files/package/package.nm.schema.json": [
+      "package.nm.yaml"
+    ],
+    "/home/ohta/NextMicon/NextMiconIDE/src/files/project/project.nm.schema.json": [
+      "project.nm.yaml"
+    ],
+    "/home/ohta/NextMicon/NextMiconIDE/src/files/registory/registory.nm.schema.json": [
+      "registory.nm.yaml"
+    ]
+  }
+}

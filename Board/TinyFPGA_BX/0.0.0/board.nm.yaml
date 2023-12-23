@@ -1,0 +1,115 @@
+templates:
+  - ["micon", "firmware.hpp"]
+  - ["micon", "firmware.cpp"]
+  - ["micon", "hardware.v"]
+
+addr:
+  pageSize: 0x01000000 # 区切り
+  reserved: 0x03000000 # 予約済みメモリ空間
+  maxAddr: 0xFFFFFFFF # 最大値
+
+ioifs:
+  - type: in
+    ports:
+      - name: in
+        direct: output
+        width: 1
+        pos: [60, 0]
+    params: []
+    size: [120, 40]
+
+  - type: out
+    ports:
+      - name: out
+        direct: input
+        width: 1
+        pos: [60, 0]
+    params: []
+    size: [120, 40]
+
+  - type: inout
+    ports:
+      - name: iosel
+        icon: "?"
+        direct: input
+        width: 1
+        pos: [60, -20]
+      - name: out
+        direct: input
+        width: 1
+        pos: [60, 0]
+      - name: in
+        direct: output
+        width: 1
+        pos: [60, 20]
+    params: []
+    size: [120, 80]
+
+  - type: irq
+    ports:
+      - name: irq
+        icon: "!"
+        direct: input
+        width: 1
+        pos: [60, 0]
+    params: []
+    size: [120, 40]
+
+ioports:
+  clk: [in]
+  led: [out]
+  pin1: [in, out, inout]
+  pin2: [in, out, inout]
+  pin3: [in, out, inout]
+  pin4: [in, out, inout]
+  pin5: [in, out, inout]
+  pin6: [in, out, inout]
+  pin7: [in, out, inout]
+  pin8: [in, out, inout]
+  pin9: [in, out, inout]
+  pin10: [in, out, inout]
+  pin11: [in, out, inout]
+  pin12: [in, out, inout]
+  pin13: [in, out, inout]
+  pin14: [in, out, inout]
+  pin15: [in, out, inout]
+  pin16: [in, out, inout]
+  pin17: [in, out, inout]
+  pin18: [in, out, inout]
+  pin19: [in, out, inout]
+  pin20: [in, out, inout]
+  pin21: [in, out, inout]
+  pin22: [in, out, inout]
+  pin23: [in, out, inout]
+  pin24: [in, out, inout]
+  irq2: [irq]
+  irq3: [irq]
+  irq4: [irq]
+  irq5: [irq]
+  irq6: [irq]
+  irq7: [irq]
+  irq8: [irq]
+  irq9: [irq]
+  irq10: [irq]
+  irq11: [irq]
+  irq12: [irq]
+  irq13: [irq]
+  irq14: [irq]
+  irq15: [irq]
+
+tools:
+  - name: yosys
+
+cmd:
+  - name: "Generate Micon"
+    src:
+      - micon.nm.yaml 
+    out:
+      - ./micon/hardware.v
+      - ./micon/firmware.hpp
+    cmd: mgen
+    arg:
+      - 
+  - name: "Synthesys"
+  - name: "Compile"
+  - name: "Upload"
