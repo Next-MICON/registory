@@ -8,7 +8,7 @@ ports:
     width: 1
     pos: [120, 20]
 params: []
-size: [240, 100]
+size: [240, 80]
 textX: -50
 software:
   className: Serial

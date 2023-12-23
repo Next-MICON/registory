@@ -24,7 +24,7 @@ ports:
     width: 1
     pos: [120, -60]
 params: []
-size: [214, 160]
+size: [240, 160]
 textX: 0
 software:
   className: SPIDAC

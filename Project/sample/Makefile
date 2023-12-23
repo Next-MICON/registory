@@ -76,8 +76,8 @@ software: .build/software.objdump .build/software.nm .build/software.bin
 upload: hardware software
 #	tinyprog -p .build/hardware.bin -u .build/software.bin
 	powershell.exe -c \
-	"tinyprog -p \$$env:WSLHome\NextMiconIDE\Projects\sample\.build\hardware.bin \
-	          -u \$$env:WSLHome\NextMiconIDE\Projects\sample\.build\software.bin"
+	"tinyprog -p \$$env:WSLHome\NextMiconIDE\Project\sample\.build\hardware.bin \
+	          -u \$$env:WSLHome\NextMiconIDE\Project\sample\.build\software.bin"
 
 ###############################################################################
 

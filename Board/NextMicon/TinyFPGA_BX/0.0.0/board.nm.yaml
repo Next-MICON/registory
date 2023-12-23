@@ -2,6 +2,7 @@ templates:
   - ["micon", "firmware.hpp"]
   - ["micon", "firmware.cpp"]
   - ["micon", "hardware.v"]
+  - ["Makefile"]
 
 addr:
   pageSize: 0x01000000 # 区切り
@@ -99,17 +100,29 @@ ioports:
 
 tools:
   - name: yosys
+    cmd: yosys
 
 cmd:
   - name: "Generate Micon"
     src:
       - micon.nm.yaml 
     out:
-      - ./micon/hardware.v
+      - ./micon/hardwiare.v
       - ./micon/firmware.hpp
     cmd: mgen
-    arg:
-      - 
+    arg: []
   - name: "Synthesys"
+    src: []
+    out: []
+    cmd: "make synth"
+    arg: []
   - name: "Compile"
+    src: []
+    out: []
+    cmd: "make compile"
+    arg: []
   - name: "Upload"
+    src: []
+    out: []
+    cmd: "make upload"
+    arg: []

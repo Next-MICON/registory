@@ -25,6 +25,46 @@
           ],
           "type": "object"
         },
+        "cmd": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "arg": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "cmd": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "out": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "src": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "name",
+              "src",
+              "out",
+              "cmd",
+              "arg"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
         "ioifs": {
           "items": {
             "additionalProperties": false,
@@ -185,12 +225,43 @@
             "type": "array"
           },
           "type": "object"
+        },
+        "templates": {
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "tools": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "cmd": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "cmd"
+            ],
+            "type": "object"
+          },
+          "type": "array"
         }
       },
       "required": [
+        "templates",
         "addr",
         "ioports",
-        "ioifs"
+        "ioifs",
+        "tools",
+        "cmd"
       ],
       "type": "object"
     }
