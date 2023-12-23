@@ -7,8 +7,8 @@ params: []
 size: [240, 60]
 textX: -50
 software:
-  className: Analog
+  className: Sawtooth
   memSize: 0x10
   member:
-    - doc: "void Analog:duty(int)"
+    - doc: "void Sawtooth:freq(int)"
       copy: "${INSTANCE}.duty()"

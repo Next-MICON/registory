@@ -15,8 +15,10 @@ params: []
 size: [240, 80]
 textX: 0
 software:
-  className: Analog
-  memSize: 0x10
+  className: Spectro
+  memSize: 0x1000
   member:
-    - doc: "void Analog:duty(int)"
-      copy: "${INSTANCE}.duty()"
+    - doc: "void Spectro::start()"
+      copy: "${INSTANCE}.start()"
+    - doc: "char Spectro::buffer[BUFFER_SIZE]"
+      copy: "${INSTANCE}.buffer[]"
