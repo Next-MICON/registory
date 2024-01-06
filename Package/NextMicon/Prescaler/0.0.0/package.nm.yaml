@@ -1,8 +1,0 @@
-ports:
-  - name: out
-    direct: output
-    width: 1
-    pos: [120, 0]
-params: []
-size: [240, 60]
-textX: -40

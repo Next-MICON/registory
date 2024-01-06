@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 
-class Sawtooth {
+class Triangle {
   volatile uint32_t* reg;
   uint32_t _clk;
   static const uint32_t FREQ_TABLE[] = {
@@ -17,7 +17,7 @@ class Sawtooth {
       4186, 4435, 4699, 4978, 5274, 5587, 5920, 6272, 6645, 7040, 7459, 7902,
       8372, 8870, 9397, 9956, 10548, 11175, 11840, 12544};
 public:
-  Sawtooth(volatile uint32_t* addr) : reg(addr) {}
+  Triangle(volatile uint32_t* addr) : reg(addr) {}
   void set_clk(uint32_t clk) { _clk = clk; }
 
   /// @brief Start oscilating

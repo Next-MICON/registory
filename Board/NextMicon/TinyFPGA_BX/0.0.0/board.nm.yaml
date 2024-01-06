@@ -2,7 +2,7 @@ templates:
   - ["micon", "firmware.hpp"]
   - ["micon", "firmware.cpp"]
   - ["micon", "hardware.v"]
-  - ["Makefile"]
+  # - ["Makefile"]
 
 addr:
   pageSize: 0x01000000 # 区切り
