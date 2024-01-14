@@ -17,6 +17,7 @@ AllowShortFunctionsOnASingleLine: true
 AllowShortIfStatementsOnASingleLine: true
 AllowShortLoopsOnASingleLine: true
 AllowShortEnumsOnASingleLine: true
+IndentCaseLabels: true
 
 SpacesBeforeTrailingComments: 2
 CommentPragmas: '[!\*]'

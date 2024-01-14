@@ -29,23 +29,23 @@ module Mixier #(
     input wire [7:0] ch1,
     input wire [7:0] ch2,
     input wire [7:0] ch3,
-    input wire [7:0] ch4,
-    input wire [7:0] ch5,
-    input wire [7:0] ch6,
-    input wire [7:0] ch7,
+    //input wire [7:0] ch4,
+    //input wire [7:0] ch5,
+    //input wire [7:0] ch6,
+    //input wire [7:0] ch7,
 
     output reg [11:0] out
 );
 
-  wire [7:0] ch[8];
+  wire [7:0] ch[N_CH];
   assign ch[0] = ch0;
   assign ch[1] = ch1;
   assign ch[2] = ch2;
   assign ch[3] = ch3;
-  assign ch[4] = ch4;
-  assign ch[5] = ch5;
-  assign ch[6] = ch6;
-  assign ch[7] = ch7;
+  //assign ch[4] = ch4;
+  //assign ch[5] = ch5;
+  //assign ch[6] = ch6;
+  //assign ch[7] = ch7;
 
   reg [3:0] vol[8];
   integer i;

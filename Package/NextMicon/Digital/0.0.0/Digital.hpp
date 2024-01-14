@@ -8,22 +8,20 @@ class Digital {
     Reg_OUT = 1,
     Reg_IN = 2
   };
-public:
   enum Mode {
     IN = 0,
     OUT = 1
   };
+public:
   Digital(volatile uint32_t* addr) : reg(addr) {}
-  void mode(Mode mode) { reg[Reg_IOSEL] = mode; }
 
+  void mode(Mode mode) { reg[Reg_IOSEL] = mode; }
   void in_mode() { reg[Reg_IOSEL] = Mode::IN; }
+  void out_mode() { reg[Reg_IOSEL] = Mode::OUT; }
+
   uint32_t read() { return reg[Reg_IN]; }
 
-  void out_mode() { reg[Reg_IOSEL] = Mode::OUT; }
   void write(uint32_t val) { reg[Reg_OUT] = val; }
   void on() { write(1); }
   void off() { write(0); }
 };
-
-void gpio_blink(Digital& gpio_out, uint32_t rpt = 5, uint32_t delay_ms = 500);
-void gpio_test(Digital& gpio_out, Digital& gpio_in, uint32_t time = 0x1'0000);

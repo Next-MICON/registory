@@ -4,9 +4,9 @@ PROJ      = /home/ohta/NextMiconIDE/Projects/sample
 BOARD     = NextMicon/TinyFPGA_BX/0.0.0
 
 # Input Files
-HARDWARE  = $(IDE_HOME)/Board/$(BOARD)/hardware/*.v \
-			$(IDE_HOME)/Package/*/*/*/*.v \
-			micon/*.v
+HARDWARE  = $(IDE_HOME)/Board/$(BOARD)/hardware/*.sv \
+			$(IDE_HOME)/Package/*/*/*/*.sv \
+			micon/*.sv
 
 PCF       = $(IDE_HOME)/Board/$(BOARD)/hardware/*.pcf
 
@@ -25,7 +25,7 @@ INCLUDE_FIRMWARE = micon
 # Tools
 CROSS     = riscv64-unknown-elf-
 
-SIMU_HARD = simulation/*.v
+SIMU_HARD = simulation/*.sv
 SIMU_SOFT = .template/cpu/*.cpp .packages/*/*.cpp micon/*.cpp simulation/*.cpp
 
 TOOLS = $(IDE_HOME)/Board/$(BOARD)/tools
