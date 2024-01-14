@@ -17,7 +17,7 @@ void piano();
 
 void init() {
   set_irq_mask(0);
-  sampling.set(44100);
+  sampling.freq(44100);
   serial.baud(460800);
   serial.print(
       "  _  _         _   __  __ _  \n"
@@ -39,64 +39,64 @@ void loop() {
       " [6] Music: FF\n"
       " [7] Piano\n");
   switch(serial.read()) {
-  case '1': {
-    serial.print("=== Blink LED ===\n");
-    digital.out_mode();
-    for(int i = 0; i < 5; ++i) {
-      digital.on();
-      serial.print("*");
-      delayMs(500);
-      digital.off();
-      serial.print(".");
-      delayMs(500);
-    }
-    serial.print("\n=== End ===\n");
-  } break;
-  case '2': {
-    serial.print("=== Play Sownd ===\n");
-    ch1_sq.freq(FREQ_TABLE[48]);
-    ch2_sq.freq(FREQ_TABLE[52]);
-    ch3_sq.freq(FREQ_TABLE[55]);
-    mix.set_vol(0, 0);
-    mix.set_vol(1, 2);
-    mix.set_vol(2, 2);
-    mix.set_vol(3, 2);
-    delayMs(1000);
-    mix.set_vol(0, 0);
-    mix.set_vol(1, 0);
-    mix.set_vol(2, 0);
-    mix.set_vol(3, 0);
-    serial.print("=== End ===\n");
-  } break;
-  case '3': {
-    serial.print("=== Music: Rockman ===\n");
-    serial.print("  /\\_/\\ \n"
-                 "6/ '-' )__ \n"
-                 "(    >____|| o o \n"
-                 " )  /\\ \\ \n"
-                 "(__)  \\_> \n");
-    serial.print("=== End ===\n");
-  } break;
-  case '4': {
-    serial.print("=== Music: Ugoku ===\n");
-    serial.print(" .. (  '-')\n");
-    serial.print("=== End ===\n");
-  } break;
-  case '5': {
-    serial.print("=== Music: Makaimura ===\n");
-    serial.print("=== End ===\n");
-  } break;
-  case '6': {
-    serial.print("=== Music: FF ===\n");
-    serial.print("=== End ===\n");
-  } break;
-  case '7': {
-    serial.print("=== Piano ===\n");
-    piano();
-    serial.print("=== End ===\n");
-  } break;
-  default: {
-  } break;
+    case '1': {
+      serial.print("=== Blink LED ===\n");
+      digital.out_mode();
+      for(int i = 0; i < 5; ++i) {
+        digital.on();
+        serial.print("*");
+        delayMs(500);
+        digital.off();
+        serial.print(".");
+        delayMs(500);
+      }
+      serial.print("\n=== End ===\n");
+    } break;
+    case '2': {
+      serial.print("=== Play Sownd ===\n");
+      ch1_sq.freq(FREQ_TABLE[48]);
+      ch2_sq.freq(FREQ_TABLE[52]);
+      ch3_sq.freq(FREQ_TABLE[55]);
+      mix.set_vol(0, 0);
+      mix.set_vol(1, 2);
+      mix.set_vol(2, 2);
+      mix.set_vol(3, 2);
+      delayMs(1000);
+      mix.set_vol(0, 0);
+      mix.set_vol(1, 0);
+      mix.set_vol(2, 0);
+      mix.set_vol(3, 0);
+      serial.print("=== End ===\n");
+    } break;
+    case '3': {
+      serial.print("=== Music: Rockman ===\n");
+      serial.print("  /\\_/\\ \n"
+                   "6/ '-' )__ \n"
+                   "(    >____|| o o \n"
+                   " )  /\\ \\ \n"
+                   "(__)  \\_> \n");
+      serial.print("=== End ===\n");
+    } break;
+    case '4': {
+      serial.print("=== Music: Ugoku ===\n");
+      serial.print(" .. (  '-')\n");
+      serial.print("=== End ===\n");
+    } break;
+    case '5': {
+      serial.print("=== Music: Makaimura ===\n");
+      serial.print("=== End ===\n");
+    } break;
+    case '6': {
+      serial.print("=== Music: FF ===\n");
+      serial.print("=== End ===\n");
+    } break;
+    case '7': {
+      serial.print("=== Piano ===\n");
+      piano();
+      serial.print("=== End ===\n");
+    } break;
+    default: {
+    } break;
   }
 }
 

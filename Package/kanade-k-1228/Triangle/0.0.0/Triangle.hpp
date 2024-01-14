@@ -1,15 +1,16 @@
 #pragma once
+#include "cpu.hpp"
 #include <stdint.h>
 
 class Triangle {
   volatile uint32_t* reg;
-  uint32_t _clk;
 public:
   Triangle(volatile uint32_t* addr) : reg(addr) {}
+  void set(uint32_t clk) { reg[0] = clk; }
 
-  /// @brief Set oscilating clock counter
-  /// @param clk
-  void set_clk(uint32_t clk) { _clk = clk; }
+  /// @brief Start oscilating
+  /// @param note_no MIDI Note number (0~127)
+  void freq(uint32_t f) { reg[0] = CLK_FREQ / f; }
 
   /// @brief Stop oscilating
   void stop() { reg[0] = 0; }
