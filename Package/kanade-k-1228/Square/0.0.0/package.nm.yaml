@@ -1,7 +1,7 @@
 ports:
   - name: out
     direct: output
-    width: 1
+    width: 8
     pos: [120, 0]
 params: []
 size: [240, 60]

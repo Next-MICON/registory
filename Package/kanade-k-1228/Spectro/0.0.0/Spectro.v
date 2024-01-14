@@ -19,8 +19,7 @@ module Spectro (
   always @(posedge clk) begin
     if (!resetn) begin
       threshold <= 0;
-      counter <= 0;
-      out <= 0;
+      counter   <= 0;
     end else begin
       ready <= valid;
       rdata <= threshold;
