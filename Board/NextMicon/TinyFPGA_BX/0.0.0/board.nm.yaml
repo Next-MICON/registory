@@ -1,7 +1,7 @@
 templates:
   - ["micon", "firmware.hpp"]
   - ["micon", "firmware.cpp"]
-  - ["micon", "hardware.v"]
+  - ["micon", "hardware.sv"]
   # - ["Makefile"]
 
 addr:

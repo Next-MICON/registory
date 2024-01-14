@@ -8,8 +8,8 @@ auto welcome = "  _  _         _   __  __ _  \n"
                "        https://github.com/NextMicon\n\n";
 
 auto help = "Select:\n"
-            " [a] Blink LED (GPIO)\n"
-            " [b] Blink LED (PWM)\n";
+            " [1] Blink LED (GPIO)\n"
+            " [2] Blink LED (PWM)\n";
 
 void init() {
   set_irq_mask(0);
@@ -20,7 +20,7 @@ void init() {
 void loop() {
   serial.print(help);
   switch(serial.read()) {
-    case 'a': {
+    case '1': {
       serial.print("=== Blink LED (GPIO) ===\n");
       digital.out_mode();
       for(int i = 0; i < 5; ++i) {
@@ -33,7 +33,7 @@ void loop() {
       }
       serial.print("\n=== end ===\n");
     } break;
-    case 'b': {
+    case '2': {
       serial.print("=== Blink LED (PWM) ===\n");
       serial.print("=== end ===\n");
     } break;

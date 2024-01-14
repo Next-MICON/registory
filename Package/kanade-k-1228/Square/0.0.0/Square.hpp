@@ -1,15 +1,15 @@
 #pragma once
+#include "cpu.hpp"
 #include <stdint.h>
 
 class Square {
   volatile uint32_t* reg;
-  uint32_t _clk;
 public:
   Square(volatile uint32_t* addr) : reg(addr) {}
 
   /// @brief Set oscilating clock counter
   /// @param clk
-  void set_clk(uint32_t clk) { _clk = clk; }
+  void freq(uint32_t f) { reg[0] = CLK_FREQ / f; }
 
   /// @brief Stop oscilating
   void stop() { reg[0] = 0; }
