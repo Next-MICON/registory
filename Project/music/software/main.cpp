@@ -1,3 +1,7 @@
+#include "cmidi/ff_bigbr.h"
+#include "cmidi/makaimura.h"
+#include "cmidi/rockman_dr_wily.h"
+#include "cmidi/ugoku.h"
 #include "firmware.hpp"
 
 static const uint32_t FREQ_TABLE[] = {
@@ -13,11 +17,18 @@ static const uint32_t FREQ_TABLE[] = {
     4186, 4435, 4699, 4978, 5274, 5587, 5920, 6272, 6645, 7040, 7459, 7902,
     8372, 8870, 9397, 9956, 10548, 11175, 11840, 12544};
 
+void play(int ch, int note);
+void stop(int ch);
 void piano();
+void music(const uint16_t* m, uint32_t len);
 
 void init() {
   set_irq_mask(0);
   sampling.freq(44100);
+  stop(0);
+  stop(1);
+  stop(2);
+  stop(3);
   serial.baud(460800);
   serial.print(
       "  _  _         _   __  __ _  \n"
@@ -54,18 +65,19 @@ void loop() {
     } break;
     case '2': {
       serial.print("=== Play Sownd ===\n");
-      ch1_sq.freq(FREQ_TABLE[48]);
-      ch2_sq.freq(FREQ_TABLE[52]);
-      ch3_sq.freq(FREQ_TABLE[55]);
-      mix.set_vol(0, 0);
+      play(0, 48);
+      mix.set_vol(0, 2);
+      delayMs(500);
+      play(1, 52);
       mix.set_vol(1, 2);
+      delayMs(500);
+      play(2, 55);
       mix.set_vol(2, 2);
-      mix.set_vol(3, 2);
-      delayMs(1000);
-      mix.set_vol(0, 0);
-      mix.set_vol(1, 0);
-      mix.set_vol(2, 0);
-      mix.set_vol(3, 0);
+      delayMs(1500);
+      stop(0);
+      stop(1);
+      stop(2);
+      stop(3);
       serial.print("=== End ===\n");
     } break;
     case '3': {
@@ -75,19 +87,23 @@ void loop() {
                    "(    >____|| o o \n"
                    " )  /\\ \\ \n"
                    "(__)  \\_> \n");
+      music(rockman_dr_wily_music, rockman_dr_wily_len);
       serial.print("=== End ===\n");
     } break;
     case '4': {
       serial.print("=== Music: Ugoku ===\n");
       serial.print(" .. (  '-')\n");
+      music(ugoku_music, ugoku_len);
       serial.print("=== End ===\n");
     } break;
     case '5': {
       serial.print("=== Music: Makaimura ===\n");
+      music(makaimura_music, makaimura_len);
       serial.print("=== End ===\n");
     } break;
     case '6': {
       serial.print("=== Music: FF ===\n");
+      music(ff_bigbr_music, ff_bigbr_len);
       serial.print("=== End ===\n");
     } break;
     case '7': {
@@ -104,8 +120,47 @@ void irq4() {
   // Start Print Spectrogram
 }
 
+void play(int ch, int note) {
+  switch(ch) {
+    case 0: {
+      ch0_sq.freq(FREQ_TABLE[note]);
+    } break;
+    case 1: {
+      ch1_sq.freq(FREQ_TABLE[note]);
+    } break;
+    case 2: {
+      ch2_sq.freq(FREQ_TABLE[note]);
+    } break;
+    case 3: {
+      ch3_sq.freq(FREQ_TABLE[note]);
+    } break;
+    default:
+      break;
+  }
+}
+
+void stop(int ch) {
+  switch(ch) {
+    case 0: {
+      ch0_sq.stop();
+    } break;
+    case 1: {
+      ch1_sq.stop();
+    } break;
+    case 2: {
+      ch2_sq.stop();
+    } break;
+    case 3: {
+      ch3_sq.stop();
+    } break;
+    default:
+      break;
+  }
+}
+
+
 void piano() {
-  const int N_CH = 5;
+  const int N_CH = 4;
   static const char* keys = "zsxdcvgbhnjm,l.;/";
   static const char* keyboard_black = "\e[7m:\e[0m \e[7m \e[0m \e[7m \e[0m\e[7m \e[0m \e[7m \e[0m \e[7m \e[0m \e[7m \e[0m";
   static const char* keyboard_white = "\e[7m:           \e[0m";
@@ -113,7 +168,7 @@ void piano() {
   static const char* keyboard_white_key = "\e[7mZ X CV B N M\e[0m";
   static const char* erase = "\r           :           :           :           :           :           :           :           :           |\r";
   static const char* tab = "           ";
-  static const char* ch_name[N_CH] = {"square1", "square2", "square3", "sawtooth", "triangle"};
+  static const char* ch_name[N_CH] = {"triangle", "square1", "square2", "square3"};
 
   const uint32_t OCT_MIN = 1;
   const uint32_t OCT_MAX = 8;
@@ -162,7 +217,7 @@ void piano() {
     if(cmd == 't') ch = 4;
     // Stop note
     if(cmd == ' ') {
-      // player.stop(ch);
+      stop(ch);
       notes[ch] = 0;
     }
     // Play sownd
@@ -170,14 +225,45 @@ void piano() {
       if(cmd == keys[i]) {
         int note = octave * 12 + i;
         notes[ch] = note;
-        // player.play(ch, note);
+        play(ch, note);
       }
     }
   }
-  // player.stop(0);
-  // player.stop(1);
-  // player.stop(2);
-  // player.stop(3);
-  // player.stop(4);
+  stop(0);
+  stop(1);
+  stop(2);
+  stop(3);
   serial.print("\n\n\n\n\n\n\n\n");
 }
+
+// Compressed MIDI
+// Data Format
+//          15 - 0:Delay 1:Sound
+//   IF Delay
+//     14 ~  0 - Delay Time [ms]
+//   IF Sound
+//     14 ~ 13 - Chip Sellect
+//     12 ~ 11 - Channel
+//     10 ~  4 - Note Number
+//      3 ~  0 - Velocity
+void cmidi(uint16_t data) {
+  int type = data & (0b1 << 15);
+  if(type) {
+    int channel = (data >> 11) & 0b11;
+    int note_number = (data >> 4) & 0b1111'111;
+    int velocity = data & 0b1111;
+    play(channel, velocity ? note_number : 0);
+  } else {
+    delayMs(data);
+  }
+  return;
+}
+
+void music(const uint16_t* m, uint32_t len) {
+  for(int i = 0; i < len; ++i) {
+    uint16_t data = m[i];
+    cmidi(data);
+  }
+}
+
+// void hoge() {}

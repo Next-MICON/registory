@@ -12,7 +12,7 @@
 //////////////////////////////////////////////////////////////////
 
 module Mixier #(
-    parameter N_CH = 8,  // チャンネル数 (0~8)
+    parameter N_CH = 4,  // チャンネル数 (0~8)
     parameter CALC_CNT = 2  // 計算に必要な待ち時間 (0~15)
 ) (
     input wire clk,
@@ -29,10 +29,6 @@ module Mixier #(
     input wire [7:0] ch1,
     input wire [7:0] ch2,
     input wire [7:0] ch3,
-    //input wire [7:0] ch4,
-    //input wire [7:0] ch5,
-    //input wire [7:0] ch6,
-    //input wire [7:0] ch7,
 
     output reg [11:0] out
 );
@@ -42,10 +38,6 @@ module Mixier #(
   assign ch[1] = ch1;
   assign ch[2] = ch2;
   assign ch[3] = ch3;
-  //assign ch[4] = ch4;
-  //assign ch[5] = ch5;
-  //assign ch[6] = ch6;
-  //assign ch[7] = ch7;
 
   reg [3:0] vol[8];
   integer i;

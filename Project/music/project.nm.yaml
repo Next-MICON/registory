@@ -4,7 +4,6 @@ board:
   version: 0.0.0
 instances:
   - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [320, -20], flip: true}
-  - {name: ch0_tri, pack: {owner: kanade-k-1228, name: Triangle, version: 0.0.0}, params: [], pos: [120, 160]}
   - {name: ch1_sq, pack: {owner: kanade-k-1228, name: Square, version: 0.0.0}, params: [], pos: [120, 240]}
   - {name: ch2_sq, pack: {owner: kanade-k-1228, name: Square, version: 0.0.0}, params: [], pos: [120, 320]}
   - {name: ch3_sq, pack: {owner: kanade-k-1228, name: Square, version: 0.0.0}, params: [], pos: [120, 400]}
@@ -12,6 +11,7 @@ instances:
   - {name: dac, pack: {owner: kanade-k-1228, name: SPIDAC, version: 0.0.0}, params: [], pos: [740, 300]}
   - {name: sampling, pack: {owner: NextMicon, name: Counter, version: 0.0.0}, params: [], pos: [420, 420]}
   - {name: digital, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [660, 20]}
+  - {name: ch0_sq, pack: {owner: kanade-k-1228, name: Square, version: 0.0.0}, params: [], pos: [120, 160]}
 ioports:
   - {name: pin2, type: in, params: [], pos: [60, -40], flip: false}
   - {name: pin1, type: out, params: [], pos: [60, 0], flip: false}
@@ -25,7 +25,7 @@ ioports:
 wires:
   - {first: [mix, out], last: [dac, in], waypoints: [], width: 12}
   - {first: [sampling, of], last: [dac, sample], waypoints: [], width: 1}
-  - {first: [ch0_tri, out], last: [mix, ch0], waypoints: [], width: 8}
+  - {first: [ch0_sq, out], last: [mix, ch0], waypoints: [], width: 8}
   - {first: [ch1_sq, out], last: [mix, ch1], waypoints: [], width: 8}
   - {first: [ch2_sq, out], last: [mix, ch2], waypoints: [], width: 8}
   - {first: [ch3_sq, out], last: [mix, ch3], waypoints: [], width: 8}
