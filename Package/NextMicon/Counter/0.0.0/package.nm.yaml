@@ -10,5 +10,7 @@ software:
   className: Prescaler
   memSize: 0x10
   member:
-    - doc: "void Prescaler::set(int)"
+    - doc: "set(int)"
       copy: "${INSTANCE}.set()"
+    - doc: "freq(int)"
+      copy: "${INSTANCE}.freq()"

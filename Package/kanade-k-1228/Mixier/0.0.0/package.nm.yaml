@@ -26,5 +26,5 @@ software:
   className: Mixier
   memSize: 0x10
   member:
-    - doc: "void set_vol(uint32_t ch, uint32_t vol)"
+    - doc: "set_vol(int ch, int vol)"
       copy: "${INSTANCE}.set_vol(ch,vol);"

@@ -14,17 +14,11 @@ software:
   className: Serial
   memSize: 0x10
   member:
-    - doc: "Serial& Serial::operator<<(char)"
-      copy: "${INSTANCE} << ' '"
-    - doc: "Serial& Serial::operator<<(const char*)"
-      copy: "${INSTANCE} << \"\""
-    - doc: "Serial& Serial::operator<<(uint32_t)"
-      copy: "${INSTANCE} <<"
-    - doc: "void Serial::print(char)"
+    - doc: "print(char)"
       copy: "${INSTANCE}.print()"
-    - doc: "void Serial::print(const char*)"
+    - doc: "print(const char*)"
       copy: "${INSTANCE}.print()"
-    - doc: "void Serial::print(uint32_t)"
+    - doc: "print(uint32_t)"
       copy: "${INSTANCE}.print()"
-    - doc: "char Serial::read()"
+    - doc: "read() -> char"
       copy: "${INSTANCE}.read()"

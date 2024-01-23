@@ -10,5 +10,9 @@ software:
   className: Square
   memSize: 0x10
   member:
-    - doc: "void Square::freq(int)"
-      copy: "${INSTANCE}.duty()"
+    - doc: "set(int cnt)"
+      copy: "${INSTANCE}.set(cnt)"
+    - doc: "freq(int f)"
+      copy: "${INSTANCE}.freq(f)"
+    - doc: "stop()"
+      copy: "${INSTANCE}.stop()"

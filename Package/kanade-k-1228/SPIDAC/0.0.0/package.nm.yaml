@@ -30,5 +30,5 @@ software:
   className: Spectro
   memSize: 0x10
   member:
-    - doc: "void analog(uint16_t value, int buf = 1, int ga = 1, int shdn = 1)"
-      copy: "${INSTANCE}.analog();"
+    - doc: "analog(int value, int buf = 1, int ga = 1, int shdn = 1)"
+      copy: "${INSTANCE}.analog(value);"
