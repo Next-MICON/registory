@@ -24,7 +24,7 @@ void music(const uint16_t* m, uint32_t len);
 
 void init() {
   set_irq_mask(0);
-  sampling.freq(44100);
+  sampling.freq(44'100);
   stop(0);
   stop(1);
   stop(2);
@@ -260,6 +260,10 @@ void cmidi(uint16_t data) {
 }
 
 void music(const uint16_t* m, uint32_t len) {
+  mix.set_vol(0, 10);
+  mix.set_vol(1, 6);
+  mix.set_vol(2, 5);
+  mix.set_vol(3, 4);
   for(int i = 0; i < len; ++i) {
     uint16_t data = m[i];
     cmidi(data);

@@ -101,3 +101,52 @@ module Mixier #(
   end
 
 endmodule
+
+
+module MixierPararell #(
+    parameter N_CH = 4,  // チャンネル数 (0~8)
+    parameter CALC_CNT = 2  // 計算に必要な待ち時間 (0~15)
+) (
+    input wire clk,
+    input wire resetn,
+
+    input wire valid,
+    output reg ready,
+    input wire [3:0] wstrb,
+    input wire [31:0] addr,
+    input wire [31:0] wdata,
+    output reg [31:0] rdata,
+
+    input wire [7:0] ch0,
+    input wire [7:0] ch1,
+    input wire [7:0] ch2,
+    input wire [7:0] ch3,
+
+    output reg [11:0] out
+);
+
+  wire [7:0] ch[N_CH];
+  assign ch[0] = ch0;
+  assign ch[1] = ch1;
+  assign ch[2] = ch2;
+  assign ch[3] = ch3;
+
+  reg [3:0] vol[8];
+  integer i;
+  always @(posedge clk) begin
+    if (!resetn) begin
+      for (i = 0; i < 4; i = i + 1) begin
+        vol[i] <= 4'b0;
+      end
+    end else begin
+      ready <= valid;
+      rdata <= vol[addr[4:2]];
+      if (wstrb[0]) vol[addr[4:2]] <= wdata[3:0];
+    end
+  end
+
+  always @(posedge clk) begin
+    out <= (ch[0] << vol[0]) + (ch[1] << vol[1]) + (ch[2] << vol[2]) + (ch[3] << vol[3]);
+  end
+
+endmodule
