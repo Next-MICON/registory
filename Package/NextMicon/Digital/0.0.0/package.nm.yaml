@@ -18,11 +18,9 @@ software:
   className: Digital
   memSize: 0x10
   member:
-    - doc: "void out_mode()"
-      copy: "${INSTANCE}.out_mode()"
-    - doc: "void write(int)"
-      copy: "${INSTANCE}.write()"
-    - doc: "void in_mode()"
-      copy: "${INSTANCE}.in_mode()"
-    - doc: "int read()"
+    - doc: "mode(Mode mode)"
+      copy: "${INSTANCE}.mode()"
+    - doc: "write(bool value)"
+      copy: "${INSTANCE}.write(value)"
+    - doc: "read()"
       copy: "${INSTANCE}.read()"
