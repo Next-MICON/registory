@@ -19,7 +19,8 @@ static const uint32_t FREQ_TABLE[] = {
 
 void play(int ch, int note);
 void stop(int ch);
-void piano();
+void multi_ch_piano();
+void single_ch_piano();
 void music(const uint16_t* m, uint32_t len);
 
 void init() {
@@ -44,11 +45,11 @@ void loop() {
       "Select:\n"
       " [1] Blink LED\n"
       " [2] Play Sownd\n"
-      " [3] Music: Rockman\n"
-      " [4] Music: Ugoku\n"
-      " [5] Music: Makaimura\n"
-      " [6] Music: FF\n"
-      " [7] Piano\n");
+      " [3] Piano\n"
+      " [4] Music: Rockman\n"
+      " [5] Music: Ugoku\n"
+      " [6] Music: Makaimura\n"
+      " [7] Music: FF\n");
   switch(serial.read()) {
     case '1': {
       serial.print("=== Blink LED ===\n");
@@ -81,6 +82,11 @@ void loop() {
       serial.print("=== End ===\n");
     } break;
     case '3': {
+      serial.print("=== Piano ===\n");
+      single_ch_piano();
+      serial.print("=== End ===\n");
+    } break;
+    case '4': {
       serial.print("=== Music: Rockman ===\n");
       serial.print("  /\\_/\\ \n"
                    "6/ '-' )__ \n"
@@ -90,25 +96,20 @@ void loop() {
       music(rockman_dr_wily_music, rockman_dr_wily_len);
       serial.print("=== End ===\n");
     } break;
-    case '4': {
+    case '5': {
       serial.print("=== Music: Ugoku ===\n");
       serial.print(" .. (  '-')\n");
       music(ugoku_music, ugoku_len);
       serial.print("=== End ===\n");
     } break;
-    case '5': {
+    case '6': {
       serial.print("=== Music: Makaimura ===\n");
       music(makaimura_music, makaimura_len);
       serial.print("=== End ===\n");
     } break;
-    case '6': {
+    case '7': {
       serial.print("=== Music: FF ===\n");
       music(ff_bigbr_music, ff_bigbr_len);
-      serial.print("=== End ===\n");
-    } break;
-    case '7': {
-      serial.print("=== Piano ===\n");
-      piano();
       serial.print("=== End ===\n");
     } break;
     default: {
@@ -116,8 +117,9 @@ void loop() {
   }
 }
 
-void irq4() {
-  // Start Print Spectrogram
+extern "C" uint32_t* irq(uint32_t* regs, uint32_t irqs) {
+  serial.print("I N T E R R U P T !!!\n");
+  return regs;
 }
 
 void play(int ch, int note) {
@@ -158,8 +160,62 @@ void stop(int ch) {
   }
 }
 
+void single_ch_piano() {
+  static const char* KEY_B = " \e[7m \e[0mw\e[7m \e[0me\e[7m \e[0m\e[7m \e[0mt\e[7m \e[0my\e[7m \e[0mu\e[7m \e[0m\e[7m \e[0mo\e[7m \e[0mp\e[7m \e[0m";
+  static const char* KEY_W = " \e[7ma s df g h jk l ;\e[0m";
+  static const char* ERASE = "\r                  \r";
+  static const char* KEYS = "awsedftgyhujkolp;";
+  const uint32_t N_KEY = 17;
+  const uint32_t OCT_MIN = 1;
+  const uint32_t OCT_MAX = 8;
 
-void piano() {
+  uint32_t ch = 0;
+  uint32_t oct = 4;
+  uint32_t note = 0;
+
+  // --------------------------------------------------------------------------------
+
+  serial.print(KEY_B).print("\n").print(KEY_W).print("\n");
+
+  for(char cmd;;) {
+
+    cmd = serial.read();
+
+    // Exit
+    if(cmd == '\n') break;
+
+    // Change Octave
+    if(OCT_MIN <= cmd - '0' && cmd - '0' <= OCT_MAX) {
+      oct = cmd - '0';
+      serial.print(ERASE).print(oct);
+    }
+
+    // Stop note
+    if(cmd == ' ') {
+      stop(ch);
+      serial.print(ERASE).print(oct);
+    }
+
+    // Play note
+    for(int i = 0; i < N_KEY; ++i) {
+      if(cmd == KEYS[i]) {
+        int note = oct * 12 + i;
+        play(ch, note);
+        serial.print(ERASE).print(oct);
+        for(int j = 0; j <= i; ++j) {
+          serial.print(' ');
+        }
+      }
+    }
+  }
+exit:
+  stop(0);
+  stop(1);
+  stop(2);
+  stop(3);
+}
+
+void multi_ch_piano() {
   const int N_CH = 4;
   static const char* keys = "zsxdcvgbhnjm,l.;/";
   static const char* keyboard_black = "\e[7m:\e[0m \e[7m \e[0m \e[7m \e[0m\e[7m \e[0m \e[7m \e[0m \e[7m \e[0m \e[7m \e[0m";
