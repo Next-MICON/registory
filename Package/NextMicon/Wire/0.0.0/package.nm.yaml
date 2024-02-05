@@ -1,0 +1,30 @@
+ports:
+  - name: scl
+    direct: output
+    width: 1
+    pos: [120, -60]
+  - name: sda_io
+    direct: output
+    width: 1
+    pos: [120, -20]
+  - name: sda_in
+    direct: input
+    width: 1
+    pos: [120, 20]
+  - name: sda_out
+    direct: output
+    width: 1
+    pos: [120, 60]
+params: []
+size: [240, 80]
+textX: -50
+software:
+  className: Wire
+  memSize: 0x10
+  member:
+    - doc: "begin(char addr)"
+      copy: "${INSTANCE}.begin()"
+    - doc: "write(char w)"
+      copy: "${INSTANCE}.write()"
+    - doc: "read() -> char"
+      copy: "${INSTANCE}.read()"
