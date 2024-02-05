@@ -16,15 +16,13 @@ ports:
     width: 1
     pos: [120, 60]
 params: []
-size: [240, 80]
+size: [240, 180]
 textX: -50
 software:
   className: Wire
   memSize: 0x10
   member:
-    - doc: "begin(char addr)"
-      copy: "${INSTANCE}.begin()"
-    - doc: "write(char w)"
-      copy: "${INSTANCE}.write()"
-    - doc: "read() -> char"
-      copy: "${INSTANCE}.read()"
+    - doc: "write(char addr, char reg, char val, bool stop = false)"
+      copy: "${INSTANCE}.write(addr, reg, val, true)"
+    - doc: "read(char addr, char reg, char len, bool stop = false) -> char*"
+      copy: "${INSTANCE}.read(addr, reg, len, true)"
