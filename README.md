@@ -11,131 +11,76 @@ $ git clone git@github.com:NextMicon/Registory.git NextMiconIDE
 
 パッケージを自作し NextMicon で使用する方法を説明します。
 
-`${owner}` はパッケージの作成者名を指します。あなたのgithubのアカウント名に置き換えてください。
+- `${owner}` はパッケージの作成者名を指します。あなたの github のアカウント名に置き換えてください。
+- `${package}` はパッケージの名前を指します。あなたが作るパッケージ名に置き換えてください。
+- `${version}` はパッケージのバージョンを指します。最初は `0.0.0` にしてください。
 
-`${package}` はパッケージの名前を指します。あなたが作るパッケージ名に置き換えてください。
+### 1.1. ファイルの作成
 
-`${version}` はパッケージのバージョンを指します。最初は `0.0.0` にしてください。
+`NextMiconIDE/Package/${owner}/${package}/${version}` というディレクトリを作ります。
 
-### 1.1. パッケージの作成
+このディレクトリ下に以下の 4 つのファイルを作成します。
 
-`NextMiconIDE/Package/${owner}/${name}/${version}` 
+- `package.nm.yaml`
+- `${package}.cpp`
+- `${package}.hpp`
+- `${package}.sv`
 
-プロジェクトの `.package` ディレクトリ以下に、パッケージを置くことで、プロジェクトで使用されるパッケージとして認識されます。
-
-```
-project
-|- .package
-   |- MyPackage
-      |- nmpackage.json
-```
-
-### 1.2. GitHubで公開
-
-パッケージは、GitHubを用いて公開できます。
-
-## バージョン番号について
-
-公開したパッケージを変更する場合、必ずバージョン番号をインクリメントしてください。その際に、セマンティックバージョニングに従ってください。
-
-セマンティックバージョニングは、パブリックAPIの互換性の基づいて定義されています。
-NextMicon のパッケージにおけるパブリックAPIとは、以下が該当します。
-
-- ハードウェアの入出力ポート
-- ハードウェアのパラメタ
-- ソフトウェアのメンバ関数
-
-NextMicon におけるセマンティックバージョニングは、具体的には以下のようになります。
-
-**メジャー**
-
-`x.y.z` → `(x+1).0.0` の変更は、後方互換性のない変更です。
-`x.y.z` のインスタンスを `(x+1).y.z` に変更した場合、プロジェクトはビルドできません。
-具体的には以下の場合が該当します。
-
-- 入出力ポートの削除
-- パラメタの削除
-
-**マイナー**
-
-`x.y.z` → `x.(y+1).0` の変更は、後方互換性のある変更です。
-`x.y.z` のインスタンスを `x.(y+1).0` に変更した場合、プロジェクトはビルドできますが、
-機能的に異なっているため、ハードウェアリソースの消費量および動作速度は変化する場合があります。
-
-**パッチ**
-
-`x.y.z` → `x.y.(z+1)` の変更は、後方互換性のある小さな変更です。
-バージョン番号をアップデートしても、そのまま動きます。
-
-**プレリリース**
-
-バージョン番号の後に、文字列を追加することができます。
-
-`x.y.z-???`
-
-これは開発時の一時的なバージョン番号付与に使います。
-
-#### 1.2.1. リポジトリの作成
-
-パッケージを置くためのリポジトリを作成します。
-ここでは、例として `my-registory` とします。
-
-作成したリポジトリに、`registory.json` を設置します。
-IDE がレジストリを探索するときのエントリポイントになります。
-
-```json:
-{
-    "owner": "your-github-id",
-    "repo": "my-registory",
-    "branch": "main",
-    "packages": [
-        {"name":"MyPackage", "versions": ["0.0.0"], "category": "SignalIO"}
-    ]
-}
-```
-
-`owner`, `repo`, `branch` は GitHub 上でのレジストリの場所を示します。
-レジストリのルートディレクトリが以下のURLにあることを表しています。
-
-`https://raw.github.com/${owner}/${repo}/${branch}/registory.json`
-
-#### 1.2.2. パッケージの追加
-
-`packages` 以下に、レジストリに含まれるパッケージを記述します。
-`name`と`version`から、パッケージの場所を取得します。
-
-`https://raw.github.com/${owner}/${repo}/${branch}/${name}/${version}/nmpackage.json`
-
-
-リポジトリの構造は
+### 1.2. package.nm.yaml
 
 ```
-my-registory
-|- packages.json
-|- MyPackage
-   |- 0.0.0
-      |- package.json
-      |- MyPackage.v
-      |- MyPackage.hpp
-      |- MyPackage.cpp
+ports:
+  - name: tx
+    direct: output
+    width: 1
+    pos: [120, -20]
+  - name: rx
+    direct: input
+    width: 1
+    pos: [120, 20]
+params: []
+size: [240, 80]
+textX: -50
+software:
+  className: ${package}
+  memSize: 0x10
+  member:
+    - doc: "baud(int)"
+      copy: "${INSTANCE}.baud()"
+    - doc: "print(char)"
+      copy: "${INSTANCE}.print()"
+    - doc: "print(const char*)"
+      copy: "${INSTANCE}.print()"
+    - doc: "print(uint32_t)"
+      copy: "${INSTANCE}.print()"
+    - doc: "read() -> char"
+      copy: "${INSTANCE}.read()"
 ```
 
-#### 1.2.3. IDEへの登録
-
-Next Micon IDE の設定画面から、`registory.json` の場所を追加します。
-
-公式リポジトリのURLは以下の通りになります。
+### 1.3. System Verilog
 
 ```
-https://raw.github.com/NextMicon/registory/main/registory.json
+module #{package} (
+    input wire clk,
+    input wire resetn,
+
+    input wire valid,
+    output wire ready,
+    input wire [3:0] wstrb,
+    input wire [31:0] addr,
+    input wire [31:0] wdata,
+    output wire [31:0] rdata,
+
+    output tx,
+    input  rx
+);
+
+
+endmodule
 ```
 
-IDE側から、レジストリが認識されるようになりました。
+### 1.4. C++
 
-IDEを再起動してください。
+### 1.5. Publish on GitHub
 
-#### 1.2.4. 注意
-
-バージョン番号は[セマンティック・バージョニング](https://semver.org/)を守るようにしてください。
-
-また、できる限りリポジトリを削除しないようにしてください。
+`NextMicon/Registory` にプルリクエストを出してください。
