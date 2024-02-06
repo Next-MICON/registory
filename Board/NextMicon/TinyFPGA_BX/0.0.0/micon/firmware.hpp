@@ -12,7 +12,6 @@ void loop();
 
 extern "C" uint32_t* irq(uint32_t* regs, uint32_t irqs);
 
-void irq2();
 void irq3();
 void irq4();
 void irq5();

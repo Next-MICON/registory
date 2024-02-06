@@ -83,7 +83,6 @@ ioports:
   pin22: [in, out, inout]
   pin23: [in, out, inout]
   pin24: [in, out, inout]
-  irq2: [irq]
   irq3: [irq]
   irq4: [irq]
   irq5: [irq]

@@ -1,4 +1,8 @@
 Project/*
+!Project/1_hello
+!Project/2_blink
+!Project/3_button_irq
+!Project/4_timer_irq
 !Project/sample
 !Project/music
 !Project/projects.nm.yaml

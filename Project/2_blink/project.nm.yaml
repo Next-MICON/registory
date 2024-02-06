@@ -1,0 +1,10 @@
+board:
+  owner: NextMicon
+  name: TinyFPGA_BX
+  version: 0.0.0
+instances:
+  - {name: gpio, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [160, 180]}
+ioports:
+  - {name: led, type: out, params: [], pos: [380, 180], flip: true}
+wires:
+  - {first: [gpio, out], last: [led, out], waypoints: [], width: 1}

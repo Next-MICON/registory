@@ -1,0 +1,15 @@
+board:
+  owner: NextMicon
+  name: TinyFPGA_BX
+  version: 0.0.0
+instances:
+  - {name: serial0, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 120]}
+  - {name: counter0, pack: {owner: NextMicon, name: Counter, version: 0.0.0}, params: [], pos: [180, 220]}
+ioports:
+  - {name: pin1, type: out, params: [], pos: [400, 100], flip: true}
+  - {name: pin2, type: in, params: [], pos: [400, 140], flip: true}
+  - {name: irq3, type: irq, params: [], pos: [400, 220], flip: true}
+wires:
+  - {first: [serial0, tx], last: [pin1, out], waypoints: [], width: 1}
+  - {first: [pin2, in], last: [serial0, rx], waypoints: [], width: 1}
+  - {first: [counter0, of], last: [irq3, irq], waypoints: [], width: 1}

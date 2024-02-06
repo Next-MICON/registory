@@ -21,7 +21,6 @@ void __attribute__((weak)) init() {}
 void __attribute__((weak)) loop() {}
 
 uint32_t* __attribute__((weak)) irq(uint32_t* regs, uint32_t irqs) {
-  if(irqs & (1 << 2)) irq2();
   if(irqs & (1 << 3)) irq3();
   if(irqs & (1 << 4)) irq4();
   if(irqs & (1 << 5)) irq5();
@@ -38,7 +37,6 @@ uint32_t* __attribute__((weak)) irq(uint32_t* regs, uint32_t irqs) {
   return regs;
 }
 
-void __attribute__((weak)) irq2() {}
 void __attribute__((weak)) irq3() {}
 void __attribute__((weak)) irq4() {}
 void __attribute__((weak)) irq5() {}
