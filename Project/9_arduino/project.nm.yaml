@@ -1,0 +1,17 @@
+board:
+  owner: NextMicon
+  name: TinyFPGA_BX
+  version: 0.0.0
+instances:
+  - {name: serial0, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [140, 140]}
+  - {name: analog0, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [140, 260]}
+  - {name: analog1, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [140, 360]}
+  - {name: analog2, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [140, 460]}
+  - {name: digital0, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 160]}
+  - {name: digital1, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 300]}
+  - {name: digital2, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 440]}
+  - {name: digital3, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 580]}
+  - {name: digital4, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 720]}
+  - {name: analog3, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [140, 560]}
+ioports: []
+wires: []
