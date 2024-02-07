@@ -19,7 +19,7 @@ void init() {
 
 void loop() {
   serial.print(help);
-  switch(serial.read()) {
+  switch(serial.receive()) {
     case '1': {
       serial.print("=== Blink LED (GPIO) ===\n");
       digital.out_mode();

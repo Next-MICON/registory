@@ -50,7 +50,7 @@ void loop() {
       " [5] Music: Ugoku\n"
       " [6] Music: Makaimura\n"
       " [7] Music: FF\n");
-  switch(serial.read()) {
+  switch(serial.receive()) {
     case '1': {
       serial.print("=== Blink LED ===\n");
       digital.out_mode();
@@ -179,7 +179,7 @@ void single_ch_piano() {
 
   for(char cmd;;) {
 
-    cmd = serial.read();
+    cmd = serial.receive();
 
     // Exit
     if(cmd == '\n') break;
@@ -259,7 +259,7 @@ void multi_ch_piano() {
     // --------------------------------------------------------------------------------
     // Input Command
 
-    cmd = serial.read();
+    cmd = serial.receive();
 
     // Exit
     if(cmd == '\n') break;

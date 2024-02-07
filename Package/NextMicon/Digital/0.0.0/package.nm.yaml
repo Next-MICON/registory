@@ -18,9 +18,12 @@ software:
   className: Digital
   memSize: 0x10
   member:
-    - doc: "mode(Mode mode)"
-      copy: "${INSTANCE}.mode()"
-    - doc: "write(bool value)"
-      copy: "${INSTANCE}.write(value)"
-    - doc: "read()"
-      copy: "${INSTANCE}.read()"
+    - note: "// Set GPIO Mode"
+      def: "void mode(GPIO::Mode);"
+      use: "${INSTANCE}.mode();"
+    - note: "// Output"
+      def: "void write(bool);"
+      use: "${INSTANCE}.write();"
+    - note: "// Input"
+      def: "void read();"
+      use: "${INSTANCE}.read();"

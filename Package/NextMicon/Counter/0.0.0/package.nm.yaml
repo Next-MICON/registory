@@ -10,7 +10,9 @@ software:
   className: Prescaler
   memSize: 0x10
   member:
-    - doc: "set(int)"
-      copy: "${INSTANCE}.set()"
-    - doc: "freq(int)"
-      copy: "${INSTANCE}.freq()"
+    - note: "// Set Counter"
+      def: "void set(uint32_t);"
+      use: "${INSTANCE}.set();"
+    - note: "// Set Counter by Frequency"
+      def: "void freq(uint32_t);"
+      use: "${INSTANCE}.freq();"

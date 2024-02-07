@@ -8,49 +8,42 @@ class Serial {
               Reg_IO = 1 };
 public:
   Serial(volatile uint32_t* addr) : reg(addr) {}
-  static const char endl = '\n';
+
   void baud(uint32_t baudrate) {
     reg[0] = CLK_FREQ / baudrate;
   }
-  Serial& print(char ch) {
-    reg[Reg_IO] = ch;
+
+  // TX
+
+  Serial& print(char c) {
+    reg[Reg_IO] = c;
     return *this;
   }
-  Serial& print(const char* ptr) {
-    while(*ptr != 0) print(*(ptr++));
+  Serial& print(const char* str) {
+    while(*str != '\0') print(*(str++));
     return *this;
   }
-  Serial& dec(uint32_t val) {
+  Serial& hex(uint32_t num, int digits) {
+    for(int i = (4 * digits) - 4; i >= 0; i -= 4)
+      print("0123456789ABCDEF"[(num >> i) & 0xF]);
+    return *this;
+  }
+  Serial& dec(uint32_t num) {
     char buffer[10];
     char* ptr = buffer;
-    while(val || ptr == buffer) {
-      *(ptr++) = val % 10;
-      val = val / 10;
+    while(num || ptr == buffer) {
+      *(ptr++) = num % 10;
+      num = num / 10;
     }
     while(ptr != buffer) {
       print('0' + *(--ptr));
     }
     return *this;
   }
-  Serial& hex(uint32_t val, int digits) {
-    for(int i = (4 * digits) - 4; i >= 0; i -= 4)
-      print("0123456789ABCDEF"[(val >> i) & 0xF]);
-    return *this;
-  }
-  Serial& operator<<(char ch) { return print(ch); }
-  Serial& operator<<(const char* ptr) { return print(ptr); }
-  Serial& operator<<(uint32_t val) { return dec(val); }
+
+  // RX
 
   char read();
+  char receive();
   uint32_t read_int();
-  Serial& operator>>(char& c) {
-    c = read();
-    return *this;
-  }
-  Serial& operator>>(uint32_t& i) {
-    i = read_int();
-    return *this;
-  }
 };
-
-uint32_t char_to_int(char c);

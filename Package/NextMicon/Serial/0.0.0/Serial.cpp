@@ -1,9 +1,16 @@
 #include "Serial.hpp"
 #include "cpu.hpp"
 
-// Receive
+uint32_t char_to_int(char c);
 
 char Serial::read() {
+  return reg[Reg_IO];
+}
+
+// Receive
+// Wait RX syncronos
+
+char Serial::receive() {
   int32_t c = -1;
   uint32_t cycles_begin, cycles_now, cycles;
 
@@ -24,7 +31,7 @@ uint32_t Serial::read_int() {
   uint32_t base = 10;
   char rcv;
   while(true) {
-    rcv = read();
+    rcv = receive();
     if('0' <= rcv && rcv <= '9') {
       ret += ret * base + (rcv - '0');
     } else {
