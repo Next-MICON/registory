@@ -3,13 +3,13 @@ board:
   name: TinyFPGA_BX
   version: 0.0.0
 instances:
-  - {name: serial0, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [200, 180]}
+  - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [200, 180]}
 ioports:
   - {name: pin1, type: out, params: [], pos: [420, 160], flip: true}
   - {name: pin2, type: in, params: [], pos: [420, 200], flip: true}
   - {name: pin11, type: in, params: [], pos: [260, 260]}
   - {name: irq5, type: irq, params: [], pos: [420, 260], flip: true}
 wires:
-  - {first: [serial0, tx], last: [pin1, out], waypoints: [], width: 1}
-  - {first: [pin2, in], last: [serial0, rx], waypoints: [], width: 1}
+  - {first: [serial, tx], last: [pin1, out], waypoints: [], width: 1}
+  - {first: [pin2, in], last: [serial, rx], waypoints: [], width: 1}
   - {first: [pin11, in], last: [irq5, irq], waypoints: [], width: 1}
