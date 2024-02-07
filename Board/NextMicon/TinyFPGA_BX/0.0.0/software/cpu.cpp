@@ -91,7 +91,7 @@ void delayUs(uint32_t time_us) {
 }
 
 /// @brief Delay mili seconds (Max = 2^32 us ~ 1.19 hour)
-/// @param time = 1 us
+/// @param time = 1 ms
 void delayMs(uint32_t time_ms) {
   delayUs(time_ms * 1000);
 }

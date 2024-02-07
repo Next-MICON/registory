@@ -13,13 +13,13 @@ auto help = "Select:\n"
 
 void init() {
   set_irq_mask(0);
-  serial.baud(460800);
+  serial.baud(9600);
   serial.print(welcome);
 }
 
 void loop() {
   serial.print(help);
-  switch(serial.receive()) {
+  switch(serial.receive(1000*50)) {
     case '1': {
       serial.print("=== Blink LED (GPIO) ===\n");
       digital.out_mode();

@@ -43,7 +43,8 @@ public:
 
   // RX
 
-  char read();
-  char receive();
+  uint32_t read();
+  uint32_t receive();
+  uint32_t receive(uint32_t timeout);
   uint32_t read_int();
 };

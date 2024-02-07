@@ -1,0 +1,71 @@
+00000000 D _data_start
+00000000 D _ram_start
+00000000 d irq_regs
+00000280 D COLOR
+00000280 d irq_stack
+00000298 D STRONG_CLEAR
+0000029c D STRONG
+000002a0 D COLOR_CLEAR
+000002a4 D _init_array_start
+000002ac B _bss_start
+000002ac D _data_end
+000002ac D _init_array_end
+000002ac B serial4
+000002b0 B serial3
+000002b4 B serial2
+000002b8 B serial1
+000002bc B serial0
+000002c0 B rom_cfg
+000002c4 B serial
+000002d8 B chat
+000002e0 B _bss_end
+000002e0 ? _heap_start
+00050000 t reset_vec
+00050010 t irq_vec
+00050152 t start
+00050190 t loop
+0005019e T init_data()
+000501d6 T init_bss()
+000501fc T init_array()
+00050228 T set_irq_mask(unsigned long)
+00050228 T set_irq_mask
+0005022e T wait_irq()
+0005022e T wait_irq
+00050234 T set_timer(unsigned long)
+00050234 T set_timer
+0005023a T rdcycle_l()
+00050240 T rdcycle_h()
+00050246 T rdcycle(long)
+00050260 T delay(unsigned long, unsigned long)
+00050282 T delayUs(unsigned long)
+000502a8 T delayMs(unsigned long)
+000502d6 T analog_blink(Analog&, unsigned long, unsigned long)
+0005032c T Serial::read()
+00050332 T Serial::receive()
+0005034e T Serial::receive(unsigned long)
+00050384 T Serial::read_int()
+000503d6 T char_to_int(char)
+00050412 W irq3()
+00050414 W irq4()
+00050416 W irq5()
+00050418 W irq6()
+0005041a W irq7()
+0005041c W irq8()
+0005041e W irq9()
+00050420 W irq10()
+00050422 W irq11()
+00050424 W irq12()
+00050426 W irq13()
+00050428 W irq14()
+0005042a W irq15()
+0005042c W irq
+00050504 T main
+0005052a t _GLOBAL__sub_I_rom_cfg
+0005055c T broadcast(char)
+00050576 T broadcast(char const*)
+000505a0 T broadcast(unsigned long)
+000505ca T init()
+00050610 T loop()
+00050810 t _GLOBAL__sub_I_serial
+00050d50 T _init_data_start
+00050d50 T _text_end

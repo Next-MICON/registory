@@ -1,0 +1,250 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x00000000         0x00002000         rw
+FLASH            0x00050000         0x00100000         xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x00050000      0xd50
+                0x00050000                        . = ALIGN (0x4)
+ *(.text .text.*)
+ .text          0x00050000      0x19e /tmp/ccBfVimG.o
+ .text          0x0005019e      0x138 /tmp/ccJSrwVh.o
+                0x0005019e                init_data()
+                0x000501d6                init_bss()
+                0x000501fc                init_array()
+                0x00050228                set_irq_mask(unsigned long)
+                0x00050228                set_irq_mask
+                0x0005022e                wait_irq()
+                0x0005022e                wait_irq
+                0x00050234                set_timer(unsigned long)
+                0x00050234                set_timer
+                0x0005023a                rdcycle_l()
+                0x00050240                rdcycle_h()
+                0x00050246                rdcycle(long)
+                0x00050260                delay(unsigned long, unsigned long)
+                0x00050282                delayUs(unsigned long)
+                0x000502a8                delayMs(unsigned long)
+ .text          0x000502d6       0x56 /tmp/ccZdN0z4.o
+                0x000502d6                analog_blink(Analog&, unsigned long, unsigned long)
+ .text          0x0005032c       0xe2 /tmp/ccjfpHX4.o
+                0x0005032c                Serial::read()
+                0x00050332                Serial::receive()
+                0x0005034e                Serial::receive(unsigned long)
+                0x00050384                Serial::read_int()
+                0x000503d6                char_to_int(char)
+ .text          0x0005040e        0x0 /tmp/cccakD5o.o
+ .text          0x0005040e       0xf6 /tmp/ccpTOrnv.o
+                0x00050412                irq3()
+                0x00050414                irq4()
+                0x00050416                irq5()
+                0x00050418                irq6()
+                0x0005041a                irq7()
+                0x0005041c                irq8()
+                0x0005041e                irq9()
+                0x00050420                irq10()
+                0x00050422                irq11()
+                0x00050424                irq12()
+                0x00050426                irq13()
+                0x00050428                irq14()
+                0x0005042a                irq15()
+                0x0005042c                irq
+ .text.startup  0x00050504       0x58 /tmp/ccpTOrnv.o
+                0x00050504                main
+ .text          0x0005055c      0x2b4 /tmp/ccHsNhKt.o
+                0x0005055c                broadcast(char)
+                0x00050576                broadcast(char const*)
+                0x000505a0                broadcast(unsigned long)
+                0x000505ca                init()
+                0x00050610                loop()
+ .text.startup  0x00050810       0x24 /tmp/ccHsNhKt.o
+ *(.rodata .rodata.* .srodata .srodata.*)
+ *fill*         0x00050834        0x0 
+ .rodata.str1.4
+                0x00050834       0xa2 /tmp/ccHsNhKt.o
+ *(.eh_frame .eh_frame.*)
+ *fill*         0x000508d6        0x2 
+ .eh_frame      0x000508d8      0x118 /tmp/ccJSrwVh.o
+ .eh_frame      0x000509f0       0x4c /tmp/ccZdN0z4.o
+ .eh_frame      0x00050a3c       0xb4 /tmp/ccjfpHX4.o
+ .eh_frame      0x00050af0      0x1a0 /tmp/ccpTOrnv.o
+ .eh_frame      0x00050c90       0xc0 /tmp/ccHsNhKt.o
+                0x00050d50                        . = ALIGN (0x4)
+                0x00050d50                        _text_end = .
+                0x00050d50                        _init_data_start = _text_end
+
+.rela.dyn       0x00050d50        0x0
+ .rela.text     0x00050d50        0x0 /tmp/ccBfVimG.o
+
+.data           0x00000000      0x2ac load address 0x00050d50
+                0x00000000                        . = ALIGN (0x4)
+                0x00000000                        _data_start = .
+                0x00000000                        _ram_start = .
+ *(.data .data.* .sdata .sdata.*)
+ .data          0x00000000      0x280 /tmp/ccBfVimG.o
+ .data          0x00000280        0x0 /tmp/ccJSrwVh.o
+ .data          0x00000280        0x0 /tmp/ccZdN0z4.o
+ .data          0x00000280        0x0 /tmp/ccjfpHX4.o
+ .data          0x00000280        0x0 /tmp/cccakD5o.o
+ .data          0x00000280        0x0 /tmp/ccpTOrnv.o
+ .data          0x00000280       0x18 /tmp/ccHsNhKt.o
+                0x00000280                COLOR
+ .sdata         0x00000298        0xc /tmp/ccHsNhKt.o
+                0x00000298                STRONG_CLEAR
+                0x0000029c                STRONG
+                0x000002a0                COLOR_CLEAR
+                0x000002a4                        _init_array_start = .
+ *(.init_array .init_array.*)
+ .init_array    0x000002a4        0x4 /tmp/ccpTOrnv.o
+ .init_array    0x000002a8        0x4 /tmp/ccHsNhKt.o
+                0x000002ac                        _init_array_end = .
+                0x000002ac                        . = ALIGN (0x4)
+                0x000002ac                        _data_end = .
+
+.bss            0x000002ac       0x34 load address 0x00050ffc
+                0x000002ac                        . = ALIGN (0x4)
+                0x000002ac                        _bss_start = .
+ *(.bss .bss.* .sbss .sbss.*)
+ .bss           0x000002ac        0x0 /tmp/ccBfVimG.o
+ .bss           0x000002ac        0x0 /tmp/ccJSrwVh.o
+ .bss           0x000002ac        0x0 /tmp/ccZdN0z4.o
+ .bss           0x000002ac        0x0 /tmp/ccjfpHX4.o
+ .bss           0x000002ac        0x0 /tmp/cccakD5o.o
+ .bss           0x000002ac        0x0 /tmp/ccpTOrnv.o
+ .sbss          0x000002ac       0x18 /tmp/ccpTOrnv.o
+                0x000002ac                serial4
+                0x000002b0                serial3
+                0x000002b4                serial2
+                0x000002b8                serial1
+                0x000002bc                serial0
+                0x000002c0                rom_cfg
+ .bss           0x000002c4       0x14 /tmp/ccHsNhKt.o
+                0x000002c4                serial
+ .sbss          0x000002d8        0x5 /tmp/ccHsNhKt.o
+                0x000002d8                chat
+ *(COMMON)
+                0x000002e0                        . = ALIGN (0x4)
+ *fill*         0x000002dd        0x3 
+                0x000002e0                        _bss_end = .
+
+.heap           0x000002e0        0x0
+                0x000002e0                        . = ALIGN (0x4)
+                0x000002e0                        _heap_start = .
+LOAD /tmp/ccBfVimG.o
+LOAD /tmp/ccJSrwVh.o
+LOAD /tmp/ccZdN0z4.o
+LOAD /tmp/ccjfpHX4.o
+LOAD /tmp/cccakD5o.o
+LOAD /tmp/ccpTOrnv.o
+LOAD /tmp/ccHsNhKt.o
+OUTPUT(.build/software.elf elf32-littleriscv)
+
+.riscv.attributes
+                0x00000000       0x2f
+ .riscv.attributes
+                0x00000000       0x2d /tmp/ccBfVimG.o
+ .riscv.attributes
+                0x0000002d       0x2f /tmp/ccJSrwVh.o
+ .riscv.attributes
+                0x0000005c       0x2f /tmp/ccZdN0z4.o
+ .riscv.attributes
+                0x0000008b       0x2f /tmp/ccjfpHX4.o
+ .riscv.attributes
+                0x000000ba       0x2f /tmp/cccakD5o.o
+ .riscv.attributes
+                0x000000e9       0x2f /tmp/ccpTOrnv.o
+ .riscv.attributes
+                0x00000118       0x2f /tmp/ccHsNhKt.o
+
+.comment        0x00000000       0x1b
+ .comment       0x00000000       0x1b /tmp/ccJSrwVh.o
+                                 0x1c (size before relaxing)
+ .comment       0x0000001b       0x1c /tmp/ccZdN0z4.o
+ .comment       0x0000001b       0x1c /tmp/ccjfpHX4.o
+ .comment       0x0000001b       0x1c /tmp/cccakD5o.o
+ .comment       0x0000001b       0x1c /tmp/ccpTOrnv.o
+ .comment       0x0000001b       0x1c /tmp/ccHsNhKt.o
+
+Cross Reference Table
+
+Symbol                                            File
+COLOR                                             /tmp/ccHsNhKt.o
+COLOR_CLEAR                                       /tmp/ccHsNhKt.o
+STRONG                                            /tmp/ccHsNhKt.o
+STRONG_CLEAR                                      /tmp/ccHsNhKt.o
+Serial::read()                                    /tmp/ccjfpHX4.o
+Serial::read_int()                                /tmp/ccjfpHX4.o
+Serial::receive()                                 /tmp/ccjfpHX4.o
+Serial::receive(unsigned long)                    /tmp/ccjfpHX4.o
+                                                  /tmp/ccHsNhKt.o
+_bss_end                                          /tmp/ccJSrwVh.o
+_bss_start                                        /tmp/ccJSrwVh.o
+_data_end                                         /tmp/ccJSrwVh.o
+_data_start                                       /tmp/ccJSrwVh.o
+_init_array_end                                   /tmp/ccJSrwVh.o
+_init_array_start                                 /tmp/ccJSrwVh.o
+_init_data_start                                  /tmp/ccJSrwVh.o
+analog_blink(Analog&, unsigned long, unsigned long) /tmp/ccZdN0z4.o
+broadcast(char const*)                            /tmp/ccHsNhKt.o
+broadcast(char)                                   /tmp/ccHsNhKt.o
+broadcast(unsigned long)                          /tmp/ccHsNhKt.o
+char_to_int(char)                                 /tmp/ccjfpHX4.o
+chat                                              /tmp/ccHsNhKt.o
+delay(unsigned long, unsigned long)               /tmp/ccJSrwVh.o
+delayMs(unsigned long)                            /tmp/ccJSrwVh.o
+delayUs(unsigned long)                            /tmp/ccJSrwVh.o
+                                                  /tmp/ccZdN0z4.o
+init()                                            /tmp/ccHsNhKt.o
+                                                  /tmp/ccpTOrnv.o
+init_array()                                      /tmp/ccJSrwVh.o
+                                                  /tmp/ccpTOrnv.o
+init_bss()                                        /tmp/ccJSrwVh.o
+                                                  /tmp/ccpTOrnv.o
+init_data()                                       /tmp/ccJSrwVh.o
+                                                  /tmp/ccpTOrnv.o
+irq                                               /tmp/ccpTOrnv.o
+                                                  /tmp/ccBfVimG.o
+irq10()                                           /tmp/ccpTOrnv.o
+irq11()                                           /tmp/ccpTOrnv.o
+irq12()                                           /tmp/ccpTOrnv.o
+irq13()                                           /tmp/ccpTOrnv.o
+irq14()                                           /tmp/ccpTOrnv.o
+irq15()                                           /tmp/ccpTOrnv.o
+irq3()                                            /tmp/ccpTOrnv.o
+irq4()                                            /tmp/ccpTOrnv.o
+irq5()                                            /tmp/ccpTOrnv.o
+irq6()                                            /tmp/ccpTOrnv.o
+irq7()                                            /tmp/ccpTOrnv.o
+irq8()                                            /tmp/ccpTOrnv.o
+irq9()                                            /tmp/ccpTOrnv.o
+loop()                                            /tmp/ccHsNhKt.o
+                                                  /tmp/ccpTOrnv.o
+main                                              /tmp/ccpTOrnv.o
+                                                  /tmp/ccBfVimG.o
+rdcycle(long)                                     /tmp/ccJSrwVh.o
+                                                  /tmp/ccjfpHX4.o
+rdcycle_h()                                       /tmp/ccJSrwVh.o
+rdcycle_l()                                       /tmp/ccJSrwVh.o
+                                                  /tmp/ccjfpHX4.o
+rom_cfg                                           /tmp/ccpTOrnv.o
+serial                                            /tmp/ccHsNhKt.o
+serial0                                           /tmp/ccpTOrnv.o
+                                                  /tmp/ccHsNhKt.o
+serial1                                           /tmp/ccpTOrnv.o
+                                                  /tmp/ccHsNhKt.o
+serial2                                           /tmp/ccpTOrnv.o
+                                                  /tmp/ccHsNhKt.o
+serial3                                           /tmp/ccpTOrnv.o
+                                                  /tmp/ccHsNhKt.o
+serial4                                           /tmp/ccpTOrnv.o
+                                                  /tmp/ccHsNhKt.o
+set_irq_mask                                      /tmp/ccJSrwVh.o
+set_irq_mask(unsigned long)                       /tmp/ccJSrwVh.o
+set_timer                                         /tmp/ccJSrwVh.o
+set_timer(unsigned long)                          /tmp/ccJSrwVh.o
+wait_irq                                          /tmp/ccJSrwVh.o
+wait_irq()                                        /tmp/ccJSrwVh.o

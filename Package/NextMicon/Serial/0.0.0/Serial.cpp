@@ -3,27 +3,33 @@
 
 uint32_t char_to_int(char c);
 
-char Serial::read() {
+uint32_t Serial::read() {
   return reg[Reg_IO];
 }
 
 // Receive
 // Wait RX syncronos
 
-char Serial::receive() {
-  int32_t c = -1;
-  uint32_t cycles_begin, cycles_now, cycles;
-
-  cycles_begin = rdcycle_l();
-  while(c == -1) {
-    cycles_now = rdcycle_l();
-    cycles = cycles_now - cycles_begin;
-    if(cycles > 12000000) {
-      cycles_begin = cycles_now;
-    }
-    c = reg[Reg_IO];
+uint32_t Serial::receive() {
+  int32_t received = -1;
+  uint32_t start = rdcycle_l();
+  for(;;) {
+    received = read();
+    if(received != -1) break;
   }
-  return c;
+  return received;
+}
+
+// Timeout (us)
+uint32_t Serial::receive(uint32_t timeout) {
+  int32_t received = -1;
+  uint32_t start = rdcycle(4);
+  for(;;) {
+    if(rdcycle(4) > timeout + start) break;
+    received = read();
+    if(received != -1) break;
+  }
+  return received;
 }
 
 uint32_t Serial::read_int() {

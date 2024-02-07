@@ -1,24 +1,6 @@
-/*
- *  PicoSoC - A simple example SoC using PicoRV32
- *
- *  Copyright (C) 2017  Claire Xenia Wolf <claire@yosyshq.com>
- *
- *  Permission to use, copy, modify, and/or distribute this software for any
- *  purpose with or without fee is hereby granted, provided that the above
- *  copyright notice and this permission notice appear in all copies.
- *
- *  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
- *  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
- *  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
- *  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
- *  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
- *  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
- *  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- *
- */
-
 module simpleuart #(
-    parameter integer DEFAULT_DIV = 1
+    parameter integer DEFAULT_DIV = 1,
+    parameter integer RX_TIMEOUT = 1000,
 ) (
     input clk,
     input resetn,
@@ -38,17 +20,6 @@ module simpleuart #(
 );
   reg [31:0] cfg_divider;
 
-  reg [3:0] recv_state;
-  reg [31:0] recv_divcnt;
-  reg [7:0] recv_pattern;
-  reg [7:0] recv_buf_data;
-  reg recv_buf_valid;
-
-  reg [9:0] send_pattern;
-  reg [3:0] send_bitcnt;
-  reg [31:0] send_divcnt;
-  reg send_dummy;
-
   assign reg_div_do   = cfg_divider;
 
   assign reg_dat_wait = reg_dat_we && (send_bitcnt || send_dummy);
@@ -64,6 +35,12 @@ module simpleuart #(
       if (reg_div_we[3]) cfg_divider[31:24] <= reg_div_di[31:24];
     end
   end
+
+  reg [3:0] recv_state;
+  reg [31:0] recv_divcnt;
+  reg [7:0] recv_pattern;
+  reg [7:0] recv_buf_data;
+  reg recv_buf_valid;
 
   always @(posedge clk) begin
     if (!resetn) begin
@@ -105,6 +82,11 @@ module simpleuart #(
   end
 
   assign ser_tx = send_pattern[0];
+
+  reg [9:0] send_pattern;
+  reg [3:0] send_bitcnt;
+  reg [31:0] send_divcnt;
+  reg send_dummy;
 
   always @(posedge clk) begin
     if (reg_div_we) send_dummy <= 1;

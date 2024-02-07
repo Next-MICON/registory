@@ -1,0 +1,476 @@
+Info: constrained 'pin1' to bel 'X4/Y33/io0'
+Info: constrained 'pin2' to bel 'X2/Y33/io1'
+Info: constrained 'pin3' to bel 'X0/Y28/io1'
+Info: constrained 'pin4' to bel 'X0/Y30/io1'
+Info: constrained 'pin5' to bel 'X0/Y28/io0'
+Info: constrained 'pin6' to bel 'X0/Y23/io1'
+Info: constrained 'pin7' to bel 'X0/Y20/io1'
+Info: constrained 'pin8' to bel 'X0/Y17/io1'
+Info: constrained 'pin9' to bel 'X0/Y20/io0'
+Info: constrained 'pin10' to bel 'X0/Y3/io1'
+Info: constrained 'pin11' to bel 'X3/Y0/io0'
+Info: constrained 'pin12' to bel 'X3/Y0/io1'
+Info: constrained 'pin13' to bel 'X0/Y3/io0'
+Info: constrained 'pin14' to bel 'X33/Y2/io0'
+Info: constrained 'pin15' to bel 'X33/Y6/io0'
+Info: constrained 'pin16' to bel 'X33/Y17/io0'
+Info: constrained 'pin17' to bel 'X33/Y21/io1'
+Info: constrained 'pin18' to bel 'X33/Y4/io1'
+Info: constrained 'pin19' to bel 'X30/Y33/io1'
+Info: constrained 'pin20' to bel 'X28/Y33/io1'
+Info: constrained 'pin21' to bel 'X25/Y33/io1'
+Info: constrained 'pin22' to bel 'X27/Y33/io0'
+Info: constrained 'pin23' to bel 'X24/Y33/io0'
+Info: constrained 'pin24' to bel 'X23/Y33/io0'
+Info: constrained 'flash_csb' to bel 'X31/Y0/io1'
+Info: constrained 'flash_clk' to bel 'X31/Y0/io0'
+Info: constrained 'flash_io0' to bel 'X30/Y0/io0'
+Info: constrained 'flash_io1' to bel 'X30/Y0/io1'
+Info: constrained 'flash_io2' to bel 'X17/Y0/io0'
+Info: constrained 'flash_io3' to bel 'X33/Y1/io0'
+Info: constrained 'pin25' to bel 'X0/Y5/io0'
+Info: constrained 'pin26' to bel 'X4/Y0/io1'
+Info: constrained 'pin27' to bel 'X11/Y0/io0'
+Info: constrained 'pin28' to bel 'X33/Y2/io1'
+Info: constrained 'pin29' to bel 'X33/Y1/io1'
+Info: constrained 'pin30' to bel 'X33/Y16/io1'
+Info: constrained 'pin31' to bel 'X4/Y0/io0'
+Info: constrained 'led' to bel 'X5/Y33/io1'
+Info: constrained 'usb_pu' to bel 'X6/Y33/io0'
+Info: constrained 'usb_p' to bel 'X9/Y33/io0'
+Info: constrained 'usb_n' to bel 'X10/Y33/io1'
+Info: constrained 'clk_16MHz' to bel 'X0/Y30/io0'
+
+Info: Packing constants..
+Info: Packing IOs..
+Info: pin5 feeds SB_IO pin5_iobuf.iobuf, removing $nextpnr_iobuf pin5.
+Info: pin4 feeds SB_IO pin4_iobuf.iobuf, removing $nextpnr_iobuf pin4.
+Info: pin3 feeds SB_IO pin3_iobuf.iobuf, removing $nextpnr_iobuf pin3.
+Info: pin2 feeds SB_IO pin2_iobuf.iobuf, removing $nextpnr_iobuf pin2.
+Info: pin10 feeds SB_IO pin10_iobuf.iobuf, removing $nextpnr_iobuf pin10.
+Info: pin1 feeds SB_IO pin1_iobuf.iobuf, removing $nextpnr_iobuf pin1.
+Info: flash_io3 feeds SB_IO flash_io3_iobuf.iobuf, removing $nextpnr_iobuf flash_io3.
+Info: flash_io2 feeds SB_IO flash_io2_iobuf.iobuf, removing $nextpnr_iobuf flash_io2.
+Info: flash_io1 feeds SB_IO flash_io1_iobuf.iobuf, removing $nextpnr_iobuf flash_io1.
+Info: flash_io0 feeds SB_IO flash_io0_iobuf.iobuf, removing $nextpnr_iobuf flash_io0.
+Info: pin9 feeds SB_IO pin9_iobuf.iobuf, removing $nextpnr_iobuf pin9.
+Info: pin8 feeds SB_IO pin8_iobuf.iobuf, removing $nextpnr_iobuf pin8.
+Info: pin7 feeds SB_IO pin7_iobuf.iobuf, removing $nextpnr_iobuf pin7.
+Info: pin6 feeds SB_IO pin6_iobuf.iobuf, removing $nextpnr_iobuf pin6.
+Info: Packing LUT-FFs..
+Info:     4649 LCs used as LUT4 only
+Info:     1453 LCs used as LUT4 and DFF
+Info: Packing non-LUT FFs..
+Info:      657 LCs used as DFF only
+Info: Packing carries..
+Info:      619 LCs used as CARRY only
+Info: Packing indirect carry+LUT pairs...
+Info:        1 LUTs merged into carry LCs
+Info: Packing RAMs..
+Info: Placing PLLs..
+Info: Packing special functions..
+Info: Packing PLLs..
+Info: Promoting globals..
+Info: promoting clk_16MHz$SB_IO_IN (fanout 2150)
+Info: promoting $abc$69506$auto$alumacc.cc:474:replace_alu$6704.AA[0] [reset] (fanout 1045)
+Info: promoting cpu.pcpi_div.start [reset] (fanout 94)
+Info: promoting cpu.pcpi_mul.mul_waiting [reset] (fanout 85)
+Info: promoting $abc$69506$auto$rtlil.cc:1969:NotGate$67294 [reset] (fanout 31)
+Info: promoting resetn [cen] (fanout 262)
+Info: promoting $abc$69506$auto$dff2dffe.cc:175:make_patterns_logic$48897 [cen] (fanout 95)
+Info: promoting $abc$69506$auto$dff2dffe.cc:158:make_patterns_logic$40329 [cen] (fanout 71)
+Info: Constraining chains...
+Info:       46 LCs used to legalise carry chains.
+Info: Checksum: 0x81ea0c38
+
+Info: Annotating ports with timing budgets for target frequency 12.00 MHz
+Info: Checksum: 0xc0222890
+
+Info: Device utilisation:
+Info: 	         ICESTORM_LC:  7425/ 7680    96%
+Info: 	        ICESTORM_RAM:    20/   32    62%
+Info: 	               SB_IO:    42/  256    16%
+Info: 	               SB_GB:     8/    8   100%
+Info: 	        ICESTORM_PLL:     0/    2     0%
+Info: 	         SB_WARMBOOT:     0/    1     0%
+
+Info: Placed 42 cells based on constraints.
+Info: Creating initial analytic placement for 5893 cells, random placement wirelen = 203413.
+Info:     at initial placer iter 0, wirelen = 3072
+Info:     at initial placer iter 1, wirelen = 3326
+Info:     at initial placer iter 2, wirelen = 3037
+Info:     at initial placer iter 3, wirelen = 3418
+Info: Running main analytical placer, max placement attempts per cell = 7021878.
+Info:     at iteration #1, type ALL: wirelen solved = 2963, spread = 75484, legal = 94274; time = 0.44s
+Info:     at iteration #2, type ALL: wirelen solved = 3736, spread = 67797, legal = 87941; time = 1.34s
+Info:     at iteration #3, type ALL: wirelen solved = 6156, spread = 60204, legal = 71819; time = 0.22s
+Info:     at iteration #4, type ALL: wirelen solved = 9254, spread = 48140, legal = 68629; time = 0.34s
+Info:     at iteration #5, type ALL: wirelen solved = 11534, spread = 43060, legal = 59181; time = 0.21s
+Info:     at iteration #6, type ALL: wirelen solved = 13411, spread = 38780, legal = 54451; time = 0.19s
+Info:     at iteration #7, type ALL: wirelen solved = 15135, spread = 37288, legal = 52045; time = 0.17s
+Info:     at iteration #8, type ALL: wirelen solved = 16374, spread = 35251, legal = 44614; time = 0.13s
+Info:     at iteration #9, type ALL: wirelen solved = 17622, spread = 35101, legal = 45108; time = 0.14s
+Info:     at iteration #10, type ALL: wirelen solved = 18485, spread = 33990, legal = 48229; time = 0.15s
+Info:     at iteration #11, type ALL: wirelen solved = 18756, spread = 33700, legal = 45574; time = 0.16s
+Info:     at iteration #12, type ALL: wirelen solved = 19646, spread = 32651, legal = 43145; time = 0.14s
+Info:     at iteration #13, type ALL: wirelen solved = 20487, spread = 32694, legal = 46556; time = 0.18s
+Info:     at iteration #14, type ALL: wirelen solved = 20655, spread = 32580, legal = 44376; time = 0.15s
+Info:     at iteration #15, type ALL: wirelen solved = 21478, spread = 32104, legal = 42580; time = 0.16s
+Info:     at iteration #16, type ALL: wirelen solved = 21464, spread = 32757, legal = 42623; time = 0.14s
+Info:     at iteration #17, type ALL: wirelen solved = 22032, spread = 32145, legal = 38691; time = 0.12s
+Info:     at iteration #18, type ALL: wirelen solved = 22305, spread = 31580, legal = 38073; time = 0.10s
+Info:     at iteration #19, type ALL: wirelen solved = 22251, spread = 31983, legal = 40589; time = 0.11s
+Info:     at iteration #20, type ALL: wirelen solved = 23089, spread = 31676, legal = 39395; time = 0.13s
+Info:     at iteration #21, type ALL: wirelen solved = 23149, spread = 31378, legal = 39250; time = 0.10s
+Info:     at iteration #22, type ALL: wirelen solved = 23366, spread = 31447, legal = 40993; time = 0.12s
+Info:     at iteration #23, type ALL: wirelen solved = 24052, spread = 32993, legal = 41962; time = 0.12s
+Info: HeAP Placer Time: 6.38s
+Info:   of which solving equations: 2.19s
+Info:   of which spreading cells: 0.27s
+Info:   of which strict legalisation: 2.86s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 2276, wirelen = 38073
+Info:   at iteration #5: temp = 0.000000, timing cost = 1373, wirelen = 33660
+Info:   at iteration #10: temp = 0.000000, timing cost = 1267, wirelen = 32403
+Info:   at iteration #15: temp = 0.000000, timing cost = 1377, wirelen = 31396
+Info:   at iteration #20: temp = 0.000000, timing cost = 1343, wirelen = 31037
+Info:   at iteration #25: temp = 0.000000, timing cost = 1331, wirelen = 30964
+Info:   at iteration #30: temp = 0.000000, timing cost = 1328, wirelen = 30924
+Info:   at iteration #31: temp = 0.000000, timing cost = 1330, wirelen = 30929 
+Info: SA placement time 8.81s
+
+Info: Max frequency for clock 'clk_16MHz$SB_IO_IN_$glb_clk': 28.64 MHz (PASS at 12.00 MHz)
+
+Info: Max delay <async>                             -> posedge clk_16MHz$SB_IO_IN_$glb_clk: 28.51 ns
+Info: Max delay posedge clk_16MHz$SB_IO_IN_$glb_clk -> <async>                            : 10.22 ns
+Info: Max delay negedge clk_16MHz$SB_IO_IN_$glb_clk -> <async>                            : 6.64 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 32 endpoint(s)
+Info:          + represents [1,32) endpoint(s)
+Info: [ 35031,  37339) |+
+Info: [ 37339,  39647) |+
+Info: [ 39647,  41955) | 
+Info: [ 41955,  44263) | 
+Info: [ 44263,  46571) | 
+Info: [ 46571,  48879) |+
+Info: [ 48879,  51187) |+
+Info: [ 51187,  53495) |****+
+Info: [ 53495,  55803) |***+
+Info: [ 55803,  58111) |******+
+Info: [ 58111,  60419) |*********+
+Info: [ 60419,  62727) |***********+
+Info: [ 62727,  65035) |****************+
+Info: [ 65035,  67343) |***********+
+Info: [ 67343,  69651) |******************+
+Info: [ 69651,  71959) |***********************************************+
+Info: [ 71959,  74267) |***********************+
+Info: [ 74267,  76575) |******************+
+Info: [ 76575,  78883) |***************************+
+Info: [ 78883,  81191) |************************************************************ 
+Info: Checksum: 0x397a1487
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 23502 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |      128        871 |  128   871 |     22679|       0.58       0.58|
+Info:       2000 |      348       1651 |  220   780 |     21949|       0.28       0.85|
+Info:       3000 |      520       2479 |  172   828 |     21236|       0.28       1.13|
+Info:       4000 |      723       3276 |  203   797 |     20500|       0.30       1.43|
+Info:       5000 |      988       4011 |  265   735 |     19873|       0.29       1.72|
+Info:       6000 |     1156       4843 |  168   832 |     19113|       0.27       1.99|
+Info:       7000 |     1408       5591 |  252   748 |     18519|       0.32       2.30|
+Info:       8000 |     1656       6343 |  248   752 |     17888|       0.31       2.61|
+Info:       9000 |     1922       7077 |  266   734 |     17276|       0.32       2.93|
+Info:      10000 |     2273       7726 |  351   649 |     16788|       0.20       3.13|
+Info:      11000 |     2624       8375 |  351   649 |     16298|       0.22       3.34|
+Info:      12000 |     3138       8836 |  514   461 |     16008|       0.26       3.60|
+Info:      13000 |     3529       9445 |  391   609 |     15693|       0.26       3.86|
+Info:      14000 |     4005       9969 |  476   524 |     15472|       0.27       4.12|
+Info:      15000 |     4504      10470 |  499   501 |     15192|       0.28       4.41|
+Info:      16000 |     5048      10926 |  544   456 |     15009|       0.33       4.74|
+Info:      17000 |     5549      11398 |  501   472 |     14753|       0.27       5.00|
+Info:      18000 |     6076      11870 |  527   472 |     14512|       0.28       5.29|
+Info:      19000 |     6656      12290 |  580   420 |     14391|       0.35       5.64|
+Info:      20000 |     7069      12854 |  413   564 |     14096|       0.37       6.02|
+Info:      21000 |     7412      13505 |  343   651 |     13746|       0.34       6.36|
+Info:      22000 |     7868      14048 |  456   543 |     13466|       0.34       6.70|
+Info:      23000 |     8420      14496 |  552   448 |     13376|       0.32       7.01|
+Info:      24000 |     8978      14938 |  558   442 |     13200|       0.40       7.41|
+Info:      25000 |     9516      15400 |  538   462 |     13115|       0.41       7.82|
+Info:      26000 |     9880      15939 |  364   539 |     12701|       0.32       8.14|
+Info:      27000 |    10454      16352 |  574   413 |     12532|       0.42       8.56|
+Info:      28000 |    10946      16814 |  492   462 |     12341|       0.45       9.01|
+Info:      29000 |    11414      17318 |  468   504 |     12071|       0.31       9.32|
+Info:      30000 |    11899      17807 |  485   489 |     11784|       0.33       9.65|
+Info:      31000 |    12372      18303 |  473   496 |     11572|       0.46      10.12|
+Info:      32000 |    12812      18821 |  440   518 |     11358|       0.56      10.67|
+Info:      33000 |    13295      19256 |  483   435 |     11070|       0.55      11.23|
+Info:      34000 |    13863      19661 |  568   405 |     10951|       0.37      11.60|
+Info:      35000 |    14303      20160 |  440   499 |     10656|       0.46      12.05|
+Info:      36000 |    14641      20660 |  338   500 |     10183|       0.35      12.40|
+Info:      37000 |    15073      21200 |  432   540 |      9848|       0.31      12.71|
+Info:      38000 |    15571      21702 |  498   502 |      9679|       0.54      13.25|
+Info:      39000 |    15984      22210 |  413   508 |      9391|       0.41      13.66|
+Info:      40000 |    16406      22727 |  422   517 |      9139|       0.50      14.15|
+Info:      41000 |    16935      23172 |  529   445 |      8962|       0.47      14.63|
+Info:      42000 |    17525      23563 |  590   391 |      8876|       0.46      15.09|
+Info:      43000 |    18023      24055 |  498   492 |      8545|       0.39      15.48|
+Info:      44000 |    18592      24486 |  569   431 |      8428|       0.66      16.13|
+Info:      45000 |    19059      25019 |  467   533 |      8279|       0.52      16.65|
+Info:      46000 |    19541      25512 |  482   493 |      8043|       0.54      17.19|
+Info:      47000 |    20125      25924 |  584   412 |      7904|       0.53      17.71|
+Info:      48000 |    20592      26457 |  467   533 |      7570|       0.40      18.11|
+Info:      49000 |    21040      26982 |  448   525 |      7360|       0.51      18.62|
+Info:      50000 |    21553      27469 |  513   487 |      7169|       0.46      19.08|
+Info:      51000 |    22021      27976 |  468   507 |      6834|       0.46      19.54|
+Info:      52000 |    22499      28469 |  478   493 |      6556|       0.52      20.06|
+Info:      53000 |    23072      28896 |  573   427 |      6450|       0.44      20.50|
+Info:      54000 |    23551      29337 |  479   441 |      6255|       0.44      20.94|
+Info:      55000 |    24089      29799 |  538   462 |      6124|       0.40      21.35|
+Info:      56000 |    24575      30260 |  486   461 |      5945|       0.39      21.74|
+Info:      57000 |    25060      30774 |  485   514 |      5738|       0.48      22.22|
+Info:      58000 |    25517      31262 |  457   488 |      5507|       0.51      22.73|
+Info:      59000 |    26047      31680 |  530   418 |      5355|       0.53      23.26|
+Info:      60000 |    26557      32170 |  510   490 |      5033|       0.40      23.66|
+Info:      61000 |    27044      32681 |  487   511 |      4752|       0.40      24.06|
+Info:      62000 |    27571      33154 |  527   473 |      4707|       0.59      24.65|
+Info:      63000 |    28138      33587 |  567   433 |      4524|       0.32      24.97|
+Info:      64000 |    28811      33914 |  673   327 |      4511|       0.46      25.43|
+Info:      65000 |    29451      34274 |  640   360 |      4466|       0.77      26.21|
+Info:      66000 |    30074      34651 |  623   377 |      4276|       0.43      26.64|
+Info:      67000 |    30597      35128 |  523   477 |      4006|       0.49      27.13|
+Info:      68000 |    31100      35621 |  503   493 |      3822|       0.41      27.54|
+Info:      69000 |    31554      36167 |  454   546 |      3627|       0.49      28.03|
+Info:      70000 |    32095      36620 |  541   453 |      3478|       0.57      28.61|
+Info:      71000 |    32602      37107 |  507   487 |      3228|       0.30      28.91|
+Info:      72000 |    33051      37649 |  449   542 |      2912|       0.30      29.20|
+Info:      73000 |    33341      38328 |  290   679 |      2256|       0.14      29.34|
+Info:      74000 |    33706      38957 |  365   629 |      1755|       0.19      29.54|
+Info:      75000 |    34106      39555 |  400   598 |      1292|       0.18      29.71|
+Info:      76000 |    34555      40106 |  449   551 |       874|       0.51      30.22|
+Info:      77000 |    34963      40698 |  408   592 |       473|       1.17      31.38|
+Info:      78000 |    35440      41221 |  477   523 |       337|       1.13      32.52|
+Info:      79000 |    36043      41618 |  603   397 |       286|       0.80      33.31|
+Info:      80000 |    36558      42103 |  515   485 |       267|       0.76      34.08|
+Info:      81000 |    37160      42501 |  602   398 |       296|       0.53      34.61|
+Info:      82000 |    37620      43041 |  460   540 |        70|       1.36      35.97|
+Info:      83000 |    38274      43387 |  654   346 |        65|       0.50      36.47|
+Info:      83343 |    38459      43546 |  185   159 |         0|       0.36      36.83|
+Info: Routing complete.
+Info: Router1 time 36.83s
+Info: Checksum: 0x7ab87c06
+
+Info: Critical path report for clock 'clk_16MHz$SB_IO_IN_$glb_clk' (posedge -> posedge):
+Info: curr total
+Info:  0.8  0.8  Source $abc$69506$auto$blifparse.cc:492:parse_blif$74428_LC.O
+Info:  3.1  3.9    Net mem_valid budget 4.899000 ns (22,4) -> (16,14)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69531_LC.I2
+Info:                Defined in:
+Info:                  micon/hardware.sv:166
+Info:  0.6  4.5  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69531_LC.O
+Info:  2.3  6.8    Net $abc$69506$new_n5255_ budget 4.899000 ns (16,14) -> (11,13)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69529_LC.I2
+Info:  0.6  7.4  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69529_LC.O
+Info:  0.9  8.2    Net $abc$69506$serial4.div_ready_new_ budget 4.898000 ns (11,13) -> (10,12)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69830_LC.I2
+Info:                Defined in:
+Info:                  micon/hardware.sv:354
+Info:                  /home/ohta/NextMiconIDE/Package/NextMicon/Serial/0.0.0/Serial.sv:155
+Info:  0.6  8.8  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69830_LC.O
+Info:  1.9 10.7    Net $abc$69506$new_n5628_ budget 4.898000 ns (10,12) -> (12,9)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69829_LC.I2
+Info:  0.6 11.2  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69829_LC.O
+Info:  0.9 12.1    Net $abc$69506$new_n5627_ budget 4.898000 ns (12,9) -> (12,9)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69828_LC.I0
+Info:  0.7 12.8  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69828_LC.O
+Info:  0.9 13.6    Net $abc$69506$new_n5626_ budget 4.898000 ns (12,9) -> (13,10)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69827_LC.I0
+Info:  0.7 14.3  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69827_LC.O
+Info:  2.3 16.6    Net $abc$69506$cpu.mem_rdata[0]_new_ budget 4.898000 ns (13,10) -> (20,11)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69826_LC.I1
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:95
+Info:  0.6 17.2  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69826_LC.O
+Info:  0.9 18.1    Net $abc$69506$new_n5624_ budget 4.898000 ns (20,11) -> (21,10)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69825_LC.I1
+Info:  0.6 18.7  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69825_LC.O
+Info:  0.9 19.5    Net $abc$69506$auto$simplemap.cc:309:simplemap_lut$10469[1] budget 4.898000 ns (21,10) -> (22,9)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69856_LC.I0
+Info:  0.7 20.2  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69856_LC.O
+Info:  1.9 22.1    Net $abc$69506$techmap\cpu.$logic_or$/home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:364$1366_Y_new_inv_ budget 4.898000 ns (22,9) -> (23,5)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69855_LC.I0
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:364
+Info:  0.7 22.7  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69855_LC.O
+Info:  3.4 26.2    Net $abc$69506$cpu.mem_done_new_ budget 4.898000 ns (23,5) -> (31,16)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$70195_LC.I0
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:363
+Info:  0.7 26.8  Source $abc$69506$auto$blifparse.cc:492:parse_blif$70195_LC.O
+Info:  0.9 27.7    Net $abc$69506$auto$simplemap.cc:250:simplemap_eqne$20835[3]_new_inv_ budget 4.905000 ns (31,16) -> (31,17)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$70194_LC.I0
+Info:  0.7 28.4  Source $abc$69506$auto$blifparse.cc:492:parse_blif$70194_LC.O
+Info:  3.0 31.3    Net $abc$69506$techmap\cpu.$3\set_mem_do_wdata[0:0]_new_ budget 4.905000 ns (31,17) -> (29,6)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$70578_LC.I2
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:1378
+Info:  0.6 31.9  Source $abc$69506$auto$blifparse.cc:492:parse_blif$70578_LC.O
+Info:  0.9 32.8    Net $abc$69506$techmap\cpu.$2\set_mem_do_wdata[0:0] budget 4.905000 ns (29,6) -> (28,5)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$70577_LC.I0
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:1378
+Info:  0.7 33.4  Source $abc$69506$auto$blifparse.cc:492:parse_blif$70577_LC.O
+Info:  2.4 35.8    Net $abc$69506$auto$dff2dffe.cc:158:make_patterns_logic$41463 budget 4.905000 ns (28,5) -> (29,5)
+Info:                Sink $auto$simplemap.cc:420:simplemap_dff$11311_DFFLC.CEN
+Info:  0.1 35.9  Setup $auto$simplemap.cc:420:simplemap_dff$11311_DFFLC.CEN
+Info: 9.5 ns logic, 26.4 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> 'posedge clk_16MHz$SB_IO_IN_$glb_clk':
+Info: curr total
+Info:  0.0  0.0  Source flash_io1_iobuf.iobuf.D_IN_0
+Info:  4.8  4.8    Net flash_io1_in budget 5.835000 ns (30,0) -> (11,9)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69591_LC.I3
+Info:                Defined in:
+Info:                  micon/hardware.sv:243
+Info:  0.5  5.3  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69591_LC.O
+Info:  0.9  6.2    Net $abc$69506$new_n5334_ budget 4.898000 ns (11,9) -> (11,10)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69589_LC.I1
+Info:  0.6  6.8  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69589_LC.O
+Info:  0.9  7.6    Net $abc$69506$new_n5332_ budget 4.898000 ns (11,10) -> (12,10)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69588_LC.I2
+Info:  0.6  8.2  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69588_LC.O
+Info:  0.9  9.1    Net $abc$69506$new_n5331_ budget 4.898000 ns (12,10) -> (13,11)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69587_LC.I2
+Info:  0.6  9.6  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69587_LC.O
+Info:  1.8 11.4    Net $abc$69506$cpu.mem_rdata[1]_new_ budget 4.898000 ns (13,11) -> (20,11)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69586_LC.I1
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:95
+Info:  0.6 12.0  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69586_LC.O
+Info:  0.9 12.9    Net $abc$69506$new_n5329_ budget 4.898000 ns (20,11) -> (21,10)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69507_LC.I0
+Info:  0.7 13.5  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69507_LC.O
+Info:  0.9 14.4    Net $abc$69506$auto$rtlil.cc:1969:NotGate$67292 budget 4.898000 ns (21,10) -> (22,9)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69856_LC.I1
+Info:  0.6 15.0  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69856_LC.O
+Info:  1.9 16.9    Net $abc$69506$techmap\cpu.$logic_or$/home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:364$1366_Y_new_inv_ budget 4.898000 ns (22,9) -> (23,5)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69855_LC.I0
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:364
+Info:  0.7 17.5  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69855_LC.O
+Info:  3.4 21.0    Net $abc$69506$cpu.mem_done_new_ budget 4.898000 ns (23,5) -> (31,16)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$70195_LC.I0
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:363
+Info:  0.7 21.6  Source $abc$69506$auto$blifparse.cc:492:parse_blif$70195_LC.O
+Info:  0.9 22.5    Net $abc$69506$auto$simplemap.cc:250:simplemap_eqne$20835[3]_new_inv_ budget 4.905000 ns (31,16) -> (31,17)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$70194_LC.I0
+Info:  0.7 23.2  Source $abc$69506$auto$blifparse.cc:492:parse_blif$70194_LC.O
+Info:  3.0 26.1    Net $abc$69506$techmap\cpu.$3\set_mem_do_wdata[0:0]_new_ budget 4.905000 ns (31,17) -> (29,6)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$70578_LC.I2
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:1378
+Info:  0.6 26.7  Source $abc$69506$auto$blifparse.cc:492:parse_blif$70578_LC.O
+Info:  0.9 27.5    Net $abc$69506$techmap\cpu.$2\set_mem_do_wdata[0:0] budget 4.905000 ns (29,6) -> (28,5)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$70577_LC.I0
+Info:                Defined in:
+Info:                  micon/hardware.sv:141
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/PicoRV32.sv:1378
+Info:  0.7 28.2  Source $abc$69506$auto$blifparse.cc:492:parse_blif$70577_LC.O
+Info:  2.4 30.6    Net $abc$69506$auto$dff2dffe.cc:158:make_patterns_logic$41463 budget 4.905000 ns (28,5) -> (29,5)
+Info:                Sink $auto$simplemap.cc:420:simplemap_dff$11311_DFFLC.CEN
+Info:  0.1 30.7  Setup $auto$simplemap.cc:420:simplemap_dff$11311_DFFLC.CEN
+Info: 7.3 ns logic, 23.4 ns routing
+
+Info: Critical path report for cross-domain path 'posedge clk_16MHz$SB_IO_IN_$glb_clk' -> '<async>':
+Info: curr total
+Info:  0.8  0.8  Source $abc$69506$auto$blifparse.cc:492:parse_blif$72374_LC.O
+Info:  0.9  1.7    Net rom.rom.xfer.dummy_count[0] budget 4.899000 ns (30,5) -> (31,5)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69919_LC.I0
+Info:                Defined in:
+Info:                  micon/hardware.sv:206
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:41
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:250
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:495
+Info:  0.7  2.3  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69919_LC.O
+Info:  0.9  3.2    Net $abc$69506$auto$simplemap.cc:168:logic_reduce$25841 budget 4.899000 ns (31,5) -> (30,6)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$69975_LC.I0
+Info:  0.7  3.9  Source $abc$69506$auto$blifparse.cc:492:parse_blif$69975_LC.O
+Info:  2.8  6.7    Net $abc$69506$new_n5786_ budget 20.164000 ns (30,6) -> (20,5)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$72061_LC.I2
+Info:  0.6  7.2  Source $abc$69506$auto$blifparse.cc:492:parse_blif$72061_LC.O
+Info:  3.4 10.6    Net flash_io1_iosel budget 20.164000 ns (20,5) -> (30,0)
+Info:                Sink flash_io1_iobuf.iobuf.OUTPUT_ENABLE
+Info:                Defined in:
+Info:                  micon/hardware.sv:243
+Info: 2.7 ns logic, 7.9 ns routing
+
+Info: Critical path report for cross-domain path 'negedge clk_16MHz$SB_IO_IN_$glb_clk' -> '<async>':
+Info: curr total
+Info:  0.8  0.8  Source $auto$simplemap.cc:420:simplemap_dff$21142_DFFLC.O
+Info:  0.9  1.7    Net rom.rom.xfer_io2_90 budget 13.242000 ns (29,4) -> (29,4)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$72050_LC.I2
+Info:                Defined in:
+Info:                  micon/hardware.sv:206
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:41
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:224
+Info:  0.6  2.2  Source $abc$69506$auto$blifparse.cc:492:parse_blif$72050_LC.O
+Info:  3.4  5.6    Net $abc$69506$techmap\rom.rom.$ternary$/home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:244$937_Y_new_inv_ budget 13.241000 ns (29,4) -> (17,1)
+Info:                Sink $abc$69506$auto$blifparse.cc:492:parse_blif$72049_LC.I1
+Info:                Defined in:
+Info:                  micon/hardware.sv:206
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:41
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:244
+Info:  0.6  6.2  Source $abc$69506$auto$blifparse.cc:492:parse_blif$72049_LC.O
+Info:  0.9  7.0    Net flash_io2_out budget 13.241000 ns (17,1) -> (17,0)
+Info:                Sink flash_io2_iobuf.iobuf.D_OUT_0
+Info:                Defined in:
+Info:                  micon/hardware.sv:206
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:41
+Info:                  /home/ohta/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0/hardware/SPIROM.sv:114
+Info: 1.9 ns logic, 5.1 ns routing
+
+Info: Max frequency for clock 'clk_16MHz$SB_IO_IN_$glb_clk': 27.84 MHz (PASS at 12.00 MHz)
+
+Info: Max delay <async>                             -> posedge clk_16MHz$SB_IO_IN_$glb_clk: 30.69 ns
+Info: Max delay posedge clk_16MHz$SB_IO_IN_$glb_clk -> <async>                            : 10.57 ns
+Info: Max delay negedge clk_16MHz$SB_IO_IN_$glb_clk -> <async>                            : 7.03 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 32 endpoint(s)
+Info:          + represents [1,32) endpoint(s)
+Info: [ 34634,  36962) |+
+Info: [ 36962,  39290) |+
+Info: [ 39290,  41618) | 
+Info: [ 41618,  43946) | 
+Info: [ 43946,  46274) | 
+Info: [ 46274,  48602) |+
+Info: [ 48602,  50930) |+
+Info: [ 50930,  53258) |****+
+Info: [ 53258,  55586) |***+
+Info: [ 55586,  57914) |*******+
+Info: [ 57914,  60242) |*********+
+Info: [ 60242,  62570) |***********+
+Info: [ 62570,  64898) |***************+
+Info: [ 64898,  67226) |*************+
+Info: [ 67226,  69554) |*******+
+Info: [ 69554,  71882) |*****************+
+Info: [ 71882,  74210) |************************************************************ 
+Info: [ 74210,  76538) |******************+
+Info: [ 76538,  78866) |*******************************+
+Info: [ 78866,  81194) |*********************************************************+
+
+Info: Program finished normally.

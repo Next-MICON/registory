@@ -7,8 +7,8 @@ instances:
   - {name: digital, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [120, 220], flip: false}
 ioports:
   - {name: irq3, type: irq, params: [], pos: [180, 340], flip: false}
-  - {name: pin2, type: in, params: [], pos: [360, 40], flip: true}
-  - {name: pin1, type: out, params: [], pos: [360, 80], flip: true}
+  - {name: pin2, type: in, params: [], pos: [360, 80], flip: true}
+  - {name: pin1, type: out, params: [], pos: [360, 40], flip: true}
   - {name: pin3, type: inout, params: [], pos: [360, 200], flip: true}
   - {name: led, type: out, params: [], pos: [360, 280], flip: true}
   - {name: pin11, type: in, params: [], pos: [360, 340], flip: true}
