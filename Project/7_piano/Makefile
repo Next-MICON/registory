@@ -1,6 +1,6 @@
 # Directory
 IDE_HOME  = /home/ohta/NextMiconIDE
-PROJ      = /home/ohta/NextMiconIDE/Projects/sample
+PROJ      = 7_piano
 BOARD     = NextMicon/TinyFPGA_BX/0.0.0
 
 # Input Files
@@ -49,6 +49,7 @@ test:
 
 hardware: .build/hardware.bin
 .build/hardware.json: $(HARDWARE)
+	make init
 	yosys -ql $@.log -p 'synth_ice40 -top hardware -json $@' $^
 .build/hardware.asc: .build/hardware.json
 	nextpnr-ice40 -ql $@.log --lp8k --package cm81 --asc $@ --pcf $(PCF) --json $^
@@ -76,8 +77,8 @@ software: .build/software.objdump .build/software.nm .build/software.bin
 upload: hardware software
 #	tinyprog -p .build/hardware.bin -u .build/software.bin
 	powershell.exe -c \
-	"tinyprog -p \$$env:WSLHome\NextMiconIDE\Project\music\.build\hardware.bin \
-	          -u \$$env:WSLHome\NextMiconIDE\Project\music\.build\software.bin"
+	"tinyprog -p \$$env:WSLHome\NextMiconIDE\Project\$(PROJ)\.build\hardware.bin \
+	          -u \$$env:WSLHome\NextMiconIDE\Project\$(PROJ)\.build\software.bin"
 
 ###############################################################################
 
@@ -114,7 +115,7 @@ upload: hardware software
 simu: .build/simulation.vcd .build/simu_software.objdump .build/simu_software.nm
 #	gtkwave .build/simulation.vcd
 	powershell.exe -c \
-	"gtkwave \$$env:WSLHome\NextMiconIDE\Project\music\.build\simulation.vcd"
+	"gtkwave \$$env:WSLHome\NextMiconIDE\Project\$(PROJ)\.build\simulation.vcd"
 
 ###############################################################################
 
