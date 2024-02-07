@@ -3,18 +3,53 @@
 
 uint32_t char_to_int(char c);
 
-uint32_t Serial::read() {
-  return reg[Reg_IO];
+// --------------------------------------------------------------------------------
+// Settings
+
+void Serial::baud(uint32_t baudrate) {
+  reg[0] = CLK_FREQ / baudrate;
 }
 
+// --------------------------------------------------------------------------------
+// Send
+
+Serial& Serial::print(char c) {
+  reg[Reg_IO] = c;
+  return *this;
+}
+
+Serial& Serial::print(const char* str) {
+  while(*str != '\0') print(*(str++));
+  return *this;
+}
+
+Serial& Serial::hex(uint32_t num, int digits) {
+  for(int i = (4 * digits) - 4; i >= 0; i -= 4)
+    print("0123456789ABCDEF"[(num >> i) & 0xF]);
+  return *this;
+}
+
+Serial& Serial::dec(uint32_t num) {
+  char buffer[10];
+  char* ptr = buffer;
+  while(num || ptr == buffer) {
+    *(ptr++) = num % 10;
+    num = num / 10;
+  }
+  while(ptr != buffer) {
+    print('0' + *(--ptr));
+  }
+  return *this;
+}
+
+// --------------------------------------------------------------------------------
 // Receive
-// Wait RX syncronos
 
 uint32_t Serial::receive() {
   int32_t received = -1;
   uint32_t start = rdcycle_l();
   for(;;) {
-    received = read();
+    received = reg[Reg_IO];
     if(received != -1) break;
   }
   return received;
@@ -26,20 +61,19 @@ uint32_t Serial::receive(uint32_t timeout) {
   uint32_t start = rdcycle(4);
   for(;;) {
     if(rdcycle(4) > timeout + start) break;
-    received = read();
+    received = reg[Reg_IO];
     if(received != -1) break;
   }
   return received;
 }
 
-uint32_t Serial::read_int() {
+uint32_t Serial::receive_int() {
   uint32_t ret = 0;
-  uint32_t base = 10;
   char rcv;
   while(true) {
     rcv = receive();
     if('0' <= rcv && rcv <= '9') {
-      ret += ret * base + (rcv - '0');
+      ret += ret * 10 + (rcv - '0');
     } else {
       break;
     }

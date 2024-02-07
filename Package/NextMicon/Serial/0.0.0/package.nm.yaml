@@ -20,15 +20,21 @@ software:
     - note: // Print Char
       def: Serial& print(char c);
       use: ${INSTANCE}.print();
-    - note: "// Print C String"
-      def: "Serial& print(const char* str);"
-      use: "${INSTANCE}.print();"
-    - note: "// Print int in hexadecimal"
-      def: "Serial& hex(uint32_t num, uint32_t digits);"
-      use: "${INSTANCE}.hex(,);"
-    - note: "// Print int in decimal"
-      def: "Serial& dec(uint32_t num)"
-      use: "${INSTANCE}.dec();"
-    - note: // Read char from RX
-      def: "char read();"
-      use: "${INSTANCE}.read();"
+    - note: // Print String
+      def: Serial& print(const char* str);
+      use: ${INSTANCE}.print();
+    - note: // Print integer in hexadecimal
+      def: Serial& hex(uint32_t num, uint32_t digits);
+      use: ${INSTANCE}.hex(,);
+    - note: // Print integer in decimal
+      def: Serial& dec(uint32_t num)
+      use: ${INSTANCE}.dec();
+    - note: // Receive synchronous
+      def: uint32_t receive();
+      use: = ${INSTANCE}.receive();
+    - note: // Receive with timeout (us)
+      def: uint32_t receive(uint32_t timeout);
+      use: = ${INSTANCE}.receive();
+    - note:  // Receive as a integer
+      def:  uint32_t receive_int();
+      use: = ${INSTANCE}.receive_int();

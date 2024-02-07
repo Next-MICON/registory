@@ -18,12 +18,12 @@ software:
   className: Digital
   memSize: 0x10
   member:
-    - note: "// Set GPIO Mode"
-      def: "void mode(GPIO::Mode);"
-      use: "${INSTANCE}.mode();"
-    - note: "// Output"
-      def: "void write(bool);"
-      use: "${INSTANCE}.write();"
-    - note: "// Input"
-      def: "void read();"
-      use: "${INSTANCE}.read();"
+    - note: // Select Input (Mode::IN) or Output (Mode::OUT)
+      def: void mode(Mode mode);
+      use: ${INSTANCE}.mode(Digital::Mode::);
+    - note: // Read value (Mode::IN)
+      def: uint32_t read();
+      use: = ${INSTANCE}.read();
+    - note: // Write value (Mode::OUT)
+      def: void write(uint32_t val);
+      use: ${INSTANCE}.write();

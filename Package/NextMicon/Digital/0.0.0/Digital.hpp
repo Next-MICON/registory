@@ -15,13 +15,12 @@ class Digital {
 public:
   Digital(volatile uint32_t* addr) : reg(addr) {}
 
-  void mode(Mode mode) { reg[Reg_IOSEL] = mode; }
-  void in_mode() { reg[Reg_IOSEL] = Mode::IN; }
-  void out_mode() { reg[Reg_IOSEL] = Mode::OUT; }
+  // Select Input (Mode::IN) or Output (Mode::OUT)
+  void set_mode(Mode mode) { reg[Reg_IOSEL] = mode; }
 
+  // Read value (Mode::IN)
   uint32_t read() { return reg[Reg_IN]; }
 
+  // Write value (Mode::OUT)
   void write(uint32_t val) { reg[Reg_OUT] = val; }
-  void on() { write(1); }
-  void off() { write(0); }
 };
