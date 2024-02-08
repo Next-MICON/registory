@@ -1,4 +1,5 @@
 // main.cpp
+#include "aa.hpp"
 #include "firmware.hpp"
 
 const uint32_t N_USER = 5;
@@ -37,10 +38,13 @@ void init() {
 }
 
 void loop() {
+  uint32_t cmd_cnt = 0;
+
   uint32_t talker = 0;
   uint32_t chat = -1;
 
   // 1. Find serial who wants to talk
+  broadcast("> ");
   for(;;) {
     chat = serial[talker].receive(1000);
     if(chat != -1) break;
@@ -48,28 +52,32 @@ void loop() {
   }
 
   // 2. Broadcast talker's info
+  broadcast("\b\b");
   broadcast(COLOR[talker]);
   broadcast("User");
   broadcast(talker);
   broadcast(COLOR_CLEAR);
+
   broadcast(" < ");
   serial[talker].print(STRONG);
 
   // 3. Start talking
   for(;;) {
-    // 3-1. Broadcast char
-    if(chat == -1 || chat == '\n') {
-      broadcast("\n");
-      break;
-    } else if(chat == '\b') {
-      broadcast("\b \b");
-    } else if(chat == '\e') {
-      serial[talker].print("\n[Escape is prohibited!]\n");
-    } else {
-      broadcast((char)chat);
+    if(chat == -1 || chat == '\n') break;
+    if(chat == '\b') broadcast("\b ");
+
+    if(chat == cmd[cmd_cnt]) ++cmd_cnt;
+
+    broadcast((char)chat);
+
+    if(cmd_cnt == cmd_len) {
+      cmd_cnt = 0;
+      broadcast(ascii_art);
     }
-    // 3-2. Get serial input
+
     chat = serial[talker].receive(3000 * 1000);
   }
+
   serial[talker].print(STRONG_CLEAR);
+  broadcast("\n");
 }
