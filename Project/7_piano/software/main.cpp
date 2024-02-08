@@ -57,10 +57,10 @@ void loop() {
       for(int i = 0; i < 5; ++i) {
         digital.on();
         serial.print("*");
-        delayMs(500);
+        delay_ms(500);
         digital.off();
         serial.print(".");
-        delayMs(500);
+        delay_ms(500);
       }
       serial.print("\n=== End ===\n");
     } break;
@@ -68,13 +68,13 @@ void loop() {
       serial.print("=== Play Sownd ===\n");
       play(0, 48);
       mix.set_vol(0, 2);
-      delayMs(500);
+      delay_ms(500);
       play(1, 52);
       mix.set_vol(1, 2);
-      delayMs(500);
+      delay_ms(500);
       play(2, 55);
       mix.set_vol(2, 2);
-      delayMs(1500);
+      delay_ms(1500);
       stop(0);
       stop(1);
       stop(2);
@@ -310,7 +310,7 @@ void cmidi(uint16_t data) {
     int velocity = data & 0b1111;
     play(channel, velocity ? note_number : 0);
   } else {
-    delayMs(data);
+    delay_ms(data);
   }
   return;
 }

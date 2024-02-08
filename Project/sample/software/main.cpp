@@ -26,10 +26,10 @@ void loop() {
       for(int i = 0; i < 5; ++i) {
         digital.on();
         serial.print("*");
-        delayMs(500);
+        delay_ms(500);
         digital.off();
         serial.print(".");
-        delayMs(500);
+        delay_ms(500);
       }
       serial.print("\n=== end ===\n");
     } break;

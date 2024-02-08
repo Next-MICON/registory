@@ -17,8 +17,4 @@ textX: 0
 software:
   className: Spectro
   memSize: 0x1000
-  member:
-    - doc: "void Spectro::start()"
-      copy: "${INSTANCE}.start()"
-    - doc: "char Spectro::buffer[BUFFER_SIZE]"
-      copy: "${INSTANCE}.buffer[]"
+  member: []

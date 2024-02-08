@@ -24,5 +24,5 @@ uint32_t rdcycle_h();
 uint32_t rdcycle(int32_t shift);
 
 void delay(uint32_t time_h, uint32_t time_l);
-void delayUs(uint32_t time_us);
-void delayMs(uint32_t time_ms);
+void delay_us(uint32_t time_us);
+void delay_ms(uint32_t time_ms);

@@ -82,7 +82,7 @@ void delay(uint32_t time_h, uint32_t time_l) {
 
 /// @brief Delay micro seconds (Max = 2^32 us ~ 1.19 hour)
 /// @param time = 1 us
-void delayUs(uint32_t time_us) {
+void delay_us(uint32_t time_us) {
   uint32_t start = rdcycle(4);
   uint32_t current = 0;
   while(start + time_us > current) {
@@ -92,6 +92,6 @@ void delayUs(uint32_t time_us) {
 
 /// @brief Delay mili seconds (Max = 2^32 us ~ 1.19 hour)
 /// @param time = 1 ms
-void delayMs(uint32_t time_ms) {
-  delayUs(time_ms * 1000);
+void delay_ms(uint32_t time_ms) {
+  delay_us(time_ms * 1000);
 }

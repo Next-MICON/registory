@@ -9,6 +9,14 @@ textX: -50
 software:
   className: Analog
   memSize: 0x10
-  member:
-    - doc: "void Analog:duty(int)"
-      copy: "${INSTANCE}.duty()"
+  methods:
+    - note: Start oscilating
+      name: freq
+      type: void
+      args:
+        - type: uint32_t
+          name: f
+    - note: Stop oscilating
+      name: stop
+      type: void
+      args: []

@@ -9,7 +9,6 @@ public:
   void set(uint32_t clk) { reg[0] = clk; }
 
   /// @brief Start oscilating
-  /// @param note_no MIDI Note number (0~127)
   void freq(uint32_t f) { reg[0] = CLK_HZ / 256 / f; }
 
   /// @brief Stop oscilating

@@ -9,10 +9,14 @@ textX: -50
 software:
   className: Square
   memSize: 0x10
-  member:
-    - doc: "set(int cnt)"
-      copy: "${INSTANCE}.set(cnt)"
-    - doc: "freq(int f)"
-      copy: "${INSTANCE}.freq(f)"
-    - doc: "stop()"
-      copy: "${INSTANCE}.stop()"
+  methods:
+    - note: Start oscilating
+      name: freq
+      type: void
+      args:
+        - type: uint32_t
+          name: f
+    - note: Stop oscilating
+      name: stop
+      type: void
+      args: []

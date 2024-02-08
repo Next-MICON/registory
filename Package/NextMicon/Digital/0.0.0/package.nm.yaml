@@ -18,17 +18,17 @@ software:
   className: Digital
   memSize: 0x10
   methods:
-    - note: // Select Input (Mode::IN) or Output (Mode::OUT)
+    - note: Select Input (Mode::IN) or Output (Mode::OUT)
       name: set_mode
       type: void
       args:
         - type: Digital::Mode
           name: mode
-    - note: // Read value (Mode::IN)
+    - note: Read value (Mode::IN)
       name: read
       type: uint32_t
       args: []
-    - note: // Write value (Mode::OUT)
+    - note: Write value (Mode::OUT)
       name: write
       type: void
       args:

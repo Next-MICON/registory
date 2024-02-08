@@ -25,6 +25,12 @@ textX: 0
 software:
   className: Mixier
   memSize: 0x10
-  member:
-    - doc: "set_vol(int ch, int vol)"
-      copy: "${INSTANCE}.set_vol(ch,vol);"
+  methods:
+    - note: Set volume (0 ~ 15)
+      name: set_vol
+      type: void
+      args:
+        - type: uint32_t
+          name: ch
+        - type: uint32_t
+          name: vol

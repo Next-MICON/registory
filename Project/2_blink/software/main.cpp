@@ -6,8 +6,8 @@ void init(){
 }
 
 void loop(){
-  delayMs(500);
+  delay_ms(500);
   ledif.write(1);
-  delayMs(500);
+  delay_ms(500);
   ledif.write(0);
 }

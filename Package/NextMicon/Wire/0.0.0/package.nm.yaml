@@ -21,10 +21,28 @@ textX: -50
 software:
   className: Wire
   memSize: 0x10
-  member:
-    - note: "// Send I2C (addr,reg,len)"
-      def: "void write(char, char, char, Wire::Next);"
-      use: "${INSTANCE}.write(,,, Wire::Next::End);"
-    - note: "// Receive I2C (addr,reg,len)"
-      def: "char* read(char, char, char, Wire::Next);"
-      copy: "${INSTANCE}.read(, , , Wire::Next::Continue);"
+  methods:
+    - note: Send I2C (addr,reg,len)
+      name: send
+      type: void
+      args:
+        - type: uint8_t
+          name: addr
+        - type: uint8_t
+          name: reg
+        - type: uint8_t
+          name: msg_len
+        - type: Wire::Next
+          name: continue
+    - note: Receive I2C
+      name: recv
+      type: char*
+      args:
+        - type: uint8_t
+          name: addr
+        - type: uint8_t
+          name: reg
+        - type: uint8_t
+          name: msg_len
+        - type: Wire::Next
+          name: continue

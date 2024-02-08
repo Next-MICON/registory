@@ -29,6 +29,19 @@ textX: 0
 software:
   className: Spectro
   memSize: 0x10
-  member:
-    - doc: "analog(int value, int buf = 1, int ga = 1, int shdn = 1)"
-      copy: "${INSTANCE}.analog(value);"
+  methods:
+    - note: Analog to Digital Converter
+      name: analog
+      type: void
+      args:
+        - type: uint16_t
+          name: value
+        - type: int
+          name: buf
+          default: 1
+        - type: int
+          name: ga
+          default: 1
+        - type: int
+          name: shdn
+          default: 1

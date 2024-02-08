@@ -14,25 +14,25 @@ software:
   className: Serial
   memSize: 0x10
   methods:
-    - note: // Set Baudrate
+    - note: Set Baudrate
       name: baud
       type: Serial&
       args:
         - type: uint32_t
           name: baudrate
-    - note: // Print Char
+    - note: Print Char
       name: print
       type: Serial&
       args:
         - type: char
           name: c
-    - note: // Print String
+    - note: Print String
       name: print
       type: Serial&
       args:
         - type: const char*
           name: str
-    - note: // Print integer in hexadecimal
+    - note: Print integer in hexadecimal
       name: hex
       type: Serial&
       args:
@@ -40,23 +40,23 @@ software:
           name: num
         - type: uint32_t
           name: digits
-    - note: // Print integer in decimal
+    - note: Print integer in decimal
       name: dec
       type: Serial&
       args:
         - type: uint32_t
           name: num
-    - note: // Receive synchronous
+    - note: Receive synchronous
       name: receive
       type: uint32_t
       args: []
-    - note: // Receive with timeout (us)
+    - note: Receive with timeout (us)
       name: receive
       type: uint32_t
       args:
         - type: uint32_t
           name: timeout
-    - note: // Receive as a integer
+    - note: Receive as a integer
       name: receive_int
       type: uint32_t
       args: []

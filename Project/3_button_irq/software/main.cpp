@@ -9,7 +9,7 @@ void init(){
 
 void loop(){
   serial.print("#");
-  delayMs(500);
+  delay_ms(500);
 }
 
 void irq5(){

@@ -3,15 +3,25 @@ board:
   name: TinyFPGA_BX
   version: 0.0.0
 instances:
-  - {name: serial0, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [140, 140]}
-  - {name: analog0, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [140, 260]}
-  - {name: analog1, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [140, 360]}
-  - {name: analog2, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [140, 460]}
+  - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [140, 140]}
+  - {name: i2c, pack: {owner: NextMicon, name: Wire, version: 0.0.0}, params: [], pos: [140, 300]}
   - {name: digital0, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 160]}
   - {name: digital1, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 300]}
   - {name: digital2, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 440]}
   - {name: digital3, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 580]}
-  - {name: digital4, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [620, 720]}
-  - {name: analog3, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [140, 560]}
-ioports: []
-wires: []
+  - {name: analog0, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [960, 140]}
+  - {name: analog1, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [960, 240]}
+  - {name: analog2, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [960, 340]}
+  - {name: analog3, pack: {owner: NextMicon, name: Analog, version: 0.0.0}, params: [], pos: [960, 440]}
+ioports:
+  - {name: pin1, type: out, params: [], pos: [360, 120], flip: true}
+  - {name: pin2, type: in, params: [], pos: [360, 160], flip: true}
+  - {name: pin3, type: out, params: [], pos: [360, 240], flip: true}
+  - {name: pin4, type: inout, params: [], pos: [360, 320], flip: true}
+wires:
+  - {first: [i2c, scl], last: [pin3, out], waypoints: [], width: 1}
+  - {first: [serial, tx], last: [pin1, out], waypoints: [], width: 1}
+  - {first: [pin2, in], last: [serial, rx], waypoints: [], width: 1}
+  - {first: [i2c, sda_io], last: [pin4, iosel], waypoints: [], width: 1}
+  - {first: [i2c, sda_tx], last: [pin4, out], waypoints: [], width: 1}
+  - {first: [pin4, in], last: [i2c, sda_rx], waypoints: [], width: 1}
