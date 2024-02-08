@@ -19,15 +19,15 @@ void init() {
 
 void loop() {
   serial.print(help);
-  switch(serial.receive(1000*50)) {
+  switch(serial.receive(1000 * 50)) {
     case '1': {
       serial.print("=== Blink LED (GPIO) ===\n");
-      digital.out_mode();
+      digital.set_mode(Digital::Mode::OUT);
       for(int i = 0; i < 5; ++i) {
-        digital.on();
+        digital.write(1);
         serial.print("*");
         delay_ms(500);
-        digital.off();
+        digital.write(0);
         serial.print(".");
         delay_ms(500);
       }

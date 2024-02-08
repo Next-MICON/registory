@@ -161,3 +161,34 @@ cmd:
     out: []
     cmd: "make upload"
     arg: []
+
+# CPU Methods
+methods:
+  - note: IRQ disable mask (0 = allow all)
+    name: set_irq_mask
+    type: uint32_t
+    args:
+      - type: uint32_t
+        name: mask
+  - note: Halt CPU until IRQ
+    name: wait_irq
+    type: uint32_t
+    args: []
+  - note: Read clock cycle counter
+    name: rdcycle
+    type: uint32_t
+    args:
+      - type: uint32_t
+        name: shift
+  - note: Delay micro seconds
+    name: delay_us
+    type: void
+    args:
+      - type: uint32_t
+        name: time_us
+  - note: Delay mili seconds
+    name: delay_ms
+    type: void
+    args:
+      - type: uint32_t
+        name: time_ms
