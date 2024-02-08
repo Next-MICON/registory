@@ -1,18 +1,16 @@
-// main.cpp
-#include "firmware.hpp"
-
-void init(){
+void init() {
   serial.baud(9600);
   serial.print("Hello FPGA!\n");
   set_irq_mask(0);
-  counter.set(0);
+  counter.set_ms(500);
 }
 
-void loop(){
+void loop() {
   serial.print("#");
+  delay_ms(100);
 }
 
-void irq3(){
-  serial.print("\n\e[41mINTERRUPT #3\e[49m\n");
-  counter.set(0);
+void irq3() {
+  serial.print("\n\e[41mIRQ #3\e[49m\n");
+  counter.set_ms(500);
 }
