@@ -7,7 +7,7 @@ uint32_t char_to_int(char c);
 // Settings
 
 void Serial::baud(uint32_t baudrate) {
-  reg[0] = CLK_FREQ / baudrate;
+  reg[0] = CLK_HZ / baudrate;
 }
 
 // --------------------------------------------------------------------------------

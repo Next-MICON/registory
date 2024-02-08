@@ -10,7 +10,7 @@ public:
 
   /// @brief Set oscilating clock counter
   /// @param clk
-  void freq(uint32_t f) { reg[0] = CLK_FREQ / 2 / f; }
+  void freq(uint32_t f) { reg[0] = CLK_HZ / 2 / f; }
 
   /// @brief Stop oscilating
   void stop() { reg[0] = 0; }

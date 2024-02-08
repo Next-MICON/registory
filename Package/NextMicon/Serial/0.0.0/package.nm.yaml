@@ -13,28 +13,50 @@ textX: -50
 software:
   className: Serial
   memSize: 0x10
-  member:
+  methods:
     - note: // Set Baudrate
-      def: Serial& baud(uint32_t baudrate);
-      use: ${INSTANCE}.baud();
+      name: baud
+      type: Serial&
+      args:
+        - type: uint32_t
+          name: baudrate
     - note: // Print Char
-      def: Serial& print(char c);
-      use: ${INSTANCE}.print();
+      name: print
+      type: Serial&
+      args:
+        - type: char
+          name: c
     - note: // Print String
-      def: Serial& print(const char* str);
-      use: ${INSTANCE}.print();
+      name: print
+      type: Serial&
+      args:
+        - type: const char*
+          name: str
     - note: // Print integer in hexadecimal
-      def: Serial& hex(uint32_t num, uint32_t digits);
-      use: ${INSTANCE}.hex(,);
+      name: hex
+      type: Serial&
+      args:
+        - type: uint32_t
+          name: num
+        - type: uint32_t
+          name: digits
     - note: // Print integer in decimal
-      def: Serial& dec(uint32_t num)
-      use: ${INSTANCE}.dec();
+      name: dec
+      type: Serial&
+      args:
+        - type: uint32_t
+          name: num
     - note: // Receive synchronous
-      def: uint32_t receive();
-      use: = ${INSTANCE}.receive();
+      name: receive
+      type: uint32_t
+      args: []
     - note: // Receive with timeout (us)
-      def: uint32_t receive(uint32_t timeout);
-      use: = ${INSTANCE}.receive();
-    - note:  // Receive as a integer
-      def:  uint32_t receive_int();
-      use: = ${INSTANCE}.receive_int();
+      name: receive
+      type: uint32_t
+      args:
+        - type: uint32_t
+          name: timeout
+    - note: // Receive as a integer
+      name: receive_int
+      type: uint32_t
+      args: []

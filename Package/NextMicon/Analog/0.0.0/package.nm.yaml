@@ -9,7 +9,11 @@ textX: -50
 software:
   className: Analog
   memSize: 0x10
-  member:
-    - note: "// Output Analog (PWM) 0~255"
-      def: "void duty(uint32_t);"
-      use: "${INSTANCE}.duty();"
+  methods:
+    - note: // Set duty ratio 0~255 (output voltage = val * (3.3V/256))
+      name: duty
+      type: void
+      args:
+        - type: uint32_t
+          name: val
+          

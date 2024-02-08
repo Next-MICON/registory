@@ -97,29 +97,65 @@ ioports:
   irq14: [irq]
   irq15: [irq]
 
+# TODO : Define build commands instead of Makefile
+
 tools:
   - name: yosys
-    cmd: yosys
+    inst: apt install yosys
+    get_v: yosys -V
+  - name: nextpnr
+    inst: apt install nextpnr-ice40
+    get_v: nextpnr-ice40 -V
+  - name: TinyFPGA 
+    inst: pip install tinyprog
+    get_v: tinyprog
+  - name: GCC RISC-V Toolchain
+    get_v: riscv64-unknown-elf-g++ -dumpversion
+    inst: sudo apt install gcc-riscv64-unknown-elf
 
 cmd:
-  - name: "Generate Micon"
+  - name: Generate Micon
     src:
-      - micon.nm.yaml 
+      - project.nm.yaml 
     out:
       - ./micon/hardwiare.v
       - ./micon/firmware.hpp
     cmd: mgen
     arg: []
-  - name: "Synthesys"
-    src: []
-    out: []
-    cmd: "make synth"
-    arg: []
+
+  - name: Synthesys
+    src: 
+      - ./micon/hardwiare.v
+      - ${modules.verilog}
+    out:
+      - .build/hardware.json
+      - .build/hardware.json.log
+    cmd: yosys
+    arg: 
+      - "-ql .build/hardware.json.log"
+      - "-p 'synth_ice40 -top hardware -json .build/hardware.json'"
+      - ./micon/hardwiare.v
+      - ${modules.verilog}
+
+  - name: Place and Route
+    src:
+      - .build/hardware.json
+    out:
+      - .build/hardware.asc
+      - .build/hardware.asc.log
+    cmd: nextpnr-ice40
+    arg:
+      - "-ql .build/hardware.asc.log"
+      - "--lp8k --package cm81"
+      - "--asc $@" 
+      - "--pcf $(PCF) --json $^"
+
   - name: "Compile"
     src: []
     out: []
     cmd: "make compile"
     arg: []
+
   - name: "Upload"
     src: []
     out: []

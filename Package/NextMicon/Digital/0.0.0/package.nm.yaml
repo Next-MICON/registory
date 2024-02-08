@@ -17,13 +17,20 @@ textX: -50
 software:
   className: Digital
   memSize: 0x10
-  member:
+  methods:
     - note: // Select Input (Mode::IN) or Output (Mode::OUT)
-      def: void mode(Mode mode);
-      use: ${INSTANCE}.mode(Digital::Mode::);
+      name: set_mode
+      type: void
+      args:
+        - type: Digital::Mode
+          name: mode
     - note: // Read value (Mode::IN)
-      def: uint32_t read();
-      use: = ${INSTANCE}.read();
+      name: read
+      type: uint32_t
+      args: []
     - note: // Write value (Mode::OUT)
-      def: void write(uint32_t val);
-      use: ${INSTANCE}.write();
+      name: write
+      type: void
+      args:
+        - type: uint32_t
+          name: val

@@ -9,10 +9,34 @@ textX: -40
 software:
   className: Prescaler
   memSize: 0x10
-  member:
-    - note: "// Set Counter"
-      def: "void set(uint32_t);"
-      use: "${INSTANCE}.set();"
-    - note: "// Set Counter by Frequency"
-      def: "void freq(uint32_t);"
-      use: "${INSTANCE}.freq();"
+  methods:
+    - note: // Set counter
+      name: set
+      type: void
+      args:
+        - type: uint32_t
+          name: cnt
+    - note: // Set counter by second
+      name: set_sec
+      type: void
+      args:
+        - type: uint32_t
+          name: sec
+    - note: // Set counter by mili second
+      name: set_ms
+      type: void
+      args:
+        - type: uint32_t
+          name: ms
+    - note: // Sec counter by micro second
+      name: set_us
+      type: void
+      args:
+        - type: uint32_t
+          name: us
+    - note: // Set conter by frequence [Hz]
+      name: set_hz
+      type: void
+      args:
+        - type: uint32_t
+          name: f
