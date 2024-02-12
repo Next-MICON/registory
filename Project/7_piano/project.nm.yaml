@@ -3,7 +3,7 @@ board:
   name: TinyFPGA_BX
   version: 0.0.0
 instances:
-  - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [120, -20], flip: false}
+  - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [120, -40], flip: false}
   - {name: ch0_sq, pack: {owner: kanade-k-1228, name: Square, version: 0.0.0}, params: [], pos: [120, 160]}
   - {name: ch1_sq, pack: {owner: kanade-k-1228, name: Square, version: 0.0.0}, params: [], pos: [120, 240]}
   - {name: ch2_sq, pack: {owner: kanade-k-1228, name: Square, version: 0.0.0}, params: [], pos: [120, 320]}
@@ -13,13 +13,13 @@ instances:
   - {name: sampling, pack: {owner: NextMicon, name: Counter, version: 0.0.0}, params: [], pos: [420, 420]}
   - {name: digital, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [760, 0]}
 ioports:
-  - {name: pin2, type: in, params: [], pos: [340, 0], flip: true}
-  - {name: pin1, type: out, params: [], pos: [340, -40], flip: true}
+  - {name: pin2, type: in, params: [], pos: [340, -20], flip: true}
+  - {name: pin1, type: out, params: [], pos: [340, -60], flip: true}
   - {name: pin24, type: out, params: [], pos: [1000, 240], flip: true}
   - {name: pin23, type: out, params: [], pos: [1000, 280], flip: true}
   - {name: pin22, type: out, params: [], pos: [1000, 320], flip: true}
   - {name: pin21, type: out, params: [], pos: [1000, 360], flip: true}
-  - {name: irq5, type: irq, params: [], pos: [260, 60], flip: true}
+  - {name: irq5, type: irq, params: [], pos: [340, 60], flip: true}
   - {name: pin11, type: in, params: [], pos: [60, 60]}
   - {name: led, type: out, params: [], pos: [1000, 0], flip: true}
 wires:
