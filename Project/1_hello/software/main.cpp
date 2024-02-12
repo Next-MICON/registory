@@ -3,9 +3,9 @@
 
 void init(){
   serial.baud(9600);
-  serial.print("Hello FPGA!\n");
 }
 
 void loop(){
-  // Code Here!
+  delay_ms(1000);
+  serial.print("Hello FPGA!\n");
 }

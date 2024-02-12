@@ -2,7 +2,6 @@ templates:
   - ["micon", "firmware.hpp"]
   - ["micon", "firmware.cpp"]
   - ["micon", "hardware.sv"]
-  # - ["Makefile"]
 
 addr:
   pageSize: 0x01000000 # 区切り
@@ -125,8 +124,8 @@ cmd:
 
   - name: Synthesys
     src: 
-      - ./micon/hardwiare.v
-      - ${modules.verilog}
+      - ./micon/hardwiare.sv
+      - ${modules.sv}
     out:
       - .build/hardware.json
       - .build/hardware.json.log
@@ -134,8 +133,8 @@ cmd:
     arg: 
       - "-ql .build/hardware.json.log"
       - "-p 'synth_ice40 -top hardware -json .build/hardware.json'"
-      - ./micon/hardwiare.v
-      - ${modules.verilog}
+      - ./micon/hardwiare.sv
+      - ${modules.sv}
 
   - name: Place and Route
     src:
@@ -149,18 +148,45 @@ cmd:
       - "--lp8k --package cm81"
       - "--asc $@" 
       - "--pcf $(PCF) --json $^"
+  - name: Timing Analysys
+    src:
+      - .build/hardware.asc
+    out:
+      - .build/hardware.rpt
+    cmd: icetime
+    arg:
+      - "-d lp8k"
+      - "-c 12"
+      - "-mtr .build/hardware.rpt"
+      - ".build/hardware.asc"
+  - name: Gen Bitstream
+    src:
+      - .build/hardware.asc
+    out:
+      - .build/hardware.bin
+    cmd: icepack
+    arg:
+      - ".build/hardware.asc"
+      - ".build/hardware.bin"
 
-  - name: "Compile"
-    src: []
-    out: []
-    cmd: "make compile"
+  - name: Compile Software
+    src:
+      - software/main.cpp
+      - "${modules.cpp}"
+    out:
+      - .build/software.bin
+    cmd: riscv64-unknown-elf-g++
     arg: []
 
   - name: "Upload"
-    src: []
+    src: 
+      - .build/hardware.bin
+      - .build/software.bin
     out: []
-    cmd: "make upload"
-    arg: []
+    cmd: tinyprog
+    arg:
+      - "-p .build/hardware.bin"
+      - "-u .build/software.bin"
 
 # CPU Methods
 methods:

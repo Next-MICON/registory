@@ -30,8 +30,8 @@
 // ※ SSはGPIOで制御します
 
 module SPI_Master #(
-    parameter int CPOL = 0,
-    parameter int CPHA = 0
+    parameter CPOL = 0,
+    parameter CPHA = 0
 ) (
     input wire clk,
     input wire resetn,
