@@ -5,8 +5,11 @@ board:
 instances:
   - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [160, 100]}
 ioports:
-  - {name: pin1, type: out, params: [], pos: [400, 80], flip: true}
-  - {name: pin2, type: in, params: [], pos: [400, 120], flip: true}
+  - {name: pin1, type: out, params: [], pos: [420, 80], flip: true}
+  - {name: pin2, type: in, params: [], pos: [420, 120], flip: true}
+  - {name: irq5, type: irq, params: [], pos: [420, 220], flip: true}
+  - {name: pin11, type: in, params: [], pos: [240, 220]}
 wires:
   - {first: [pin2, in], last: [serial, rx], waypoints: [], width: 1}
   - {first: [serial, tx], last: [pin1, out], waypoints: [], width: 1}
+  - {first: [pin11, in], last: [irq5, irq], waypoints: [], width: 1}

@@ -2,7 +2,7 @@
 #include "firmware.hpp"
 
 void init(){
-    // Code Here!
+  // Code Here!
 }
 
 void loop(){
