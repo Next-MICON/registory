@@ -19,7 +19,7 @@ params: []
 size: [240, 180]
 textX: -50
 software:
-  className: Wire
+  className: I2C_Master
   memSize: 0x10
   methods:
     - note: Send I2C (addr,reg,len)
@@ -32,7 +32,7 @@ software:
           name: reg
         - type: uint8_t
           name: msg_len
-        - type: Wire::Next
+        - type: I2C::Next
           name: continue
     - note: Receive I2C
       name: recv
@@ -44,5 +44,5 @@ software:
           name: reg
         - type: uint8_t
           name: msg_len
-        - type: Wire::Next
+        - type: I2C::Next
           name: continue

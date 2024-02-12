@@ -27,7 +27,7 @@ params: []
 size: [240, 160]
 textX: 0
 software:
-  className: Spectro
+  className: SPIDAC
   memSize: 0x10
   methods:
     - note: Analog to Digital Converter
