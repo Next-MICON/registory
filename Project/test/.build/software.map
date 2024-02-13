@@ -1,0 +1,224 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x00000000         0x00002000         rw
+FLASH            0x00050000         0x00100000         xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x00050000      0x9c4
+                0x00050000                        . = ALIGN (0x4)
+ *(.text .text.*)
+ .text          0x00050000      0x19e /tmp/ccCa9rM0.o
+ .text          0x0005019e      0x138 /tmp/ccYf0FEa.o
+                0x0005019e                init_data()
+                0x000501d6                init_bss()
+                0x000501fc                init_array()
+                0x00050228                set_irq_mask(unsigned long)
+                0x00050228                set_irq_mask
+                0x0005022e                wait_irq()
+                0x0005022e                wait_irq
+                0x00050234                set_timer(unsigned long)
+                0x00050234                set_timer
+                0x0005023a                rdcycle_l()
+                0x00050240                rdcycle_h()
+                0x00050246                rdcycle(long)
+                0x00050260                delay(unsigned long, unsigned long)
+                0x00050282                delay_us(unsigned long)
+                0x000502a8                delay_ms(unsigned long)
+ .text          0x000502d6        0x0 /tmp/cci6jpED.o
+ .text          0x000502d6        0x0 /tmp/ccqssS7v.o
+ .text          0x000502d6      0x16e /tmp/ccoXa6lL.o
+                0x000502d6                Serial::baud(unsigned long)
+                0x000502e8                Serial::print(char)
+                0x000502ee                Serial::print(char const*)
+                0x00050302                Serial::hex(unsigned long, int)
+                0x00050330                Serial::dec(unsigned long)
+                0x00050368                Serial::receive()
+                0x00050384                Serial::receive(unsigned long)
+                0x000503ba                Serial::receive_int()
+                0x0005040c                char_to_int(char)
+ .text          0x00050444       0xf6 /tmp/cciCKK7o.o
+                0x00050448                irq3()
+                0x0005044a                irq4()
+                0x0005044c                irq5()
+                0x0005044e                irq6()
+                0x00050450                irq7()
+                0x00050452                irq8()
+                0x00050454                irq9()
+                0x00050456                irq10()
+                0x00050458                irq11()
+                0x0005045a                irq12()
+                0x0005045c                irq13()
+                0x0005045e                irq14()
+                0x00050460                irq15()
+                0x00050462                irq
+ .text.startup  0x0005053a       0x38 /tmp/cciCKK7o.o
+                0x0005053a                main
+ .text          0x00050572       0x28 /tmp/cc3QS0fv.o
+                0x00050572                init()
+                0x0005057e                loop()
+ *(.rodata .rodata.* .srodata .srodata.*)
+ *fill*         0x0005059a        0x2 
+ .rodata.str1.4
+                0x0005059c       0x11 /tmp/ccoXa6lL.o
+ *fill*         0x000505ad        0x3 
+ .rodata.str1.4
+                0x000505b0        0xd /tmp/cc3QS0fv.o
+ *(.eh_frame .eh_frame.*)
+ *fill*         0x000505bd        0x3 
+ .eh_frame      0x000505c0      0x118 /tmp/ccYf0FEa.o
+ .eh_frame      0x000506d8      0x108 /tmp/ccoXa6lL.o
+ .eh_frame      0x000507e0      0x1a0 /tmp/cciCKK7o.o
+ .eh_frame      0x00050980       0x44 /tmp/cc3QS0fv.o
+                0x000509c4                        . = ALIGN (0x4)
+                0x000509c4                        _text_end = .
+                0x000509c4                        _init_data_start = _text_end
+
+.rela.dyn       0x000509c4        0x0
+ .rela.text     0x000509c4        0x0 /tmp/ccCa9rM0.o
+
+.data           0x00000000      0x284 load address 0x000509c4
+                0x00000000                        . = ALIGN (0x4)
+                0x00000000                        _data_start = .
+                0x00000000                        _ram_start = .
+ *(.data .data.* .sdata .sdata.*)
+ .data          0x00000000      0x280 /tmp/ccCa9rM0.o
+ .data          0x00000280        0x0 /tmp/ccYf0FEa.o
+ .data          0x00000280        0x0 /tmp/cci6jpED.o
+ .data          0x00000280        0x0 /tmp/ccqssS7v.o
+ .data          0x00000280        0x0 /tmp/ccoXa6lL.o
+ .data          0x00000280        0x0 /tmp/cciCKK7o.o
+ .data          0x00000280        0x0 /tmp/cc3QS0fv.o
+                0x00000280                        _init_array_start = .
+ *(.init_array .init_array.*)
+ .init_array    0x00000280        0x4 /tmp/cciCKK7o.o
+                0x00000284                        _init_array_end = .
+                0x00000284                        . = ALIGN (0x4)
+                0x00000284                        _data_end = .
+
+.bss            0x00000284        0x8 load address 0x00050c48
+                0x00000284                        . = ALIGN (0x4)
+                0x00000284                        _bss_start = .
+ *(.bss .bss.* .sbss .sbss.*)
+ .bss           0x00000284        0x0 /tmp/ccCa9rM0.o
+ .bss           0x00000284        0x0 /tmp/ccYf0FEa.o
+ .bss           0x00000284        0x0 /tmp/cci6jpED.o
+ .bss           0x00000284        0x0 /tmp/ccqssS7v.o
+ .bss           0x00000284        0x0 /tmp/ccoXa6lL.o
+ .bss           0x00000284        0x0 /tmp/cciCKK7o.o
+ .sbss          0x00000284        0x8 /tmp/cciCKK7o.o
+                0x00000284                serial0
+                0x00000288                rom_cfg
+ .bss           0x0000028c        0x0 /tmp/cc3QS0fv.o
+ *(COMMON)
+                0x0000028c                        . = ALIGN (0x4)
+                0x0000028c                        _bss_end = .
+
+.heap           0x0000028c        0x0
+                0x0000028c                        . = ALIGN (0x4)
+                0x0000028c                        _heap_start = .
+LOAD /tmp/ccCa9rM0.o
+LOAD /tmp/ccYf0FEa.o
+LOAD /tmp/cci6jpED.o
+LOAD /tmp/ccqssS7v.o
+LOAD /tmp/ccoXa6lL.o
+LOAD /tmp/cciCKK7o.o
+LOAD /tmp/cc3QS0fv.o
+OUTPUT(.build/software.elf elf32-littleriscv)
+
+.riscv.attributes
+                0x00000000       0x2f
+ .riscv.attributes
+                0x00000000       0x2d /tmp/ccCa9rM0.o
+ .riscv.attributes
+                0x0000002d       0x2f /tmp/ccYf0FEa.o
+ .riscv.attributes
+                0x0000005c       0x2f /tmp/cci6jpED.o
+ .riscv.attributes
+                0x0000008b       0x2f /tmp/ccqssS7v.o
+ .riscv.attributes
+                0x000000ba       0x2f /tmp/ccoXa6lL.o
+ .riscv.attributes
+                0x000000e9       0x2f /tmp/cciCKK7o.o
+ .riscv.attributes
+                0x00000118       0x2f /tmp/cc3QS0fv.o
+
+.comment        0x00000000       0x1b
+ .comment       0x00000000       0x1b /tmp/ccYf0FEa.o
+                                 0x1c (size before relaxing)
+ .comment       0x0000001b       0x1c /tmp/cci6jpED.o
+ .comment       0x0000001b       0x1c /tmp/ccqssS7v.o
+ .comment       0x0000001b       0x1c /tmp/ccoXa6lL.o
+ .comment       0x0000001b       0x1c /tmp/cciCKK7o.o
+ .comment       0x0000001b       0x1c /tmp/cc3QS0fv.o
+
+Cross Reference Table
+
+Symbol                                            File
+Serial::baud(unsigned long)                       /tmp/ccoXa6lL.o
+                                                  /tmp/cc3QS0fv.o
+Serial::dec(unsigned long)                        /tmp/ccoXa6lL.o
+Serial::hex(unsigned long, int)                   /tmp/ccoXa6lL.o
+Serial::print(char const*)                        /tmp/ccoXa6lL.o
+                                                  /tmp/cc3QS0fv.o
+Serial::print(char)                               /tmp/ccoXa6lL.o
+Serial::receive()                                 /tmp/ccoXa6lL.o
+Serial::receive(unsigned long)                    /tmp/ccoXa6lL.o
+Serial::receive_int()                             /tmp/ccoXa6lL.o
+_bss_end                                          /tmp/ccYf0FEa.o
+_bss_start                                        /tmp/ccYf0FEa.o
+_data_end                                         /tmp/ccYf0FEa.o
+_data_start                                       /tmp/ccYf0FEa.o
+_init_array_end                                   /tmp/ccYf0FEa.o
+_init_array_start                                 /tmp/ccYf0FEa.o
+_init_data_start                                  /tmp/ccYf0FEa.o
+char_to_int(char)                                 /tmp/ccoXa6lL.o
+delay(unsigned long, unsigned long)               /tmp/ccYf0FEa.o
+delay_ms(unsigned long)                           /tmp/ccYf0FEa.o
+                                                  /tmp/cc3QS0fv.o
+delay_us(unsigned long)                           /tmp/ccYf0FEa.o
+init()                                            /tmp/cc3QS0fv.o
+                                                  /tmp/cciCKK7o.o
+init_array()                                      /tmp/ccYf0FEa.o
+                                                  /tmp/cciCKK7o.o
+init_bss()                                        /tmp/ccYf0FEa.o
+                                                  /tmp/cciCKK7o.o
+init_data()                                       /tmp/ccYf0FEa.o
+                                                  /tmp/cciCKK7o.o
+irq                                               /tmp/cciCKK7o.o
+                                                  /tmp/ccCa9rM0.o
+irq10()                                           /tmp/cciCKK7o.o
+irq11()                                           /tmp/cciCKK7o.o
+irq12()                                           /tmp/cciCKK7o.o
+irq13()                                           /tmp/cciCKK7o.o
+irq14()                                           /tmp/cciCKK7o.o
+irq15()                                           /tmp/cciCKK7o.o
+irq3()                                            /tmp/cciCKK7o.o
+irq4()                                            /tmp/cciCKK7o.o
+irq5()                                            /tmp/cciCKK7o.o
+irq6()                                            /tmp/cciCKK7o.o
+irq7()                                            /tmp/cciCKK7o.o
+irq8()                                            /tmp/cciCKK7o.o
+irq9()                                            /tmp/cciCKK7o.o
+loop()                                            /tmp/cc3QS0fv.o
+                                                  /tmp/cciCKK7o.o
+main                                              /tmp/cciCKK7o.o
+                                                  /tmp/ccCa9rM0.o
+rdcycle(long)                                     /tmp/ccYf0FEa.o
+                                                  /tmp/ccoXa6lL.o
+rdcycle_h()                                       /tmp/ccYf0FEa.o
+rdcycle_l()                                       /tmp/ccYf0FEa.o
+                                                  /tmp/ccoXa6lL.o
+rom_cfg                                           /tmp/cciCKK7o.o
+serial0                                           /tmp/cciCKK7o.o
+                                                  /tmp/cc3QS0fv.o
+set_irq_mask                                      /tmp/ccYf0FEa.o
+set_irq_mask(unsigned long)                       /tmp/ccYf0FEa.o
+set_timer                                         /tmp/ccYf0FEa.o
+set_timer(unsigned long)                          /tmp/ccYf0FEa.o
+wait_irq                                          /tmp/ccYf0FEa.o
+wait_irq()                                        /tmp/ccYf0FEa.o

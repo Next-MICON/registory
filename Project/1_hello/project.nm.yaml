@@ -7,9 +7,6 @@ instances:
 ioports:
   - {name: pin1, type: out, params: [], pos: [420, 80], flip: true}
   - {name: pin2, type: in, params: [], pos: [420, 120], flip: true}
-  - {name: irq5, type: irq, params: [], pos: [420, 180], flip: true}
-  - {name: pin13, type: in, params: [], pos: [220, 180]}
 wires:
   - {first: [pin2, in], last: [serial, rx], waypoints: [], width: 1}
   - {first: [serial, tx], last: [pin1, out], waypoints: [], width: 1}
-  - {first: [pin13, in], last: [irq5, irq], waypoints: [], width: 1}
