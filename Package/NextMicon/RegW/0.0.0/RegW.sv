@@ -1,4 +1,4 @@
-module Reg (
+module RegW (
     input wire clk,
     input wire resetn,
 
@@ -14,8 +14,7 @@ module Reg (
 
   always @(posedge clk) begin
     if (!resetn) begin
-      iosel <= 0;
-      out   <= 0;
+      out <= 0;
     end else begin
       ready <= valid;
       (* full_case *)

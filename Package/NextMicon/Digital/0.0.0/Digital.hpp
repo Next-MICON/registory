@@ -8,6 +8,7 @@ class Digital {
     Reg_OUT = 1,
     Reg_IN = 2
   };
+public:
   enum Mode {
     IN = 0,
     OUT = 1
