@@ -5,7 +5,8 @@ board:
 instances:
   - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [120, 60], flip: false}
   - {name: digital, pack: {owner: NextMicon, name: Digital, version: 0.0.0}, params: [], pos: [120, 220], flip: false}
-  - {name: spi0, pack: {owner: NextMicon, name: SPI_Master, version: 0.0.0}, params: [], pos: [120, 520]}
+  - {name: adc0, pack: {owner: NextMicon, name: ADC, version: 0.0.0}, params: [], pos: [100, 580]}
+  - {name: dac, pack: {owner: kanade-k-1228, name: SPIDAC, version: 0.0.0}, params: [], pos: [440, 580]}
 ioports:
   - {name: irq3, type: irq, params: [], pos: [180, 340], flip: false}
   - {name: pin2, type: in, params: [], pos: [360, 80], flip: true}
