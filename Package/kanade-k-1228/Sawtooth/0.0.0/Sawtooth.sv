@@ -29,8 +29,7 @@ module Sawtooth (
       if (wstrb[3]) threshold[31:24] <= wdata[31:24];
 
       // Wave Generator
-      // on CSR Updated
-      if (|wstrb) begin  // Reset
+      if (|wstrb) begin  // Reset (on CSR Updated)
         out <= 0;
         counter <= 0;
       end else if (threshold == 0) begin  // Stop

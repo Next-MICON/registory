@@ -25,12 +25,12 @@ void music(const uint16_t* m, uint32_t len);
 
 void init() {
   set_irq_mask(0);
-  sampling.freq(44'100);
+  sampling.set_hz(44'100);
   stop(0);
   stop(1);
   stop(2);
   stop(3);
-  serial.baud(460800);
+  serial.baud(9600);
   serial.print(
       "  _  _         _   __  __ _  \n"
       " | \\| |_____ _| |_|  \\/  (_)__ ___ _ _  \n"
@@ -43,29 +43,15 @@ void init() {
 void loop() {
   serial.print(
       "Select:\n"
-      " [1] Blink LED\n"
-      " [2] Play Sownd\n"
-      " [3] Piano\n"
-      " [4] Music: Rockman\n"
-      " [5] Music: Ugoku\n"
-      " [6] Music: Makaimura\n"
-      " [7] Music: FF\n");
+      " [1] Sownd Test\n"
+      " [2] Piano\n"
+      " [3] Music: Rockman\n"
+      " [4] Music: Ugoku\n"
+      " [5] Music: Makaimura\n"
+      " [6] Music: FF\n");
   switch(serial.receive()) {
     case '1': {
-      serial.print("=== Blink LED ===\n");
-      digital.out_mode();
-      for(int i = 0; i < 5; ++i) {
-        digital.on();
-        serial.print("*");
-        delay_ms(500);
-        digital.off();
-        serial.print(".");
-        delay_ms(500);
-      }
-      serial.print("\n=== End ===\n");
-    } break;
-    case '2': {
-      serial.print("=== Play Sownd ===\n");
+      serial.print("=== Sownd Test ===\n");
       play(0, 48);
       mix.set_vol(0, 2);
       delay_ms(500);
@@ -81,12 +67,12 @@ void loop() {
       stop(3);
       serial.print("=== End ===\n");
     } break;
-    case '3': {
+    case '2': {
       serial.print("=== Piano ===\n");
       single_ch_piano();
       serial.print("=== End ===\n");
     } break;
-    case '4': {
+    case '3': {
       serial.print("=== Music: Rockman ===\n");
       serial.print("  /\\_/\\ \n"
                    "6/ '-' )__ \n"
@@ -96,18 +82,18 @@ void loop() {
       music(rockman_dr_wily_music, rockman_dr_wily_len);
       serial.print("=== End ===\n");
     } break;
-    case '5': {
+    case '4': {
       serial.print("=== Music: Ugoku ===\n");
       serial.print(" .. (  '-')\n");
       music(ugoku_music, ugoku_len);
       serial.print("=== End ===\n");
     } break;
-    case '6': {
+    case '5': {
       serial.print("=== Music: Makaimura ===\n");
       music(makaimura_music, makaimura_len);
       serial.print("=== End ===\n");
     } break;
-    case '7': {
+    case '6': {
       serial.print("=== Music: FF ===\n");
       music(ff_bigbr_music, ff_bigbr_len);
       serial.print("=== End ===\n");
@@ -125,16 +111,16 @@ extern "C" uint32_t* irq(uint32_t* regs, uint32_t irqs) {
 void play(int ch, int note) {
   switch(ch) {
     case 0: {
-      ch0_sq.freq(FREQ_TABLE[note]);
+      ch0.freq(FREQ_TABLE[note]);
     } break;
     case 1: {
-      ch1_sq.freq(FREQ_TABLE[note]);
+      ch1.freq(FREQ_TABLE[note]);
     } break;
     case 2: {
-      ch2_sq.freq(FREQ_TABLE[note]);
+      ch2.freq(FREQ_TABLE[note]);
     } break;
     case 3: {
-      ch3_sq.freq(FREQ_TABLE[note]);
+      ch3.freq(FREQ_TABLE[note]);
     } break;
     default:
       break;
@@ -144,16 +130,16 @@ void play(int ch, int note) {
 void stop(int ch) {
   switch(ch) {
     case 0: {
-      ch0_sq.stop();
+      ch0.stop();
     } break;
     case 1: {
-      ch1_sq.stop();
+      ch1.stop();
     } break;
     case 2: {
-      ch2_sq.stop();
+      ch2.stop();
     } break;
     case 3: {
-      ch3_sq.stop();
+      ch3.stop();
     } break;
     default:
       break;
@@ -174,6 +160,8 @@ void single_ch_piano() {
   uint32_t note = 0;
 
   // --------------------------------------------------------------------------------
+
+  mix.set_vol(0,5);
 
   serial.print(KEY_B).print("\n").print(KEY_W).print("\n");
 
@@ -316,14 +304,14 @@ void cmidi(uint16_t data) {
 }
 
 void music(const uint16_t* m, uint32_t len) {
-  mix.set_vol(0, 10);
-  mix.set_vol(1, 6);
-  mix.set_vol(2, 5);
-  mix.set_vol(3, 4);
+  mix.set_vol(0, 4);
+  mix.set_vol(1, 3);
+  mix.set_vol(2, 3);
+  mix.set_vol(3, 3);
   for(int i = 0; i < len; ++i) {
     uint16_t data = m[i];
     cmidi(data);
   }
 }
 
-// void hoge() {}
+void hoge(){}

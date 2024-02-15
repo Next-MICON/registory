@@ -6,7 +6,7 @@ void init(){
 }
 
 void loop(){
-  serial.print("Hello FPGA!\n");
+  serial.print("Hello FPGA! ");
   ledout.write(0);
   delay_ms(500);
   ledout.write(1);

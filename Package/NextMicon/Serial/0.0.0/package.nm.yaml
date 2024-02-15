@@ -2,11 +2,11 @@ ports:
   - name: tx
     direct: output
     width: 1
-    pos: [120, -20]
+    pos: [120, 20]
   - name: rx
     direct: input
     width: 1
-    pos: [120, 20]
+    pos: [120, -20]
 params: []
 size: [240, 80]
 textX: -50

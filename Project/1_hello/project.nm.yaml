@@ -6,8 +6,8 @@ instances:
   - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 80]}
   - {name: ledout, pack: {owner: NextMicon, name: RegW, version: 0.0.0}, params: [], pos: [180, 180]}
 ioports:
-  - {name: pin1, type: out, params: [], pos: [400, 60], flip: true}
-  - {name: pin2, type: in, params: [], pos: [400, 100], flip: true}
+  - {name: pin1, type: out, params: [], pos: [400, 100], flip: true}
+  - {name: pin2, type: in, params: [], pos: [400, 60], flip: true}
   - {name: led, type: out, params: [], pos: [400, 180], flip: true}
 wires:
   - {first: [pin2, in], last: [serial, rx], waypoints: [], width: 1}

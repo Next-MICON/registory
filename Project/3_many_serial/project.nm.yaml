@@ -9,24 +9,24 @@ instances:
   - {name: serial3, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 360]}
   - {name: serial4, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 460]}
 ioports:
-  - {name: pin2, type: in, params: [], pos: [420, 80], flip: true}
-  - {name: pin1, type: out, params: [], pos: [420, 40], flip: true}
-  - {name: pin3, type: out, params: [], pos: [420, 140], flip: true}
-  - {name: pin4, type: in, params: [], pos: [420, 180], flip: true}
-  - {name: pin5, type: out, params: [], pos: [420, 240], flip: true}
-  - {name: pin7, type: out, params: [], pos: [420, 340], flip: true}
-  - {name: pin6, type: in, params: [], pos: [420, 280], flip: true}
-  - {name: pin8, type: in, params: [], pos: [420, 380], flip: true}
-  - {name: pin9, type: out, params: [], pos: [420, 440], flip: true}
-  - {name: pin10, type: in, params: [], pos: [420, 480], flip: true}
+  - {name: pin1, type: in, params: [], pos: [400, 40], flip: true}
+  - {name: pin2, type: out, params: [], pos: [400, 80], flip: true}
+  - {name: pin3, type: in, params: [], pos: [400, 140], flip: true}
+  - {name: pin4, type: out, params: [], pos: [400, 180], flip: true}
+  - {name: pin5, type: in, params: [], pos: [400, 240], flip: true}
+  - {name: pin6, type: out, params: [], pos: [400, 280], flip: true}
+  - {name: pin7, type: in, params: [], pos: [400, 340], flip: true}
+  - {name: pin8, type: out, params: [], pos: [400, 380], flip: true}
+  - {name: pin9, type: in, params: [], pos: [400, 440], flip: true}
+  - {name: pin10, type: out, params: [], pos: [400, 480], flip: true}
 wires:
-  - {first: [pin2, in], last: [serial0, rx], waypoints: [], width: 1}
-  - {first: [serial0, tx], last: [pin1, out], waypoints: [], width: 1}
-  - {first: [serial1, tx], last: [pin3, out], waypoints: [], width: 1}
-  - {first: [pin4, in], last: [serial1, rx], waypoints: [], width: 1}
-  - {first: [serial2, tx], last: [pin5, out], waypoints: [], width: 1}
-  - {first: [pin6, in], last: [serial2, rx], waypoints: [], width: 1}
-  - {first: [serial3, tx], last: [pin7, out], waypoints: [], width: 1}
-  - {first: [pin8, in], last: [serial3, rx], waypoints: [], width: 1}
-  - {first: [serial4, tx], last: [pin9, out], waypoints: [], width: 1}
-  - {first: [pin10, in], last: [serial4, rx], waypoints: [], width: 1}
+  - {first: [pin1, in], last: [serial0, rx], waypoints: [], width: 1}
+  - {first: [serial0, tx], last: [pin2, out], waypoints: [], width: 1}
+  - {first: [pin3, in], last: [serial1, rx], waypoints: [], width: 1}
+  - {first: [serial1, tx], last: [pin4, out], waypoints: [], width: 1}
+  - {first: [pin5, in], last: [serial2, rx], waypoints: [], width: 1}
+  - {first: [serial2, tx], last: [pin6, out], waypoints: [], width: 1}
+  - {first: [pin7, in], last: [serial3, rx], waypoints: [], width: 1}
+  - {first: [serial3, tx], last: [pin8, out], waypoints: [], width: 1}
+  - {first: [pin9, in], last: [serial4, rx], waypoints: [], width: 1}
+  - {first: [serial4, tx], last: [pin10, out], waypoints: [], width: 1}

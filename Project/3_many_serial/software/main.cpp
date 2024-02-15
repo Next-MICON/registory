@@ -35,6 +35,14 @@ void init() {
     serial[i].baud(9600);
   }
   broadcast("Welcome to Serial Chat!\n");
+  for(uint32_t i = 0; i < N_USER; ++i) {
+    serial[i].print("You are ");
+    serial[i].print(COLOR[i]);
+    serial[i].print("User");
+    serial[i].hex(i,1);
+    serial[i].print(COLOR_CLEAR);
+    serial[i].print("\n");
+  }
 }
 
 void loop() {

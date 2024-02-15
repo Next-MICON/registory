@@ -30,8 +30,7 @@ module Square (
       if (wstrb[3]) threshold[31:24] <= wdata[31:24];
 
       // Wave Generator
-      // on CSR Updated
-      if (|wstrb) begin  // Reset
+      if (|wstrb) begin  // Reset (on CSR Updated)
         _out <= 0;
         counter <= 0;
       end else if (threshold == 0) begin  // Stop
@@ -46,6 +45,6 @@ module Square (
     end
   end
 
-  assign out = _out ? 8'b1111_1111 : 8'b0000_0000;
+  assign out = _out ? 8'b1000_0000 : 8'b0000_0000;
 
 endmodule
