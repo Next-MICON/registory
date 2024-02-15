@@ -1,6 +1,6 @@
 # Directory
 IDE_HOME  = /home/ohta/NextMiconIDE
-PROJ      = 4_timer_irq
+PROJ      = 2_irq
 BOARD     = NextMicon/TinyFPGA_BX/0.0.0
 
 # Input Files

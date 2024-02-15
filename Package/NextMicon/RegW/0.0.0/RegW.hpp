@@ -1,10 +1,10 @@
 #pragma once
 #include <stdint.h>
 
-class Reg {
+class RegW {
   volatile uint32_t* reg;
 public:
-  Reg(volatile uint32_t* addr) : reg(addr) {}
+  RegW(volatile uint32_t* addr) : reg(addr) {}
 
   // Read value
   uint32_t read() { return reg[0]; }

@@ -1,6 +1,6 @@
 # Directory
 IDE_HOME  = /home/ohta/NextMiconIDE
-PROJ      = 3_button_irq
+PROJ      = 3_many_serial
 BOARD     = NextMicon/TinyFPGA_BX/0.0.0
 
 # Input Files
@@ -115,7 +115,7 @@ upload: hardware software
 simu: .build/simulation.vcd .build/simu_software.objdump .build/simu_software.nm
 #	gtkwave .build/simulation.vcd
 	powershell.exe -c \
-	"gtkwave \$$env:WSLHome\NextMiconIDE\Project\music\.build\simulation.vcd"
+	"gtkwave \$$env:WSLHome\NextMiconIDE\Project\$(PROJ)\.build\simulation.vcd"
 
 ###############################################################################
 
