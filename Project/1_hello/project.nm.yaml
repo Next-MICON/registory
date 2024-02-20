@@ -1,15 +1,11 @@
-board:
-  owner: NextMicon
-  name: TinyFPGA_BX
-  version: 0.0.0
-instances:
-  - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 80]}
-  - {name: ledout, pack: {owner: NextMicon, name: RegW, version: 0.0.0}, params: [], pos: [180, 180]}
-ioports:
-  - {name: pin1, type: out, params: [], pos: [400, 100], flip: true}
-  - {name: pin2, type: in, params: [], pos: [400, 60], flip: true}
-  - {name: led, type: out, params: [], pos: [400, 180], flip: true}
-wires:
-  - {first: [pin2, in], last: [serial, rx], waypoints: [], width: 1}
-  - {first: [serial, tx], last: [pin1, out], waypoints: [], width: 1}
-  - {first: [ledout, out], last: [led, out], waypoints: [], width: 1}
+target:
+  path: [NextMicon, TinyFPGA_BX, 0.0.0]
+objs:
+  - {obj: Inst, name: serial0, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [200, 60], flip: false, width: 120}
+  - {obj: Reg, name: reg0000, type: '0', pos: [80, 200], flip: false, width: 120}
+  - {obj: Port, name: pin1, variant: In, pos: [440, 40], flip: false, width: 120}
+  - {obj: Irq, name: irq5, sw_stmts: [], pos: [140, 140], flip: false, width: 120}
+  - {obj: Port, name: pin3, variant: InOut, pos: [440, 220], flip: false, width: 120}
+  - {obj: Mem, variant: RO, name: mem0, byte: 1, pos: [440, 140], flip: true, width: 120}
+  - {obj: Port, name: pin2, variant: Out, pos: [440, 80], flip: false, width: 120}
+wires: []

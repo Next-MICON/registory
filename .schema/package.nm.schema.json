@@ -141,20 +141,44 @@
             "memSize": {
               "type": "number"
             },
-            "member": {
+            "methods": {
               "items": {
                 "additionalProperties": false,
                 "properties": {
-                  "copy": {
+                  "args": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "name"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
                     "type": "string"
                   },
-                  "doc": {
+                  "note": {
+                    "type": "string"
+                  },
+                  "type": {
                     "type": "string"
                   }
                 },
                 "required": [
-                  "doc",
-                  "copy"
+                  "args",
+                  "name",
+                  "note",
+                  "type"
                 ],
                 "type": "object"
               },
@@ -164,7 +188,7 @@
           "required": [
             "className",
             "memSize",
-            "member"
+            "methods"
           ],
           "type": "object"
         },
