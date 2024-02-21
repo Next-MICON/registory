@@ -2,7 +2,7 @@ target:
   path: [NextMicon, TinyFPGA_BX, 0.0.0]
 objs:
   - {obj: Inst, name: serial0, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [200, 60], flip: false, width: 120}
-  - {obj: Reg, name: reg0000, type: '0', pos: [80, 200], flip: false, width: 120}
+  - {obj: Reg, name: reg0000, type: '0', pos: [280, 220], flip: false, width: 120}
   - {obj: Port, name: pin1, variant: In, pos: [440, 40], flip: false, width: 120}
   - {obj: Irq, name: irq5, sw_stmts: [], pos: [140, 140], flip: false, width: 120}
   - {obj: Port, name: pin3, variant: InOut, pos: [440, 220], flip: false, width: 120}
