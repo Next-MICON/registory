@@ -1,11 +1,30 @@
 target:
   path: [NextMicon, TinyFPGA_BX, 0.0.0]
 objs:
-  - {obj: Inst, name: ch0, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [140, -40], flip: false, width: 200}
-  - {obj: Inst, name: ch1, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [140, 0], flip: false, width: 200}
-  - {obj: Inst, name: ch2, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [140, 40], flip: false, width: 200}
-  - {obj: Inst, name: ch3, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [140, 80], flip: false, width: 200}
-  - {obj: Inst, name: mix, mod: [kanade-k-1228, Mixier, 0.0.0], params: [], pos: [400, 20], flip: false, width: 200}
-  - {obj: Inst, name: spidac, mod: [kanade-k-1228, SPIDAC, 0.0.0], params: [], pos: [720, 40], flip: false, width: 200}
-  - {obj: Inst, name: sampling, mod: [NextMicon, Counter, 0.0.0], params: [], pos: [480, 160], flip: false, width: 200}
-wires: []
+  - {obj: Inst, name: ch0, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [100, 120], flip: false, width: 200}
+  - {obj: Inst, name: ch1, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [100, 160], flip: false, width: 200}
+  - {obj: Inst, name: ch2, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [100, 200], flip: false, width: 200}
+  - {obj: Inst, name: ch3, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [100, 240], flip: false, width: 200}
+  - {obj: Inst, name: mix, mod: [kanade-k-1228, Mixier, 0.0.0], params: [], pos: [380, 180], flip: false, width: 200}
+  - {obj: Inst, name: spidac, mod: [kanade-k-1228, SPIDAC, 0.0.0], params: [], pos: [660, 200], flip: false, width: 200}
+  - {obj: Inst, name: sampling, mod: [NextMicon, Counter, 0.0.0], params: [], pos: [380, 300], flip: false, width: 200}
+  - {obj: Inst, name: serial, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 40], flip: false, width: 200}
+  - {obj: Port, name: pin1, variant: In, pos: [340, 20], flip: false, width: 120}
+  - {obj: Port, name: pin2, variant: Out, pos: [340, 60], flip: false, width: 120}
+  - {obj: Port, name: pin24, variant: Out, pos: [900, 140], flip: false, width: 120}
+  - {obj: Port, name: pin23, variant: Out, pos: [900, 180], flip: false, width: 120}
+  - {obj: Port, name: pin22, variant: Out, pos: [900, 220], flip: false, width: 120}
+  - {obj: Port, name: pin21, variant: Out, pos: [900, 260], flip: false, width: 120}
+wires:
+  - {first: [ch0, out], last: [mix, ch0], waypoints: [], width: 8}
+  - {first: [ch1, out], last: [mix, ch1], waypoints: [], width: 8}
+  - {first: [ch2, out], last: [mix, ch2], waypoints: [], width: 8}
+  - {first: [ch3, out], last: [mix, ch3], waypoints: [], width: 8}
+  - {first: [mix, out], last: [spidac, in], waypoints: [], width: 12}
+  - {first: [sampling, of], last: [spidac, sample], waypoints: [[520, 300], [520, 220]], width: 1}
+  - {first: [pin1, out], last: [serial, rx], waypoints: [], width: 1}
+  - {first: [serial, tx], last: [pin2, in], waypoints: [], width: 1}
+  - {first: [spidac, ldac], last: [pin21, in], waypoints: [], width: 1}
+  - {first: [spidac, sdi], last: [pin22, in], waypoints: [], width: 1}
+  - {first: [spidac, scl], last: [pin23, in], waypoints: [], width: 1}
+  - {first: [spidac, cs], last: [pin24, in], waypoints: [], width: 1}

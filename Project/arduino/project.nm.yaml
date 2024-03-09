@@ -1,7 +1,75 @@
-board:
-  owner: NextMicon
-  name: TinyFPGA_BX
-  version: 0.0.0
-instances: []
-ioports: []
-wires: []
+target:
+  path: [NextMicon, TinyFPGA_BX, 0.0.0]
+objs:
+  - {obj: Inst, name: i2c, mod: [NextMicon, I2C_Master, 0.0.0], params: [], pos: [100, 180], flip: false, width: 200}
+  - {obj: Inst, name: spi, mod: [NextMicon, SPI_Master, 0.0.0], params: [], pos: [100, 340], flip: false, width: 200}
+  - {obj: Inst, name: gpio0, mod: [NextMicon, Digital, 0.0.0], params: [], pos: [560, 60], flip: false, width: 200}
+  - {obj: Inst, name: gpio1, mod: [NextMicon, Digital, 0.0.0], params: [], pos: [560, 200], flip: false, width: 200, oldName: digital0}
+  - {obj: Inst, name: gpio2, mod: [NextMicon, Digital, 0.0.0], params: [], pos: [560, 340], flip: false, width: 200, oldName: digital0}
+  - {obj: Inst, name: serial, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 40], flip: false, width: 200}
+  - {obj: Port, name: pin1, variant: In, pos: [340, 20], flip: false, width: 120}
+  - {obj: Port, name: pin2, variant: Out, pos: [340, 60], flip: false, width: 120}
+  - {obj: Port, name: pin3, variant: Out, pos: [340, 120], flip: false, width: 120}
+  - {obj: Port, name: pin4, variant: InOut, pos: [340, 200], flip: false, width: 120}
+  - {obj: Port, name: pin5, variant: In, pos: [340, 300], flip: false, width: 120}
+  - {obj: Port, name: pin6, variant: In, pos: [340, 340], flip: false, width: 120}
+  - {obj: Port, name: pin7, variant: Out, pos: [340, 380], flip: false, width: 120}
+  - {obj: Port, name: pin8, variant: InOut, pos: [800, 60], flip: false, width: 120}
+  - {obj: Port, name: pin9, variant: InOut, pos: [800, 200], flip: false, width: 120}
+  - {obj: Port, name: pin10, variant: InOut, pos: [800, 340], flip: false, width: 120}
+  - {obj: Port, name: pin11, variant: InOut, pos: [800, 480], flip: false, width: 120}
+  - {obj: Inst, name: gpio3, mod: [NextMicon, Digital, 0.0.0], params: [], pos: [560, 480], flip: false, width: 200}
+  - {obj: Inst, name: pwm0, mod: [NextMicon, Analog, 0.0.0], params: [], pos: [100, 440], flip: false, width: 200}
+  - {obj: Inst, name: pwm1, mod: [NextMicon, Analog, 0.0.0], params: [], pos: [100, 480], flip: false, width: 200}
+  - {obj: Inst, name: pwm2, mod: [NextMicon, Analog, 0.0.0], params: [], pos: [100, 520], flip: false, width: 200}
+  - {obj: Inst, name: pwm3, mod: [NextMicon, Analog, 0.0.0], params: [], pos: [100, 560], flip: false, width: 200}
+  - {obj: Port, name: pin16, variant: Out, pos: [340, 440], flip: false, width: 120}
+  - {obj: Port, name: pin17, variant: Out, pos: [340, 480], flip: false, width: 120}
+  - {obj: Port, name: pin18, variant: Out, pos: [340, 520], flip: false, width: 120}
+  - {obj: Port, name: pin19, variant: Out, pos: [340, 560], flip: false, width: 120}
+  - {obj: Port, name: pin12, variant: InOut, pos: [1240, 60], flip: false, width: 120}
+  - {obj: Port, name: pin13, variant: InOut, pos: [1240, 200], flip: false, width: 120}
+  - {obj: Port, name: pin14, variant: InOut, pos: [1240, 340], flip: false, width: 120}
+  - {obj: Port, name: pin15, variant: InOut, pos: [1240, 480], flip: false, width: 120}
+  - {obj: Inst, name: gpio4, mod: [NextMicon, Digital, 0.0.0], params: [], pos: [1000, 60], flip: false, width: 200}
+  - {obj: Inst, name: gpio5, mod: [NextMicon, Digital, 0.0.0], params: [], pos: [1000, 200], flip: false, width: 200}
+  - {obj: Inst, name: gpio6, mod: [NextMicon, Digital, 0.0.0], params: [], pos: [1000, 340], flip: false, width: 200}
+  - {obj: Inst, name: gpio7, mod: [NextMicon, Digital, 0.0.0], params: [], pos: [1000, 480], flip: false, width: 200}
+wires:
+  - {first: [pin1, out], last: [serial, rx], waypoints: [], width: 1}
+  - {first: [serial, tx], last: [pin2, in], waypoints: [], width: 1}
+  - {first: [i2c, scl], last: [pin3, in], waypoints: [], width: 1}
+  - {first: [i2c, sda_io], last: [pin4, iosel], waypoints: [], width: 1}
+  - {first: [i2c, sda_tx], last: [pin4, out], waypoints: [], width: 1}
+  - {first: [pin4, in], last: [i2c, sda_rx], waypoints: [], width: 1}
+  - {first: [pin5, out], last: [spi, scl], waypoints: [], width: 1}
+  - {first: [pin6, out], last: [spi, miso], waypoints: [], width: 1}
+  - {first: [spi, mosi], last: [pin7, in], waypoints: [], width: 1}
+  - {first: [gpio0, iosel], last: [pin8, iosel], waypoints: [], width: 1}
+  - {first: [gpio0, out], last: [pin8, out], waypoints: [], width: 1}
+  - {first: [pin8, in], last: [gpio0, in], waypoints: [], width: 1}
+  - {first: [gpio1, iosel], last: [pin9, iosel], waypoints: [], width: 1}
+  - {first: [gpio1, out], last: [pin9, out], waypoints: [], width: 1}
+  - {first: [pin9, in], last: [gpio1, in], waypoints: [], width: 1}
+  - {first: [gpio2, iosel], last: [pin10, iosel], waypoints: [], width: 1}
+  - {first: [gpio2, out], last: [pin10, out], waypoints: [], width: 1}
+  - {first: [pin10, in], last: [gpio2, in], waypoints: [], width: 1}
+  - {first: [gpio3, iosel], last: [pin11, iosel], waypoints: [], width: 1}
+  - {first: [gpio3, out], last: [pin11, out], waypoints: [], width: 1}
+  - {first: [pin11, in], last: [gpio3, in], waypoints: [], width: 1}
+  - {first: [pwm0, out], last: [pin16, in], waypoints: [], width: 1}
+  - {first: [pwm1, out], last: [pin17, in], waypoints: [], width: 1}
+  - {first: [pwm2, out], last: [pin18, in], waypoints: [], width: 1}
+  - {first: [pwm3, out], last: [pin19, in], waypoints: [], width: 1}
+  - {first: [gpio4, iosel], last: [pin12, iosel], waypoints: [], width: 1}
+  - {first: [gpio4, out], last: [pin12, out], waypoints: [], width: 1}
+  - {first: [pin12, in], last: [gpio4, in], waypoints: [], width: 1}
+  - {first: [gpio5, iosel], last: [pin13, iosel], waypoints: [], width: 1}
+  - {first: [gpio5, out], last: [pin13, out], waypoints: [], width: 1}
+  - {first: [pin13, in], last: [gpio5, in], waypoints: [], width: 1}
+  - {first: [gpio6, iosel], last: [pin14, iosel], waypoints: [], width: 1}
+  - {first: [gpio6, out], last: [pin14, out], waypoints: [], width: 1}
+  - {first: [pin14, in], last: [gpio6, in], waypoints: [], width: 1}
+  - {first: [gpio7, iosel], last: [pin15, iosel], waypoints: [], width: 1}
+  - {first: [gpio7, out], last: [pin15, out], waypoints: [], width: 1}
+  - {first: [pin15, in], last: [gpio7, in], waypoints: [], width: 1}
