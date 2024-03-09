@@ -1,13 +1,14 @@
 // main.cpp
 #include "firmware.hpp"
 
-void init(){
+void init() {
   serial.baud(9600);
 }
 
-void loop(){
-  serial.print('a');
-  if(serial.receive() == 'a') ledout.write(1);
-  delay_ms(1000);
-  ledout.write(0);
+void loop() {
+  serial.print("Hello FPGA!\n");
+  reg1.write(1);
+  delay_ms(500);
+  reg1.write(0);
+  delay_ms(500);
 }

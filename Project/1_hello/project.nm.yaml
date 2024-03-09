@@ -1,11 +1,13 @@
 target:
   path: [NextMicon, TinyFPGA_BX, 0.0.0]
 objs:
-  - {obj: Inst, name: serial0, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [200, 60], flip: false, width: 120}
-  - {obj: Reg, name: reg0000, type: '0', pos: [280, 220], flip: false, width: 120}
-  - {obj: Port, name: pin1, variant: In, pos: [440, 40], flip: false, width: 120}
-  - {obj: Irq, name: irq5, sw_stmts: [], pos: [140, 140], flip: false, width: 120}
-  - {obj: Port, name: pin3, variant: InOut, pos: [440, 220], flip: false, width: 120}
-  - {obj: Mem, variant: RO, name: mem0, byte: 1, pos: [440, 140], flip: true, width: 120}
-  - {obj: Port, name: pin2, variant: Out, pos: [440, 80], flip: false, width: 120}
-wires: []
+  - {obj: Port, name: pin1, variant: In, pos: [360, 20], flip: false, width: 120}
+  - {obj: Port, name: pin2, variant: Out, pos: [360, 60], flip: false, width: 120}
+  - {obj: Inst, name: serial, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [120, 40], flip: false, width: 200}
+  - {obj: Port, name: led, variant: Out, pos: [360, 100], flip: false, width: 120}
+  - {obj: Mem, variant: Write, name: reg1, byte: 1, pos: [160, 100], flip: true, width: 120}
+  - {obj: Vmod, name: vmod0, body: '', port: [{name: clk, direct: in, type: w1, bit: 1, side: left}, {name: in, direct: in, type: w1, bit: 1, side: left}, {name: out, direct: out, type: w1, bit: 1, side: right}, {name: ready, direct: out, type: w1, bit: 1, side: right}, {name: ack, direct: in, type: w1, bit: 1, side: right}], pos: [160, 200], flip: false, width: 280}
+wires:
+  - {first: [pin1, out], last: [serial, rx], waypoints: [], width: 1}
+  - {first: [serial, tx], last: [pin2, in], waypoints: [], width: 1}
+  - {first: [reg1, out], last: [led, in], waypoints: [], width: 1}

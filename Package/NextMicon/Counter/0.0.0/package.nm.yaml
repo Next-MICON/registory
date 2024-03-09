@@ -1,11 +1,6 @@
 ports:
-  - name: of
-    direct: output
-    width: 1
-    pos: [120, 0]
+  - {name: of, type: wire, bit: 1, direct: out, side: right}
 params: []
-size: [240, 60]
-textX: -40
 software:
   className: Prescaler
   memSize: 0x10

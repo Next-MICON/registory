@@ -1,21 +1,18 @@
-board:
-  owner: NextMicon
-  name: TinyFPGA_BX
-  version: 0.0.0
-instances:
-  - {name: serial, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [200, 180]}
-  - {name: counter, pack: {owner: NextMicon, name: Counter, version: 0.0.0}, params: [], pos: [200, 380]}
-ioports:
-  - {name: pin4, type: out, params: [], pos: [420, 200], flip: true}
-  - {name: pin3, type: in, params: [], pos: [420, 160], flip: true}
-  - {name: pin15, type: in, params: [], pos: [260, 260]}
-  - {name: irq3, type: irq, params: [], pos: [420, 260], flip: true}
-  - {name: irq4, type: irq, params: [], pos: [420, 320], flip: true}
-  - {name: pin16, type: in, params: [], pos: [260, 320]}
-  - {name: irq5, type: irq, params: [], pos: [420, 380], flip: true}
+target:
+  path: [NextMicon, TinyFPGA_BX, 0.0.0]
+objs:
+  - {obj: Inst, name: serial, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [200, 220], flip: false, width: 200}
+  - {obj: Port, name: pin1, variant: In, pos: [420, 200], flip: false, width: 120}
+  - {obj: Port, name: pin2, variant: Out, pos: [420, 240], flip: false, width: 120}
+  - {obj: Irq, name: irq3, sw_stmts: [], pos: [420, 300], flip: false, width: 120}
+  - {obj: Irq, name: irq4, sw_stmts: [], pos: [420, 340], flip: false, width: 120}
+  - {obj: Irq, name: irq5, sw_stmts: [], pos: [420, 400], flip: false, width: 120}
+  - {obj: Inst, name: counter, mod: [NextMicon, Counter, 0.0.0], params: [], pos: [200, 400], flip: false, width: 200}
+  - {obj: Port, name: pin15, variant: In, pos: [240, 300], flip: true, width: 120}
+  - {obj: Port, name: pin16, variant: In, pos: [240, 340], flip: true, width: 120}
 wires:
-  - {first: [serial, tx], last: [pin4, out], waypoints: [], width: 1}
-  - {first: [pin3, in], last: [serial, rx], waypoints: [], width: 1}
-  - {first: [pin15, in], last: [irq3, irq], waypoints: [], width: 1}
-  - {first: [pin16, in], last: [irq4, irq], waypoints: [], width: 1}
-  - {first: [counter, of], last: [irq5, irq], waypoints: [], width: 1}
+  - {first: [pin1, out], last: [serial, rx], waypoints: [], width: 1}
+  - {first: [serial, tx], last: [pin2, in], waypoints: [], width: 1}
+  - {first: [counter, of], last: [irq5, in], waypoints: [], width: 1}
+  - {first: [pin15, out], last: [irq3, in], waypoints: [], width: 1}
+  - {first: [pin16, out], last: [irq4, in], waypoints: [], width: 1}

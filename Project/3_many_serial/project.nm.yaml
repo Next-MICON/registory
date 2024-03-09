@@ -1,32 +1,29 @@
-board:
-  owner: NextMicon
-  name: TinyFPGA_BX
-  version: 0.0.0
-instances:
-  - {name: serial0, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 60]}
-  - {name: serial1, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 160]}
-  - {name: serial2, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 260]}
-  - {name: serial3, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 360]}
-  - {name: serial4, pack: {owner: NextMicon, name: Serial, version: 0.0.0}, params: [], pos: [180, 460]}
-ioports:
-  - {name: pin1, type: in, params: [], pos: [400, 40], flip: true}
-  - {name: pin2, type: out, params: [], pos: [400, 80], flip: true}
-  - {name: pin3, type: in, params: [], pos: [400, 140], flip: true}
-  - {name: pin4, type: out, params: [], pos: [400, 180], flip: true}
-  - {name: pin5, type: in, params: [], pos: [400, 240], flip: true}
-  - {name: pin6, type: out, params: [], pos: [400, 280], flip: true}
-  - {name: pin7, type: in, params: [], pos: [400, 340], flip: true}
-  - {name: pin8, type: out, params: [], pos: [400, 380], flip: true}
-  - {name: pin9, type: in, params: [], pos: [400, 440], flip: true}
-  - {name: pin10, type: out, params: [], pos: [400, 480], flip: true}
+target:
+  path: [NextMicon, TinyFPGA_BX, 0.0.0]
+objs:
+  - {obj: Inst, name: serial0, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, -60], flip: false, width: 200}
+  - {obj: Port, name: pin1, variant: In, pos: [320, -80], flip: false, width: 120}
+  - {obj: Port, name: pin2, variant: Out, pos: [320, -40], flip: false, width: 120}
+  - {obj: Inst, name: serial1, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 20], flip: false, width: 200}
+  - {obj: Inst, name: serial2, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 100], flip: false, width: 200}
+  - {obj: Inst, name: serial3, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 180], flip: false, width: 200}
+  - {obj: Inst, name: serial4, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 260], flip: false, width: 200}
+  - {obj: Port, name: pin3, variant: In, pos: [320, 0], flip: false, width: 120}
+  - {obj: Port, name: pin4, variant: Out, pos: [320, 40], flip: false, width: 120}
+  - {obj: Port, name: pin5, variant: In, pos: [320, 80], flip: false, width: 120}
+  - {obj: Port, name: pin6, variant: Out, pos: [320, 120], flip: false, width: 120}
+  - {obj: Port, name: pin7, variant: In, pos: [320, 160], flip: false, width: 120}
+  - {obj: Port, name: pin8, variant: Out, pos: [320, 200], flip: false, width: 120}
+  - {obj: Port, name: pin9, variant: In, pos: [320, 240], flip: false, width: 120}
+  - {obj: Port, name: pin10, variant: Out, pos: [320, 280], flip: false, width: 120}
 wires:
-  - {first: [pin1, in], last: [serial0, rx], waypoints: [], width: 1}
-  - {first: [serial0, tx], last: [pin2, out], waypoints: [], width: 1}
-  - {first: [pin3, in], last: [serial1, rx], waypoints: [], width: 1}
-  - {first: [serial1, tx], last: [pin4, out], waypoints: [], width: 1}
-  - {first: [pin5, in], last: [serial2, rx], waypoints: [], width: 1}
-  - {first: [serial2, tx], last: [pin6, out], waypoints: [], width: 1}
-  - {first: [pin7, in], last: [serial3, rx], waypoints: [], width: 1}
-  - {first: [serial3, tx], last: [pin8, out], waypoints: [], width: 1}
-  - {first: [pin9, in], last: [serial4, rx], waypoints: [], width: 1}
-  - {first: [serial4, tx], last: [pin10, out], waypoints: [], width: 1}
+  - {first: [pin1, out], last: [serial0, rx], waypoints: [], width: 1}
+  - {first: [serial0, tx], last: [pin2, in], waypoints: [], width: 1}
+  - {first: [pin3, out], last: [serial1, rx], waypoints: [], width: 1}
+  - {first: [serial1, tx], last: [pin4, in], waypoints: [], width: 1}
+  - {first: [pin5, out], last: [serial2, rx], waypoints: [], width: 1}
+  - {first: [serial2, tx], last: [pin6, in], waypoints: [], width: 1}
+  - {first: [pin7, out], last: [serial3, rx], waypoints: [], width: 1}
+  - {first: [serial3, tx], last: [pin8, in], waypoints: [], width: 1}
+  - {first: [pin9, out], last: [serial4, rx], waypoints: [], width: 1}
+  - {first: [serial4, tx], last: [pin10, in], waypoints: [], width: 1}

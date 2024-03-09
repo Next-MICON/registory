@@ -1,11 +1,5 @@
 ports:
-  - name: out
-    direct: output
-    width: 8
-    pos: [120, 0]
-params: []
-size: [240, 60]
-textX: -50
+  - {name: out, type: wire, bit: 8, direct: out, side: right}
 software:
   className: Sawtooth
   memSize: 0x10

@@ -8,93 +8,47 @@ addr:
   reserved: 0x03000000 # 予約済みメモリ空間
   maxAddr: 0xFFFFFFFF # 最大値
 
-ioifs:
-  - type: in
-    ports:
-      - name: in
-        direct: output
-        width: 1
-        pos: [60, 0]
-    params: []
-    size: [120, 40]
-
-  - type: out
-    ports:
-      - name: out
-        direct: input
-        width: 1
-        pos: [60, 0]
-    params: []
-    size: [120, 40]
-
-  - type: inout
-    ports:
-      - name: iosel
-        icon: "?"
-        direct: input
-        width: 1
-        pos: [60, -20]
-      - name: out
-        direct: input
-        width: 1
-        pos: [60, 0]
-      - name: in
-        direct: output
-        width: 1
-        pos: [60, 20]
-    params: []
-    size: [120, 80]
-
-  - type: irq
-    ports:
-      - name: irq
-        icon: "!"
-        direct: input
-        width: 1
-        pos: [60, 0]
-    params: []
-    size: [120, 40]
-
 ioports:
-  clk: [in]
-  led: [out]
-  pin1: [in, out, inout]
-  pin2: [in, out, inout]
-  pin3: [in, out, inout]
-  pin4: [in, out, inout]
-  pin5: [in, out, inout]
-  pin6: [in, out, inout]
-  pin7: [in, out, inout]
-  pin8: [in, out, inout]
-  pin9: [in, out, inout]
-  pin10: [in, out, inout]
-  pin11: [in, out, inout]
-  pin12: [in, out, inout]
-  pin13: [in, out, inout]
-  pin14: [in, out, inout]
-  pin15: [in, out, inout]
-  pin16: [in, out, inout]
-  pin17: [in, out, inout]
-  pin18: [in, out, inout]
-  pin19: [in, out, inout]
-  pin20: [in, out, inout]
-  pin21: [in, out, inout]
-  pin22: [in, out, inout]
-  pin23: [in, out, inout]
-  pin24: [in, out, inout]
-  irq3: [irq]
-  irq4: [irq]
-  irq5: [irq]
-  irq6: [irq]
-  irq7: [irq]
-  irq8: [irq]
-  irq9: [irq]
-  irq10: [irq]
-  irq11: [irq]
-  irq12: [irq]
-  irq13: [irq]
-  irq14: [irq]
-  irq15: [irq]
+  led: o
+  pin1: io
+  pin2: io
+  pin3: io
+  pin4: io
+  pin5: io
+  pin6: io
+  pin7: io
+  pin8: io
+  pin9: io
+  pin10: io
+  pin11: io
+  pin12: io
+  pin13: io
+  pin14: io
+  pin15: io
+  pin16: io
+  pin17: io
+  pin18: io
+  pin19: io
+  pin20: io
+  pin21: io
+  pin22: io
+  pin23: io
+  pin24: io
+
+irqs:
+  - irq3
+  - irq4
+  - irq5
+  - irq6
+  - irq7
+  - irq8
+  - irq9
+  - irq10
+  - irq11
+  - irq12
+  - irq13
+  - irq14
+  - irq15
 
 # TODO : Define build commands instead of Makefile
 

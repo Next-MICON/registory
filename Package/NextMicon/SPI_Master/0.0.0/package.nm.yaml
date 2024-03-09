@@ -1,19 +1,8 @@
 ports:
-  - name: scl
-    direct: output
-    width: 1
-    pos: [120, -40]
-  - name: miso
-    direct: input
-    width: 1
-    pos: [120, 0]
-  - name: mosi
-    direct: output
-    width: 1
-    pos: [120, 40]
+  - {name: scl, type: wire, bit: 1, direct: in, side: right}
+  - {name: miso, type: wire, bit: 1, direct: in, side: right}
+  - {name: mosi, type: wire, bit: 1, direct: out, side: right}
 params: []
-size: [240, 120]
-textX: -50
 software:
   className: SPI_Master
   memSize: 0x10

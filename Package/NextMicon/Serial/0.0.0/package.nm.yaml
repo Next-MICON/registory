@@ -1,15 +1,7 @@
 ports:
-  - name: tx
-    direct: output
-    width: 1
-    pos: [120, 20]
-  - name: rx
-    direct: input
-    width: 1
-    pos: [120, -20]
+  - {name: rx, type: wire, bit: 1, direct: in, side: right}
+  - {name: tx, type: wire, bit: 1, direct: out, side: right}
 params: []
-size: [240, 80]
-textX: -50
 software:
   className: Serial
   memSize: 0x10

@@ -1,16 +1,7 @@
 ports:
-  - name: in
-    direct: input
-    width: 8
-    pos: [-120, -20]
-  - name: sample
-    direct: input
-    width: 1
-    pos: [-120, 20]
-  - name: done
-    direct: output
-    width: 1
-    pos: [120,0]
+  - {name: in, type: wire, bit: 12, direct: in, side: left}
+  - {name: sample, type: wire, bit: 1, direct: in, side: left}
+  - {name: done, type: wire, bit: 1, direct: out, side: right}
 params: []
 size: [240, 80]
 textX: 0

@@ -1,31 +1,10 @@
 ports:
-  - name: in
-    direct: input
-    width: 12
-    pos: [-120, -20]
-  - name: sample
-    direct: input
-    width: 1
-    pos: [-120, 20]
-  - name: cs
-    direct: output
-    width: 1
-    pos: [120, -60]
-  - name: scl
-    direct: output
-    width: 1
-    pos: [120, -20]
-  - name: sdi
-    direct: output
-    width: 1
-    pos: [120, 20]
-  - name: ldac
-    direct: output
-    width: 1
-    pos: [120, 60]
-params: []
-size: [240, 160]
-textX: 0
+  - {name: in, type: wire, bit: 12, direct: in, side: left}
+  - {name: sample, type: wire, bit: 1, direct: in, side: left}
+  - {name: cs, type: wire, bit: 1, direct: out, side: right}
+  - {name: scl, type: wire, bit: 1, direct: out, side: right}
+  - {name: sdi, type: wire, bit: 1, direct: out, side: right}
+  - {name: ldac, type: wire, bit: 1, direct: out, side: right}
 software:
   className: SPIDAC
   memSize: 0x10

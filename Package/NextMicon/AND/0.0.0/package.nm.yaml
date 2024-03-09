@@ -1,16 +1,5 @@
 ports:
-  - name: in1
-    direct: input
-    width: 1
-    pos: [-120, -20]
-  - name: in2
-    direct: input
-    width: 1
-    pos: [-120, 20]
-  - name: out
-    direct: output
-    width: 1
-    pos: [120, 0]
+  - {name: in1, type: wire, bit: 1, direct: in, side: left}
+  - {name: in2, type: wire, bit: 1, direct: in, side: left}
+  - {name: out, type: wire, bit: 1, direct: in, side: right}
 params: []
-size: [240, 160]
-textX: 0

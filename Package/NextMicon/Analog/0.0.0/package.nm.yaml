@@ -1,11 +1,6 @@
 ports:
-  - name: out
-    direct: output
-    width: 1
-    pos: [120, 0]
+  - {name: out, type: wire, bit: 1, direct: out, side: right}
 params: []
-size: [240, 64]
-textX: -50
 software:
   className: Analog
   memSize: 0x10

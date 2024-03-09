@@ -1,4 +1,5 @@
 #include "cpu.hpp"
+#include "mem.hpp"
 #include "rom.hpp"
 /* includes */
 /* end */

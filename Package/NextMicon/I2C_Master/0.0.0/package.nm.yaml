@@ -1,23 +1,9 @@
 ports:
-  - name: scl
-    direct: output
-    width: 1
-    pos: [120, -60]
-  - name: sda_io
-    direct: output
-    width: 1
-    pos: [120, -20]
-  - name: sda_tx
-    direct: output
-    width: 1
-    pos: [120, 20]
-  - name: sda_rx
-    direct: input
-    width: 1
-    pos: [120, 60]
+  - {name: scl, type: wire, bit: 1, direct: out, side: right}
+  - {name: sda_io, type: wire, bit: 1, direct: out, side: right}
+  - {name: sda_tx, type: wire, bit: 1, direct: out, side: right}
+  - {name: sda_rx, type: wire, bit: 1, direct: in, side: right}
 params: []
-size: [240, 180]
-textX: -50
 software:
   className: I2C_Master
   memSize: 0x10

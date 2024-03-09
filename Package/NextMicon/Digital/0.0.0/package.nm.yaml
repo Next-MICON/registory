@@ -1,19 +1,8 @@
 ports:
-  - name: iosel
-    direct: output
-    width: 1
-    pos: [120, -40]
-  - name: out
-    direct: output
-    width: 1
-    pos: [120, 0]
-  - name: in
-    direct: input
-    width: 1
-    pos: [120, 40]
+  - {name: iosel, type: wire, bit: 1, direct: out, side: right}
+  - {name: out, type: wire, bit: 1, direct: out, side: right}
+  - {name: in, type: wire, bit: 1, direct: in, side: right}
 params: []
-size: [240, 120]
-textX: -50
 software:
   className: Digital
   memSize: 0x10

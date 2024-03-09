@@ -60,8 +60,12 @@ module hardware (
   /* end */
 
   ///////////////////////////////////
-  // Wire Deffinitions
+  // Clock & Reset
 
+  por por (
+      .clk(clk),
+      .resetn(resetn)
+  );
   wire clk = clk_16MHz;
   wire resetn;
 
@@ -134,11 +138,6 @@ module hardware (
   ///////////////////////////////////
   // Modules
 
-  por por (
-      .clk(clk),
-      .resetn(resetn)
-  );
-
   ram #(
       .WORDS(MEM_WORDS)
   ) ram (
@@ -206,29 +205,29 @@ module hardware (
   wire flash_io3_iosel;
   wire flash_io3_in;
   wire flash_io3_out;
-  InOut flash_io0_iobuf (
+  PortInOut flash_io0_iobuf (
       .pin  (flash_io0),
       .iosel(flash_io0_iosel),
-      .in   (flash_io0_in),
-      .out  (flash_io0_out)
+      .out  (flash_io0_in),
+      .in   (flash_io0_out)
   );
-  InOut flash_io1_iobuf (
+  PortInOut flash_io1_iobuf (
       .pin  (flash_io1),
       .iosel(flash_io1_iosel),
-      .in   (flash_io1_in),
-      .out  (flash_io1_out)
+      .out  (flash_io1_in),
+      .in   (flash_io1_out)
   );
-  InOut flash_io2_iobuf (
+  PortInOut flash_io2_iobuf (
       .pin  (flash_io2),
       .iosel(flash_io2_iosel),
-      .in   (flash_io2_in),
-      .out  (flash_io2_out)
+      .out  (flash_io2_in),
+      .in   (flash_io2_out)
   );
-  InOut flash_io3_iobuf (
+  PortInOut flash_io3_iobuf (
       .pin  (flash_io3),
       .iosel(flash_io3_iosel),
-      .in   (flash_io3_in),
-      .out  (flash_io3_out)
+      .out  (flash_io3_in),
+      .in   (flash_io3_out)
   );
 
   /* instances */
