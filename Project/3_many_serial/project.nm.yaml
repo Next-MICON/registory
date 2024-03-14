@@ -2,12 +2,13 @@ target:
   path: [NextMicon, TinyFPGA_BX, 0.0.0]
 objs:
   - {obj: Inst, name: serial0, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 40], flip: false, width: 200}
-  - {obj: Port, name: pin1, variant: In, pos: [320, 20], flip: false, width: 120}
-  - {obj: Port, name: pin2, variant: Out, pos: [320, 60], flip: false, width: 120}
   - {obj: Inst, name: serial1, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 120], flip: false, width: 200}
   - {obj: Inst, name: serial2, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 200], flip: false, width: 200}
   - {obj: Inst, name: serial3, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 280], flip: false, width: 200}
   - {obj: Inst, name: serial4, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 360], flip: false, width: 200}
+  - {obj: Port, name: pin1, variant: In, pos: [320, 20], flip: false, width: 120}
+  - {obj: Port, name: pin10, variant: Out, pos: [320, 380], flip: false, width: 120}
+  - {obj: Port, name: pin2, variant: Out, pos: [320, 60], flip: false, width: 120}
   - {obj: Port, name: pin3, variant: In, pos: [320, 100], flip: false, width: 120}
   - {obj: Port, name: pin4, variant: Out, pos: [320, 140], flip: false, width: 120}
   - {obj: Port, name: pin5, variant: In, pos: [320, 180], flip: false, width: 120}
@@ -15,7 +16,6 @@ objs:
   - {obj: Port, name: pin7, variant: In, pos: [320, 260], flip: false, width: 120}
   - {obj: Port, name: pin8, variant: Out, pos: [320, 300], flip: false, width: 120}
   - {obj: Port, name: pin9, variant: In, pos: [320, 340], flip: false, width: 120}
-  - {obj: Port, name: pin10, variant: Out, pos: [320, 380], flip: false, width: 120}
 wires:
   - {first: [pin1, out], last: [serial0, rx], waypoints: [], width: 1}
   - {first: [serial0, tx], last: [pin2, in], waypoints: [], width: 1}

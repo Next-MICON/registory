@@ -1,12 +1,13 @@
 #include "custom_ops.S"
 
+.global irq
+.global main
+
 ///////////////////////////////////////
 
 .section .data
 
-///////////////////////////////////////
 // Memory for IRQ Handler
-
 irq_regs:
 	.fill 32,4
 
@@ -17,50 +18,34 @@ irq_stack:
 
 .section .text
 
-///////////////////////////////////////
 // Reset
-// no more than 16 bytes here !
-
 reset_vec:
-	//picorv32_waitirq_insn(zero)
-	//picorv32_maskirq_insn(zero, zero)
+	picorv32_waitirq_insn(zero)
+	picorv32_maskirq_insn(zero, zero)
 	j start
 
-///////////////////////////////////////
 // Interrupt Handler
-
 .balign 16 // picorv32.PROGADDR_IRQ
 irq_vec:
 
-// Current state
-//
-// pc = 0x0500_0010
-// q0 = interrupt return address
-// q1 = irq bits
+	// 0. Context at this point
+	//      pc = 0x0500_0010
+	//      q0 = interrupt return address
+	//      q1 = irq bits
 
-// Save Registers
-
-	// irq_regs q2 & q3 is reserved for saving registers
-	// q2 & q3 must save values during irq function
+	// 1. Stash registors
 	picorv32_setq_insn(q2, x1) // q2 <= x1 (ra)
 	picorv32_setq_insn(q3, x2) // q3 <= x2 (sp)
-	// now x1 & x2 is free
-
-// Disable interrupt
-
-	// lui  x1,     %hi(0xFFFFFFFF)
-	// addi x1, x1, %lo(0xFFFFFFFF)
-	// picorv32_maskirq_insn(zero,x1)
-
-// Save Registers
 
 	lui  x1,     %hi(irq_regs)
 	addi x1, x1, %lo(irq_regs)
 
     picorv32_getq_insn(x2, q0)
 	sw x2,   0*4(x1) // irq_regs + 00 <= interrut return address
+
 	picorv32_getq_insn(x2, q2)
 	sw x2,   1*4(x1) // irq_regs + 04 <= original x1 (ra)
+
 	picorv32_getq_insn(x2, q3)
 	sw x2,   2*4(x1) // irq_regs + 08 <= original x2 (sp)
 
@@ -94,13 +79,10 @@ irq_vec:
 	sw x30, 30*4(x1) // irq_regs + 78 <= x30
 	sw x31, 31*4(x1) // irq_regs + 7C <= x31
 
-// call C function
-// irq(
-//    arg0 = pointer to saved registers
-//    arg1 = interrupt type bitmask
-// )
-
-.global irq
+	// 2. Call irq function
+	//   arg(a0) = pointer to saved context
+	//   arg(a1) = interrupt bitmask
+	//   ret(a0) = pointer to new context
 
 	// irq function use irq_stack
 	lui  sp,     %hi(irq_stack)
@@ -115,14 +97,10 @@ irq_vec:
 
 	jal ra, irq
 
-/////////////////////////////////////
-// return irq
-// ret a0 = new irq_regs address
+	// 3. Restore context
 
-	mv x1, a0
-
-// restore registers
-
+	mv x1, a0 // pointer to context
+	
 	lw x2,   0*4(x1)
 	picorv32_setq_insn(q0, x2)
 
@@ -162,26 +140,15 @@ irq_vec:
 	lw x30, 30*4(x1)
 	lw x31, 31*4(x1)
 
-// Restore registers
-
 	picorv32_getq_insn(x1, q2)
 	picorv32_getq_insn(x2, q3)
 
-// Enable interrupt
-
-	// picorv32_maskirq_insn(zero,zero)
-
-// return from irq
-	
+	//4. Return from interruption
 	picorv32_retirq_insn()
 
-///////////////////////////////////////
 // Main program
-
 start:
-
-// zero-initialize all registers 
-
+	// 1. Initialize all registers to 0
 	addi x1, zero, 0
 	// x2 = sp is initialize to picorv32.STACKADDR
 	addi x3, zero, 0
@@ -214,7 +181,51 @@ start:
 	addi x30, zero, 0
 	addi x31, zero, 0
 
+	// 2. Initialize BSS Section to zero
+	init_bss:
+		la a0, _bss_start
+		la a1, _bss_end
+	init_bss_loop:
+		beq a0, a1, init_bss_done
+		sw zero, 0(a0)
+		add a0, a0, 4
+		j init_bss_loop
+	init_bss_done:
+
+	// 3. Copy Data Section
+	init_data:
+		la a0, _data_start
+		la a1, _data_end
+		la a2, _init_data_start
+	init_data_loop:
+		bge a0, a1, init_data_done
+		lw a3, 0(a2)
+		sw a3, 0(a0)
+		addi a2, a2, 4
+		addi a0, a0, 4
+		j init_data_loop
+	init_data_done:
+
+	// 4. Run static initializer
+	init_static:
+		la a0, _init_array_start
+		la a1, _init_array_end
+		addi sp,sp,-4
+	init_static_loop:
+		beq a0, a1, init_static_done
+		lw  a3, 0(a0)
+		add a0, a0, 4
+		sw  a0, 0(sp)
+		jalr a3
+		lw a0, 0(sp)
+		j init_static_loop
+	init_static_done:
+		addi sp, sp, 4
+
+	// 5. Main function
 	call main
+
+	// TODO: Shutdown
 
 loop:
 	j loop

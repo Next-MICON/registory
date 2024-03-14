@@ -1,0 +1,174 @@
+templates:
+  - ["micon", "firmware.hpp"]
+  - ["micon", "firmware.cpp"]
+  - ["micon", "hardware.sv"]
+
+addr:
+  pageSize: 0x01000000 # 区切り
+  reserved: 0x03000000 # 予約済みメモリ空間
+  maxAddr: 0xFFFFFFFF # 最大値
+
+ioports:
+  led: o
+  pin1: io
+  pin2: io
+  pin3: io
+  pin4: io
+  pin5: io
+  pin6: io
+  pin7: io
+  pin8: io
+  pin9: io
+  pin10: io
+  pin11: io
+  pin12: io
+  pin13: io
+  pin14: io
+  pin15: io
+  pin16: io
+  pin17: io
+  pin18: io
+  pin19: io
+  pin20: io
+  pin21: io
+  pin22: io
+  pin23: io
+  pin24: io
+
+irqs:
+  - irq3
+  - irq4
+  - irq5
+  - irq6
+  - irq7
+  - irq8
+  - irq9
+  - irq10
+  - irq11
+  - irq12
+  - irq13
+  - irq14
+  - irq15
+
+# TODO : Define build commands instead of Makefile
+
+tools:
+  - name: yosys
+    inst: apt install yosys
+    get_v: yosys -V
+  - name: nextpnr
+    inst: apt install nextpnr-ice40
+    get_v: nextpnr-ice40 -V
+  - name: TinyFPGA 
+    inst: pip install tinyprog
+    get_v: tinyprog
+  - name: GCC RISC-V Toolchain
+    get_v: riscv64-unknown-elf-g++ -dumpversion
+    inst: sudo apt install gcc-riscv64-unknown-elf
+
+cmd:
+  - name: Generate Micon
+    src:
+      - project.nm.yaml 
+    out:
+      - ./micon/hardwiare.v
+      - ./micon/firmware.hpp
+    cmd: mgen
+    arg: []
+
+  - name: Synthesys
+    src: 
+      - ./micon/hardwiare.sv
+      - ${modules.sv}
+    out:
+      - .build/hardware.json
+      - .build/hardware.json.log
+    cmd: yosys
+    arg: 
+      - "-ql .build/hardware.json.log"
+      - "-p 'synth_ice40 -top hardware -json .build/hardware.json'"
+      - ./micon/hardwiare.sv
+      - ${modules.sv}
+
+  - name: Place and Route
+    src:
+      - .build/hardware.json
+    out:
+      - .build/hardware.asc
+      - .build/hardware.asc.log
+    cmd: nextpnr-ice40
+    arg:
+      - "-ql .build/hardware.asc.log"
+      - "--lp8k --package cm81"
+      - "--asc $@" 
+      - "--pcf $(PCF) --json $^"
+  - name: Timing Analysys
+    src:
+      - .build/hardware.asc
+    out:
+      - .build/hardware.rpt
+    cmd: icetime
+    arg:
+      - "-d lp8k"
+      - "-c 12"
+      - "-mtr .build/hardware.rpt"
+      - ".build/hardware.asc"
+  - name: Gen Bitstream
+    src:
+      - .build/hardware.asc
+    out:
+      - .build/hardware.bin
+    cmd: icepack
+    arg:
+      - ".build/hardware.asc"
+      - ".build/hardware.bin"
+
+  - name: Compile Software
+    src:
+      - software/main.cpp
+      - "${modules.cpp}"
+    out:
+      - .build/software.bin
+    cmd: riscv64-unknown-elf-g++
+    arg: []
+
+  - name: "Upload"
+    src: 
+      - .build/hardware.bin
+      - .build/software.bin
+    out: []
+    cmd: tinyprog
+    arg:
+      - "-p .build/hardware.bin"
+      - "-u .build/software.bin"
+
+# CPU Methods
+methods:
+  - note: IRQ disable mask (0 = allow all)
+    name: set_irq_mask
+    type: uint32_t
+    args:
+      - type: uint32_t
+        name: mask
+  - note: Halt CPU until IRQ
+    name: wait_irq
+    type: uint32_t
+    args: []
+  - note: Read clock cycle counter
+    name: rdcycle
+    type: uint32_t
+    args:
+      - type: uint32_t
+        name: shift
+  - note: Delay micro seconds
+    name: delay_us
+    type: void
+    args:
+      - type: uint32_t
+        name: time_us
+  - note: Delay mili seconds
+    name: delay_ms
+    type: void
+    args:
+      - type: uint32_t
+        name: time_ms

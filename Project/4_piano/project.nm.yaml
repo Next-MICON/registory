@@ -6,15 +6,15 @@ objs:
   - {obj: Inst, name: ch2, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [100, 200], flip: false, width: 200}
   - {obj: Inst, name: ch3, mod: [kanade-k-1228, Sawtooth, 0.0.0], params: [], pos: [100, 240], flip: false, width: 200}
   - {obj: Inst, name: mix, mod: [kanade-k-1228, Mixier, 0.0.0], params: [], pos: [380, 180], flip: false, width: 200}
-  - {obj: Inst, name: spidac, mod: [kanade-k-1228, SPIDAC, 0.0.0], params: [], pos: [660, 200], flip: false, width: 200}
   - {obj: Inst, name: sampling, mod: [NextMicon, Counter, 0.0.0], params: [], pos: [380, 300], flip: false, width: 200}
   - {obj: Inst, name: serial, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 40], flip: false, width: 200}
+  - {obj: Inst, name: spidac, mod: [kanade-k-1228, SPIDAC, 0.0.0], params: [], pos: [660, 200], flip: false, width: 200}
   - {obj: Port, name: pin1, variant: In, pos: [340, 20], flip: false, width: 120}
   - {obj: Port, name: pin2, variant: Out, pos: [340, 60], flip: false, width: 120}
-  - {obj: Port, name: pin24, variant: Out, pos: [900, 140], flip: false, width: 120}
-  - {obj: Port, name: pin23, variant: Out, pos: [900, 180], flip: false, width: 120}
-  - {obj: Port, name: pin22, variant: Out, pos: [900, 220], flip: false, width: 120}
   - {obj: Port, name: pin21, variant: Out, pos: [900, 260], flip: false, width: 120}
+  - {obj: Port, name: pin22, variant: Out, pos: [900, 220], flip: false, width: 120}
+  - {obj: Port, name: pin23, variant: Out, pos: [900, 180], flip: false, width: 120}
+  - {obj: Port, name: pin24, variant: Out, pos: [900, 140], flip: false, width: 120}
 wires:
   - {first: [ch0, out], last: [mix, ch0], waypoints: [], width: 8}
   - {first: [ch1, out], last: [mix, ch1], waypoints: [], width: 8}

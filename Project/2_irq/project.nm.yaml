@@ -1,15 +1,15 @@
 target:
   path: [NextMicon, TinyFPGA_BX, 0.0.0]
 objs:
+  - {obj: Inst, name: counter, mod: [NextMicon, Counter, 0.0.0], params: [], pos: [100, 220], flip: false, width: 200}
   - {obj: Inst, name: serial, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 40], flip: false, width: 200}
-  - {obj: Port, name: pin1, variant: In, pos: [320, 20], flip: false, width: 120}
-  - {obj: Port, name: pin2, variant: Out, pos: [320, 60], flip: false, width: 120}
   - {obj: Irq, name: irq3, sw_stmts: [], pos: [320, 120], flip: false, width: 120}
   - {obj: Irq, name: irq4, sw_stmts: [], pos: [320, 160], flip: false, width: 120}
   - {obj: Irq, name: irq5, sw_stmts: [], pos: [320, 220], flip: false, width: 120}
-  - {obj: Inst, name: counter, mod: [NextMicon, Counter, 0.0.0], params: [], pos: [100, 220], flip: false, width: 200}
+  - {obj: Port, name: pin1, variant: In, pos: [320, 20], flip: false, width: 120}
   - {obj: Port, name: pin15, variant: In, pos: [140, 120], flip: true, width: 120}
   - {obj: Port, name: pin16, variant: In, pos: [140, 160], flip: true, width: 120}
+  - {obj: Port, name: pin2, variant: Out, pos: [320, 60], flip: false, width: 120}
 wires:
   - {first: [pin1, out], last: [serial, rx], waypoints: [], width: 1}
   - {first: [serial, tx], last: [pin2, in], waypoints: [], width: 1}

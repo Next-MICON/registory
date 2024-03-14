@@ -1,14 +1,27 @@
 # Directory
-IDE_HOME  = /home/ohta/NextMiconIDE
+IDE_HOME  = ~/NextMiconIDE
 PROJ      = ${PROJ_NAME}
-BOARD     = NextMicon/TinyFPGA_BX/0.0.0
+BOARD     = NextMicon/TangNano9K/0.0.0
+
+# Tools
+OSS_BIN = ~/oss-cad-suite/bin
+YOSYS   = $(OSS_BIN)/yosys
+NEXTPNR = $(OSS_BIN)/nextpnr-gowin
+GW_PACK = $(OSS_BIN)/gowin_pack
+
+CROSS   = riscv64-unknown-elf-
+
+TOOLS = $(IDE_HOME)/Board/$(BOARD)/tools
+
+# Target Config
+PART      = GW1NR-LV9QN88PC6/I5
 
 # Input Files
-HARDWARE  = $(IDE_HOME)/Board/$(BOARD)/hardware/*.sv \
+SV_FILES  = $(IDE_HOME)/Board/$(BOARD)/hardware/*.sv \
 			$(IDE_HOME)/Package/*/*/*/*.sv \
 			micon/*.sv
 
-PCF       = $(IDE_HOME)/Board/$(BOARD)/hardware/*.pcf
+PCF_FILE = $(IDE_HOME)/Board/$(BOARD)/hardware/*.pcf
 
 START     = $(IDE_HOME)/Board/$(BOARD)/software/start.S
 LINKER    = $(IDE_HOME)/Board/$(BOARD)/software/sections.lds
@@ -22,15 +35,8 @@ INCLUDE_BOARD    = $(IDE_HOME)/Board/$(BOARD)/software
 INCLUDE_LIBRARY  = $(IDE_HOME)/Package
 INCLUDE_FIRMWARE = micon
 
-# Tools
-YOSYS     = ~/build/oss-cad-suite/bin/yosys
-NEXTPNR   = ~/build/oss-cad-suite/bin/nextpnr
-CROSS     = riscv64-unknown-elf-
-
 SIMU_HARD = simulation/*.v
 SIMU_SOFT = .template/cpu/*.cpp .packages/*/*.cpp micon/*.cpp simulation/*.cpp
-
-TOOLS = $(IDE_HOME)/Board/$(BOARD)/tools
 
 ###############################################################################
 
@@ -44,20 +50,16 @@ install:
 init:
 	mkdir -p .build micon
 
-test:
-	echo TEST
-
 ###############################################################################
 
 hardware: .build/hardware.bin
-.build/hardware.json: $(HARDWARE)
+.build/hardware.json: $(SV_FILES)
 	make init
-	yosys -ql $@.log -p 'synth_ice40 -top hardware -json $@' $^
-.build/hardware.asc: .build/hardware.json
-	nextpnr-ice40 -ql $@.log --lp8k --package cm81 --asc $@ --pcf $(PCF) --json $^
-.build/hardware.bin: .build/hardware.asc
-	icetime -d lp8k -c 12 -mtr .build/hardware.rpt $^
-	icepack $^ $@
+	yosys -ql $@.log -p 'synth_gowin -top hardware -json $@' $^
+.build/hardware.fs: .build/hardware.json
+	$(NEXTPNR) -ql $@.log --lp8k --package cm81 --asc $@ --pcf $(PCF_FILE) --json $<
+.build/hardware.bin: .build/hardware.fs
+	$(GW_PACK) -d tangnano9k $^
 
 software: .build/software.objdump .build/software.nm .build/software.bin
 .build/software.elf: $(START) $(SOFTWARE)
@@ -106,7 +108,7 @@ upload: hardware software
 	sh $(TOOLS)/zeropadding.sh $^ > $@
 .build/simu_flash.hex: .build/simu_flash.bin
 	xxd -c 1 -p $^ > $@
-.build/simu_testbench.vvp: $(SIMU_HARD) $(HARDWARE)
+.build/simu_testbench.vvp: $(SIMU_HARD) $(SV_FILES)
 	iverilog -g2005-sv -s testbench -o $@ $^ \
 	         `yosys-config --datdir/ice40/cells_sim.v` \
 			 -DNO_ICE40_DEFAULT_ASSIGNMENTS \

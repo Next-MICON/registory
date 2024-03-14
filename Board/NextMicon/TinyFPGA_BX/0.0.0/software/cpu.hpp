@@ -1,7 +1,5 @@
 #pragma once
 #include <stdint.h>
-#define RAM_END 0x2000
-#define REG_NUM 32
 
 constexpr uint32_t CLK_HZ = 16000000;
 constexpr uint32_t CLK_KHZ = CLK_HZ / 1000;
