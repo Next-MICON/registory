@@ -1,6 +1,6 @@
 module simpleuart #(
     parameter integer DEFAULT_DIV = 1,
-    parameter integer RX_TIMEOUT = 1000,
+    parameter integer RX_TIMEOUT  = 1000
 ) (
     input clk,
     input resetn,

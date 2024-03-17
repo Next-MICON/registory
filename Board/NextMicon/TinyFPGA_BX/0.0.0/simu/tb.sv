@@ -26,7 +26,7 @@ module testbench;
 
   parameter CYCLE = 30_0000;
   initial begin
-    $dumpfile(".build/simulation.vcd");
+    $dumpfile("build/simu.vcd");
     $dumpvars(0, testbench);
     repeat (CYCLE) @(posedge clk);
     $finish;

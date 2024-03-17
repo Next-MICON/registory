@@ -12,3 +12,5 @@ void loop() {
   reg1.write(0);
   delay_ms(500);
 }
+
+void hoge() {}

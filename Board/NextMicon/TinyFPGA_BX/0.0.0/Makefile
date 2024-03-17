@@ -1,6 +1,6 @@
 # Makefile for TinyFPGA_BX
 
-BOARD    := NextMicon/TinyFPGA_BX/0.0.0
+BOARD := NextMicon/TinyFPGA_BX/0.0.0
 
 # Tools
 SYNTH := yosys

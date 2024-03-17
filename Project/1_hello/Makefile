@@ -80,16 +80,16 @@ upload: hw sw
 
 ###############################################################################
 
-SIMU_HW := simu/*.v
+SIMU_HW := simu/*.sv
 SIMU_SW := .template/cpu/*.cpp .packages/*/*.cpp micon/*.cpp simu/*.cpp
 
 build/simu_sw.elf: $(ASM) $(CPP)
 	$(CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
 	        -Wl,-Bstatic,-T,$(LINK),--strip-debug,-Map=build/sw.map,--cref \
 			-O3 -ffreestanding -nostdlib \
-			-I $(INCLUDE_BOARD) \
-			-I $(INCLUDE_LIBRARY) \
-			-I $(INCLUDE_FIRMWARE) \
+			-I $(INC_BRD) \
+			-I $(INC_LIB) \
+			-I $(INC_FW) \
 			-o $@ \
 			$^ \
 			-DSIMU
@@ -103,10 +103,10 @@ build/simu_sw.hex: build/simu_sw.bin
 	xxd $^ > $@
 build/simu_flash.bin: build/simu_sw.bin
 	sh $(SCRIPTS)/zeropadding.sh $^ > $@
-build/simu_flash.hex: .build/simu_flash.bin
+build/simu_flash.hex: build/simu_flash.bin
 	xxd -c 1 -p $^ > $@
 build/simu_tb.vvp: $(SIMU_HW) $(HW)
-	$(IVERILOG) -g2005-sv -s testbench -o $@ $^ \
+	$(IVERILOG) -g2005-sv -s tb -o $@ $^ \
 	           `yosys-config --datdir/ice40/cells_sim.v` \
 			   -DNO_ICE40_DEFAULT_ASSIGNMENTS \
 			   -DDEBUG -DDEBUGNETS -DDEBUGREGS
@@ -114,7 +114,7 @@ build/simu.vcd: build/simu_tb.vvp
 	$(VVP) $^ > build/simu.log
 	sh $(SCRIPTS)/serial.sh build/simu.log build/simu_serial.log
 
-simu: build/simu.vcd build/simu_sw.objdump build/simu_sw.nm
+simu: build/simu_flash.hex build/simu.vcd build/simu_sw.objdump build/simu_sw.nm
 	$(GTKWAVE) build/simu.vcd
 
 ###############################################################################

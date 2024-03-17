@@ -1,12 +1,16 @@
 target:
   path: [NextMicon, TinyFPGA_BX, 0.0.0]
 objs:
+  - {obj: Inst, name: or0, mod: [NextMicon, OR, 0.0.0], params: [], pos: [280, 140], flip: false, width: 200}
   - {obj: Inst, name: serial, mod: [NextMicon, Serial, 0.0.0], params: [], pos: [100, 40], flip: false, width: 200}
-  - {obj: Mem, variant: Write, name: reg1, byte: 1, pos: [140, 120], flip: true, width: 120}
-  - {obj: Port, name: led, variant: Out, pos: [300, 120], flip: false, width: 120}
+  - {obj: Mem, variant: Write, name: reg1, byte: 1, pos: [60, 120], flip: true, width: 120}
+  - {obj: Port, name: led, variant: Out, pos: [500, 140], flip: false, width: 120}
   - {obj: Port, name: pin1, variant: In, pos: [300, 20], flip: false, width: 120}
+  - {obj: Port, name: pin16, variant: In, pos: [60, 160], flip: true, width: 120}
   - {obj: Port, name: pin2, variant: Out, pos: [300, 60], flip: false, width: 120}
 wires:
   - {first: [pin1, out], last: [serial, rx], waypoints: [], width: 1}
   - {first: [serial, tx], last: [pin2, in], waypoints: [], width: 1}
-  - {first: [reg1, out], last: [led, in], waypoints: [], width: 1}
+  - {first: [reg1, out], last: [or0, in1], waypoints: [], width: 1}
+  - {first: [pin16, out], last: [or0, in2], waypoints: [], width: 1}
+  - {first: [or0, out], last: [led, in], waypoints: [], width: 1}

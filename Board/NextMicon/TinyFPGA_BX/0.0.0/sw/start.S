@@ -20,8 +20,8 @@ irq_stack:
 
 // Reset
 reset_vec:
-	picorv32_waitirq_insn(zero)
-	picorv32_maskirq_insn(zero, zero)
+	//picorv32_waitirq_insn(zero)
+	//picorv32_maskirq_insn(zero, zero)
 	j start
 
 // Interrupt Handler
