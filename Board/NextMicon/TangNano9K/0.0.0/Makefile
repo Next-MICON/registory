@@ -5,7 +5,7 @@ BOARD  := NextMicon/TangNano9K/0.0.0
 # Tools
 SYNTH := yosys
 PNR   := nextpnr-gowin
-# TIME  := icetime
+# TIME  := gowin_time
 PACK  := gowin_pack
 PROG  := openFPGALoader
 
@@ -30,13 +30,13 @@ HW  := ${HOME}/NextMiconIDE/Board/$(BOARD)/hw/*.sv \
 
 build/hw_synth.json: $(HW)
 	$(SYNTH) -ql $@.log -p 'synth_gowin -top hw -json $@' $^
-build/hw_pnr.asc: build/hw_synth.json
+build/hw_pnr.json: build/hw_synth.json
 	$(PNR) -ql $@.log --json $^ --cst $(PIN) --write $@ \
 	--device GW1NR-LV9QN88PC6/I5 --family GW1N-9C
-build/hw_bit.bin: build/hw_pnr.asc
+build/hw_bit.fs: build/hw_pnr.json
 	$(PACK) -d GW1NR-9C -o $@ $^
 
-hw: build/hw_bit.bin
+hw: build/hw_bit.fs
 
 ###############################################################################
 
@@ -72,7 +72,7 @@ sw: build/sw.objdump build/sw.nm build/sw.bin
 ###############################################################################
 
 upload: hw sw
-	$(PROG) -p build/hw.bin -u build/sw.bin
+	$(PROG) -b tangnano9k build/hw_bit.fs --external-flash build/sw.bin
 
 ###############################################################################
 

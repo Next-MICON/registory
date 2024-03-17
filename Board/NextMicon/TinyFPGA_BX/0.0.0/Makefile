@@ -1,6 +1,6 @@
 # Makefile for TinyFPGA_BX
 
-BOARD := NextMicon/TinyFPGA_BX/0.0.0
+BOARD    := NextMicon/TinyFPGA_BX/0.0.0
 
 # Tools
 SYNTH := yosys
@@ -31,7 +31,8 @@ HW  := ${HOME}/NextMiconIDE/Board/$(BOARD)/hw/*.sv \
 build/hw_synth.json: $(HW)
 	$(SYNTH) -ql $@.log -p 'synth_ice40 -top hw -json $@' $^
 build/hw_pnr.asc: build/hw_synth.json
-	$(PNR) -ql $@.log --lp8k --package cm81 --asc $@ --pcf $(PIN) --json $^
+	$(PNR) -ql $@.log --json $^ --pcf $(PIN) --asc $@ \
+	--lp8k --package cm81
 build/hw_time.rpt: build/hw_pnr.asc
 	$(TIME) -d lp8k -c 12 -mtr $@ $^
 build/hw_bit.bin: build/hw_pnr.asc
@@ -73,20 +74,20 @@ sw: build/sw.objdump build/sw.nm build/sw.bin
 ###############################################################################
 
 upload: hw sw
-	$(PROG) -p build/hw.bin -u build/sw.bin
+	$(PROG) -p build/hw_bit.bin -u build/sw.bin
 
 ###############################################################################
 
-SIMU_HW := simu/*.v
+SIMU_HW := simu/*.sv
 SIMU_SW := .template/cpu/*.cpp .packages/*/*.cpp micon/*.cpp simu/*.cpp
 
 build/simu_sw.elf: $(ASM) $(CPP)
 	$(CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
 	        -Wl,-Bstatic,-T,$(LINK),--strip-debug,-Map=build/sw.map,--cref \
 			-O3 -ffreestanding -nostdlib \
-			-I $(INCLUDE_BOARD) \
-			-I $(INCLUDE_LIBRARY) \
-			-I $(INCLUDE_FIRMWARE) \
+			-I $(INC_BRD) \
+			-I $(INC_LIB) \
+			-I $(INC_FW) \
 			-o $@ \
 			$^ \
 			-DSIMU
@@ -100,10 +101,10 @@ build/simu_sw.hex: build/simu_sw.bin
 	xxd $^ > $@
 build/simu_flash.bin: build/simu_sw.bin
 	sh $(SCRIPTS)/zeropadding.sh $^ > $@
-build/simu_flash.hex: .build/simu_flash.bin
+build/simu_flash.hex: build/simu_flash.bin
 	xxd -c 1 -p $^ > $@
 build/simu_tb.vvp: $(SIMU_HW) $(HW)
-	$(IVERILOG) -g2005-sv -s testbench -o $@ $^ \
+	$(IVERILOG) -g2005-sv -s tb -o $@ $^ \
 	           `yosys-config --datdir/ice40/cells_sim.v` \
 			   -DNO_ICE40_DEFAULT_ASSIGNMENTS \
 			   -DDEBUG -DDEBUGNETS -DDEBUGREGS
@@ -111,7 +112,7 @@ build/simu.vcd: build/simu_tb.vvp
 	$(VVP) $^ > build/simu.log
 	sh $(SCRIPTS)/serial.sh build/simu.log build/simu_serial.log
 
-simu: build/simu.vcd build/simu_sw.objdump build/simu_sw.nm
+simu: build/simu_flash.hex build/simu.vcd build/simu_sw.objdump build/simu_sw.nm
 	$(GTKWAVE) build/simu.vcd
 
 ###############################################################################

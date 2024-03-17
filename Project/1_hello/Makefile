@@ -31,13 +31,14 @@ HW  := ${HOME}/NextMiconIDE/Board/$(BOARD)/hw/*.sv \
 build/hw_synth.json: $(HW)
 	$(SYNTH) -ql $@.log -p 'synth_ice40 -top hw -json $@' $^
 build/hw_pnr.asc: build/hw_synth.json
-	$(PNR) -ql $@.log --lp8k --package cm81 --asc $@ --pcf $(PIN) --json $^
+	$(PNR) -ql $@.log --json $^ --pcf $(PIN) --asc $@ \
+	--lp8k --package cm81
 build/hw_time.rpt: build/hw_pnr.asc
 	$(TIME) -d lp8k -c 12 -mtr $@ $^
-build/hw.bin: build/hw_pnr.asc
+build/hw_bit.bin: build/hw_pnr.asc
 	$(PACK) $^ $@
 
-hw: build/hw_time.rpt build/hw.bin
+hw: build/hw_time.rpt build/hw_bit.bin
 
 ###############################################################################
 
@@ -73,9 +74,9 @@ sw: build/sw.objdump build/sw.nm build/sw.bin
 ###############################################################################
 
 upload: hw sw
-# $(PROG) -p build/hw.bin -u build/sw.bin
+# $(PROG) -p build/hw_bit.bin -u build/sw.bin
 	powershell.exe -c \
-	"tinyprog -p \$$env:WSLHome\NextMiconIDE\Project\1_hello\build\hw.bin \
+	"tinyprog -p \$$env:WSLHome\NextMiconIDE\Project\1_hello\build\hw_bit.bin \
 	          -u \$$env:WSLHome\NextMiconIDE\Project\1_hello\build\sw.bin"
 
 ###############################################################################
