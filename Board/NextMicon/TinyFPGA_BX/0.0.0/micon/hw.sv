@@ -1,4 +1,4 @@
-module hardware (
+module hw (
     // Left side
     inout pin1,
     inout pin2,

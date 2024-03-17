@@ -1,4 +1,4 @@
-#include "firmware.hpp"
+#include "fw.hpp"
 
 ROM rom_cfg((volatile uint32_t*)0x0200'0000);
 /* definitions */
