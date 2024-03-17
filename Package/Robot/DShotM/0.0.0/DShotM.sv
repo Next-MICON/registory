@@ -60,64 +60,64 @@ module DShotM #(
   localparam RECVING = 6'b010000;
   localparam ENDING = 6'b100000;
 
-  always @(posedge clk) begin
-    if (!resetn) begin  // [0] Initial state
-      state <= WAITING;
-      iosel <= 0;
-      tx    <= 0;
-    end else begin
-      ready <= valid && state == ENDING;
-      rdata <= {16'b0, drcv};
-      (* full_case *)
-      case (state)
-        WAITING: begin
-          if (wstrb) begin  // [1] Start
-            dsnd <= {
-              wdata[15:5],  // Moter Control Command
-              wdata[4],  // Telemetry Request
-              (wdata[7:4] ^ wdata[11:8] ^ wdata[15:12])  // CRC
-            };
-            state <= SENDING;
-            bit_cnt <= 15;
-            phase_cnt <= 0;
-            time_cnt <= TRANS_CNT;
-            tx <= 1;
-          end
-        end
-        SENDING: begin
-          case (phase_cnt)
-            0: begin
-              phase_cnt <= 1;
-              tx <= dsnd[bit_cnt];
-            end
-            1: begin
-              if (count != 0) begin  // [B]
-                sclk <= 0;
-                count <= count - 1;
-                mosi <= dsnd[count];
-                drcv[count] <= miso;
-              end else begin  // [E] ENDING
-                state <= ENDING;
-                count <= 1;
-              end
-            end
-          endcase
-        end
-        WAIT_RX: begin
-        end
-        RECVING: begin
-        end
-        ENDING: begin
-          case (count)
-            1: begin
-              count <= 0;
-            end
-            0: begin
-              state <= WAITING;
-            end
-          endcase
-        end
-      endcase
-    end
-  end
+  // always @(posedge clk) begin
+  //   if (!resetn) begin  // [0] Initial state
+  //     state <= WAITING;
+  //     iosel <= 0;
+  //     tx    <= 0;
+  //   end else begin
+  //     ready <= valid && state == ENDING;
+  //     rdata <= {16'b0, drcv};
+  //     (* full_case *)
+  //     case (state)
+  //       WAITING: begin
+  //         if (wstrb) begin  // [1] Start
+  //           dsnd <= {
+  //             wdata[15:5],  // Moter Control Command
+  //             wdata[4],  // Telemetry Request
+  //             (wdata[7:4] ^ wdata[11:8] ^ wdata[15:12])  // CRC
+  //           };
+  //           state <= SENDING;
+  //           bit_cnt <= 15;
+  //           phase_cnt <= 0;
+  //           time_cnt <= TRANS_CNT;
+  //           tx <= 1;
+  //         end
+  //       end
+  //       SENDING: begin
+  //         case (phase_cnt)
+  //           0: begin
+  //             phase_cnt <= 1;
+  //             tx <= dsnd[bit_cnt];
+  //           end
+  //           1: begin
+  //             if (count != 0) begin  // [B]
+  //               sclk <= 0;
+  //               count <= count - 1;
+  //               mosi <= dsnd[count];
+  //               drcv[count] <= miso;
+  //             end else begin  // [E] ENDING
+  //               state <= ENDING;
+  //               count <= 1;
+  //             end
+  //           end
+  //         endcase
+  //       end
+  //       WAIT_RX: begin
+  //       end
+  //       RECVING: begin
+  //       end
+  //       ENDING: begin
+  //         case (count)
+  //           1: begin
+  //             count <= 0;
+  //           end
+  //           0: begin
+  //             state <= WAITING;
+  //           end
+  //         endcase
+  //       end
+  //     endcase
+  //   end
+  // end
 endmodule

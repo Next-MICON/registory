@@ -1,5 +1,5 @@
 // main.cpp
-#include "firmware.hpp"
+#include "fw.hpp"
 
 void init() {
   serial.baud(9600);

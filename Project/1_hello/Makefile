@@ -3,19 +3,19 @@
 BOARD    := NextMicon/TinyFPGA_BX/0.0.0
 
 # Tools
-YOSYS     = yosys
-NEXTPNR   = nextpnr-ice40
-ICETIME   = icetime
-ICEPACK   = icepack
-TINYPROG  = tinyprog
+SYNTH := yosys
+PNR   := nextpnr-ice40
+TIME  := icetime
+PACK  := icepack
+PROG  := tinyprog
 
-CROSS     = riscv64-unknown-elf-
+CROSS    := riscv64-unknown-elf-
 
-IVERILOG  = iverilog
-VVP       = vvp
-GTKWAVE   = gtkwave
+IVERILOG := iverilog
+VVP      := vvp
+GTKWAVE  := gtkwave
 
-SCRIPTS   = ${HOME}/NextMiconIDE/Board/$(BOARD)/tools
+SCRIPTS  := ${HOME}/NextMiconIDE/Board/$(BOARD)/tools
 
 ###############################################################################
 
@@ -23,38 +23,38 @@ all: upload
 
 ###############################################################################
 
-PCF := ${HOME}/NextMiconIDE/Board/$(BOARD)/hardware/fpga.pcf
-HW  := ${HOME}/NextMiconIDE/Board/$(BOARD)/hardware/*.sv \
+PIN := ${HOME}/NextMiconIDE/Board/$(BOARD)/hw/fpga.pcf
+HW  := ${HOME}/NextMiconIDE/Board/$(BOARD)/hw/*.sv \
        ${HOME}/NextMiconIDE/Package/*/*/*/*.sv \
        micon/*.sv
 
 build/hw_synth.json: $(HW)
-	$(YOSYS) -ql $@.log -p 'synth_ice40 -top hw -json $@' $^
+	$(SYNTH) -ql $@.log -p 'synth_ice40 -top hw -json $@' $^
 build/hw_pnr.asc: build/hw_synth.json
-	$(NEXTPNR) -ql $@.log --lp8k --package cm81 --asc $@ --pcf $(PCF) --json $^
+	$(PNR) -ql $@.log --lp8k --package cm81 --asc $@ --pcf $(PIN) --json $^
 build/hw_time.rpt: build/hw_pnr.asc
-	$(ICETIME) -d lp8k -c 12 -mtr build/hardware.rpt $^
-build/hw_bit.bin: build/hw_pnr.asc
-	$(ICEPACK) $^ $@
+	$(TIME) -d lp8k -c 12 -mtr $@ $^
+build/hw.bin: build/hw_pnr.asc
+	$(PACK) $^ $@
 
-hw: build/hw_time.rpt build/hw_bit.bin
+hw: build/hw_time.rpt build/hw.bin
 
 ###############################################################################
 
-LINK := ${HOME}/NextMiconIDE/Board/$(BOARD)/software/sections.lds
-ASM  := ${HOME}/NextMiconIDE/Board/$(BOARD)/software/start.S
-CPP  := ${HOME}/NextMiconIDE/Board/$(BOARD)/software/*.cpp \
+LINK := ${HOME}/NextMiconIDE/Board/$(BOARD)/sw/link.ld
+ASM  := ${HOME}/NextMiconIDE/Board/$(BOARD)/sw/start.S
+CPP  := ${HOME}/NextMiconIDE/Board/$(BOARD)/sw/*.cpp \
 		${HOME}/NextMiconIDE/Package/*/*/*/*.cpp \
 		micon/*.cpp \
-		software/*.cpp
+		sw/*.cpp
 
-INC_BRD = ${HOME}/NextMiconIDE/Board/$(BOARD)/software
-INC_LIB = ${HOME}/NextMiconIDE/Package
-INC_FW  = micon
+INC_BRD := ${HOME}/NextMiconIDE/Board/$(BOARD)/sw
+INC_LIB := ${HOME}/NextMiconIDE/Package
+INC_FW  := micon
 
 build/sw.elf: $(ASM) $(CPP)
 	$(CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
-	        -Wl,-Bstatic,-T,$(LINK),--strip-debug,-Map=build/software.map,--cref \
+	        -Wl,-Bstatic,-T,$(LINK),--strip-debug,-Map=build/sw.map,--cref \
 			-O3 -ffreestanding -nostdlib \
 			-I $(INC_BRD) \
 			-I $(INC_LIB) \
@@ -73,12 +73,15 @@ sw: build/sw.objdump build/sw.nm build/sw.bin
 ###############################################################################
 
 upload: hw sw
-	tinyprog -p build/hw.bin -u build/sw.bin
+# $(PROG) -p build/hw.bin -u build/sw.bin
+	powershell.exe -c \
+	"tinyprog -p \$$env:WSLHome\NextMiconIDE\Project\1_hello\build\hw.bin \
+	          -u \$$env:WSLHome\NextMiconIDE\Project\1_hello\build\sw.bin"
 
 ###############################################################################
 
-SIMU_HW = simulation/*.v
-SIMU_SW = .template/cpu/*.cpp .packages/*/*.cpp micon/*.cpp simulation/*.cpp
+SIMU_HW := simu/*.v
+SIMU_SW := .template/cpu/*.cpp .packages/*/*.cpp micon/*.cpp simu/*.cpp
 
 build/simu_sw.elf: $(ASM) $(CPP)
 	$(CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
