@@ -1,21 +1,23 @@
 # Makefile for TinyFPGA_BX
 
-BOARD    := NextMicon/TinyFPGA_BX/0.0.0
+DIR_PROJECT := $(shell pwd)
+DIR_PACKAGE := ${HOME}/NextMiconIDE/Package
+DIR_TARGET  := ${HOME}/NextMiconIDE/Board/NextMicon/TinyFPGA_BX/0.0.0
 
 # Tools
-SYNTH := yosys
-PNR   := nextpnr-ice40
-TIME  := icetime
-PACK  := icepack
-PROG  := tinyprog
+CMD_SYNTH := yosys
+CMD_PNR   := nextpnr-ice40
+CMD_TIME  := icetime
+CMD_PACK  := icepack
+CMD_PROG  := tinyprog
 
-CROSS    := riscv64-unknown-elf-
+CMD_CROSS := riscv64-unknown-elf-
 
-IVERILOG := iverilog
-VVP      := vvp
-GTKWAVE  := gtkwave
+CMD_SIMU := iverilog
+CMD_EXE  := vvp
+CMD_WAVE := gtkwave
 
-SCRIPTS  := ${HOME}/NextMiconIDE/Board/$(BOARD)/tools
+DIR_SCRIPTS := $(DIR_TARGET)/tools
 
 ###############################################################################
 
@@ -23,97 +25,84 @@ all: upload
 
 ###############################################################################
 
-PIN := ${HOME}/NextMiconIDE/Board/$(BOARD)/hw/fpga.pcf
-HW  := ${HOME}/NextMiconIDE/Board/$(BOARD)/hw/*.sv \
-       ${HOME}/NextMiconIDE/Package/*/*/*/*.sv \
-       micon/*.sv
+FILE_PIN := $(DIR_TARGET)/hw/fpga.pcf
+FILE_HW  := $(wildcard $(DIR_TARGET)/hw/*.sv) $(wildcard $(DIR_PACKAGE)/*/*/*/*.sv) $(wildcard micon/*.sv)
 
-build/hw_synth.json: $(HW)
-	$(SYNTH) -ql $@.log -p 'synth_ice40 -top hw -json $@' $^
+build/hw_synth.json: $(FILE_HW)
+	$(CMD_SYNTH) -ql $@.log -p 'synth_ice40 -top hw -json $@' $^
 build/hw_pnr.asc: build/hw_synth.json
-	$(PNR) -ql $@.log --json $^ --pcf $(PIN) --asc $@ \
+	$(CMD_PNR) -ql $@.log --json $^ --pcf $(FILE_PIN) --asc $@ \
 	--lp8k --package cm81
 build/hw_time.rpt: build/hw_pnr.asc
-	$(TIME) -d lp8k -c 12 -mtr $@ $^
+	$(CMD_TIME) -d lp8k -c 12 -mtr $@ $^
 build/hw_bit.bin: build/hw_pnr.asc
-	$(PACK) $^ $@
+	$(CMD_PACK) $^ $@
 
 hw: build/hw_time.rpt build/hw_bit.bin
 
 ###############################################################################
 
-LINK := ${HOME}/NextMiconIDE/Board/$(BOARD)/sw/link.ld
-ASM  := ${HOME}/NextMiconIDE/Board/$(BOARD)/sw/start.S
-CPP  := ${HOME}/NextMiconIDE/Board/$(BOARD)/sw/*.cpp \
-		${HOME}/NextMiconIDE/Package/*/*/*/*.cpp \
-		micon/*.cpp \
-		sw/*.cpp
+FILE_LINK := $(DIR_TARGET)/sw/link.ld
+FILE_ASM  := $(DIR_TARGET)/sw/start.S
+FILES_CPP  := $(wildcard $(DIR_TARGET)/sw/*.cpp) $(wildcard $(DIR_PACKAGE)/*/*/*/*.cpp) $(wildcard $(DIR_PROJECT)/micon/*.cpp) $(wildcard $(DIR_PROJECT)/sw/*.cpp)
 
-INC_BRD := ${HOME}/NextMiconIDE/Board/$(BOARD)/sw
-INC_LIB := ${HOME}/NextMiconIDE/Package
-INC_FW  := micon
-
-build/sw.elf: $(ASM) $(CPP)
-	$(CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
-	        -Wl,-Bstatic,-T,$(LINK),--strip-debug,-Map=build/sw.map,--cref \
+build/sw.elf: $(FILE_ASM) $(FILES_CPP)
+	$(CMD_CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
+	        -Wl,-Bstatic,-T,$(FILE_LINK),--strip-debug,-Map=build/sw.map,--cref \
 			-O3 -ffreestanding -nostdlib \
-			-I $(INC_BRD) \
-			-I $(INC_LIB) \
-			-I $(INC_FW) \
+			-I $(DIR_TARGET)/sw -I $(DIR_PACKAGE) -I $(DIR_PROJECT)/micon \
 			-o $@ \
 			$^
 build/sw.objdump: build/sw.elf
-	$(CROSS)objdump --demangle -D $^ > $@
+	$(CMD_CROSS)objdump --demangle -D $^ > $@
 build/sw.nm: build/sw.elf
-	$(CROSS)nm --demangle --numeric-sort $^ > $@
+	$(CMD_CROSS)nm --demangle --numeric-sort $^ > $@
 build/sw.bin: build/sw.elf
-	$(CROSS)objcopy -O binary $^ /dev/stdout > $@
+	$(CMD_CROSS)objcopy -O binary $^ /dev/stdout > $@
 
 sw: build/sw.objdump build/sw.nm build/sw.bin
 
 ###############################################################################
 
 upload: hw sw
-	$(PROG) -p build/hw_bit.bin -u build/sw.bin
+	$(CMD_PROG) -p build/hw_bit.bin -u build/sw.bin
 
 ###############################################################################
 
 SIMU_HW := simu/*.sv
 SIMU_SW := .template/cpu/*.cpp .packages/*/*.cpp micon/*.cpp simu/*.cpp
 
-build/simu_sw.elf: $(ASM) $(CPP)
-	$(CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
-	        -Wl,-Bstatic,-T,$(LINK),--strip-debug,-Map=build/sw.map,--cref \
+build/simu_sw.elf: $(FILE_ASM) $(FILES_CPP)
+	$(CMD_CROSS)g++ -march=rv32imc -mabi=ilp32 -nostartfiles \
+	        -Wl,-Bstatic,-T,$(FILE_LINK),--strip-debug,-Map=build/sw.map,--cref \
 			-O3 -ffreestanding -nostdlib \
-			-I $(INC_BRD) \
-			-I $(INC_LIB) \
-			-I $(INC_FW) \
+			-I $(DIR_TARGET)/sw -I $(DIR_PACKAGE) -I $(DIR_PROJECT)/micon \
 			-o $@ \
 			$^ \
 			-DSIMU
 build/simu_sw.objdump: build/simu_sw.elf
-	$(CROSS)objdump --demangle -D $^ > $@
+	$(CMD_CROSS)objdump --demangle -D $^ > $@
 build/simu_sw.nm: build/simu_sw.elf
-	$(CROSS)nm --demangle --numeric-sort $^ > $@
+	$(CMD_CROSS)nm --demangle --numeric-sort $^ > $@
 build/simu_sw.bin: build/simu_sw.elf
-	$(CROSS)objcopy -O binary $^ $@
+	$(CMD_CROSS)objcopy -O binary $^ $@
 build/simu_sw.hex: build/simu_sw.bin
 	xxd $^ > $@
 build/simu_flash.bin: build/simu_sw.bin
-	sh $(SCRIPTS)/zeropadding.sh $^ > $@
+	sh $(DIR_SCRIPTS)/zeropadding.sh $^ > $@
 build/simu_flash.hex: build/simu_flash.bin
 	xxd -c 1 -p $^ > $@
 build/simu_tb.vvp: $(SIMU_HW) $(HW)
-	$(IVERILOG) -g2005-sv -s tb -o $@ $^ \
+	$(CMD_SIMU) -g2005-sv -s tb -o $@ $^ \
 	           `yosys-config --datdir/ice40/cells_sim.v` \
 			   -DNO_ICE40_DEFAULT_ASSIGNMENTS \
 			   -DDEBUG -DDEBUGNETS -DDEBUGREGS
 build/simu.vcd: build/simu_tb.vvp
-	$(VVP) $^ > build/simu.log
-	sh $(SCRIPTS)/serial.sh build/simu.log build/simu_serial.log
+	$(CMD_EXE) $^ > build/simu.log
+	sh $(DIR_SCRIPTS)/serial.sh build/simu.log build/simu_serial.log
 
 simu: build/simu_flash.hex build/simu.vcd build/simu_sw.objdump build/simu_sw.nm
-	$(GTKWAVE) build/simu.vcd
+	$(CMD_WAVE) build/simu.vcd
 
 ###############################################################################
 

@@ -8,6 +8,10 @@ objs:
   - {obj: Port, name: pin1, variant: In, pos: [300, 20], flip: false, width: 120}
   - {obj: Port, name: pin16, variant: In, pos: [60, 160], flip: true, width: 120}
   - {obj: Port, name: pin2, variant: Out, pos: [300, 60], flip: false, width: 120}
+  - {obj: Inst, name: vvm0, mod: [Vector, VVM, 0.0.0], params: [], pos: [300, 340], flip: false, width: 200}
+  - {obj: Mem, variant: Write, name: vx, byte: 8, pos: [80, 320], flip: true, width: 120}
+  - {obj: Mem, variant: Write, name: vy, byte: 8, pos: [80, 360], flip: true, width: 120}
+  - {obj: Mem, variant: Read, name: vo, byte: 8, pos: [520, 340], flip: false, width: 120}
 wires:
   - {first: [pin1, out], last: [serial, rx], waypoints: [], width: 1}
   - {first: [serial, tx], last: [pin2, in], waypoints: [], width: 1}

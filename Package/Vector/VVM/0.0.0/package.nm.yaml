@@ -1,0 +1,5 @@
+ports:
+  - {name: x, type: wire, bit: 256, direct: in, side: left}
+  - {name: y, type: wire, bit: 256, direct: in, side: left}
+  - {name: o, type: wire, bit: 256, direct: out, side: right}
+params: []

@@ -3,6 +3,7 @@
 //////////////////////////////////////////////////////////////////
 
 module AbsEnc #(
+    parameter DELAY = 4
 ) (
     input wire clk,
     input wire resetn,

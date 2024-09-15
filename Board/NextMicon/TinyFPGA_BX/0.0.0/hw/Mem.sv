@@ -1,4 +1,7 @@
-module MemRead (
+module MemRead #(
+    parameter BIT  = 1,
+    parameter ADDR = 32'h0000_0000
+) (
     input wire clk,
     input wire resetn,
 
@@ -9,7 +12,7 @@ module MemRead (
     input wire [31:0] wdata,
     output reg [31:0] rdata,
 
-    input wire in
+    input wire [BIT-1:0] in
 );
 
   always @(posedge clk) begin
@@ -27,7 +30,9 @@ module MemRead (
 
 endmodule
 
-module MemWrite (
+module MemWrite #(
+    parameter BIT = 1
+) (
     input wire clk,
     input wire resetn,
 
@@ -38,7 +43,7 @@ module MemWrite (
     input wire [31:0] wdata,
     output reg [31:0] rdata,
 
-    output reg out
+    output reg [BIT-1:0] out
 );
 
   always @(posedge clk) begin
